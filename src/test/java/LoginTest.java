@@ -38,7 +38,7 @@ public class LoginTest {
         loginPage.clickLoginButton();
         
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        //assert profileName.getText().equals("   John Doe");
+        //assert profileName.getText().equals("   John Doe"); - another way of testing I didn't know.
         Assert.assertEquals(dashboardPage.usernameGetText(), user.getExpectedDashboardUsername());
     }
 
