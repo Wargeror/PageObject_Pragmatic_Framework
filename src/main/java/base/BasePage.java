@@ -19,7 +19,8 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void click(WebElement element) {
+    public void clickWebElement(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
         element.click();
     }
 
@@ -27,8 +28,8 @@ public class BasePage {
         element.sendKeys(text);
     }
 
-    public String getText(WebElement element, By locator) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    public String w8AndGetText(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
         return element.getText();
     }
 
@@ -50,5 +51,15 @@ public class BasePage {
     // Waits for an element to be either invisible or not present on the DOM.
     public void waitUntilElementIsInvisible(By locator){
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+
+    // Checks if the current URL contains the specified page URL.
+    public boolean urlContains(String pageUrl) {
+        try {
+            return driver.getCurrentUrl().contains(pageUrl);
+        } catch (NullPointerException e) {
+            // Re-throw the exception with a more informative message
+            throw new NullPointerException("The URL does not contain the specified page URL:");
+        }
     }
 }

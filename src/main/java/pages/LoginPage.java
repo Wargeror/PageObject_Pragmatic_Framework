@@ -1,7 +1,6 @@
 package pages;
 
 import base.BasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,9 +24,6 @@ public class LoginPage extends BasePage {
     @FindBy(css = "#alert .alert-danger")
     private WebElement alert;
 
-    //Locator for the alert
-    private static final By ALERT = By.cssSelector("#alert .alert-danger");
-
     //Expected text for the alert
     public static final String EXPECTED_ALERT_TEXT = "No match for Username and/or Password.";
 
@@ -50,11 +46,11 @@ public class LoginPage extends BasePage {
 
     //Method used to click the login button
     public void clickLoginButton() {
-        click(loginButton);
+        clickWebElement(loginButton);
     }
 
     public String alertGetText(){
-       return getText(alert,ALERT);
+       return w8AndGetText(alert);
     }
 
 }

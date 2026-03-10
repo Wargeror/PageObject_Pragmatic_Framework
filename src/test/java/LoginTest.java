@@ -40,6 +40,7 @@ public class LoginTest {
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         //assert profileName.getText().equals("   John Doe"); - another way of testing I didn't know.
         Assert.assertEquals(dashboardPage.usernameGetText(), user.getExpectedDashboardUsername());
+        Assert.assertTrue(dashboardPage.urlContains());
     }
 
     //Unsuccessful login test
