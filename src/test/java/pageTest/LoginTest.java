@@ -1,3 +1,5 @@
+package pageTest;
+
 import base.BaseTest;
 import data.User;
 import org.testng.Assert;

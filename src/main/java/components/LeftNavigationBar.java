@@ -1,10 +1,14 @@
 package components;
 
 import base.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.beans.Visibility;
 
 public class LeftNavigationBar extends BasePage {
 
@@ -53,35 +57,35 @@ public class LeftNavigationBar extends BasePage {
        private WebElement information;
 
     //Extensions Menu and Options
-    @FindBy(css = "//*[@id=\"menu-extension\"]/a")
+    @FindBy(xpath = "//*[@id=\"menu-extension\"]/a")
     private WebElement menuExtensions;
 
     //Customers Menu and Options
-    @FindBy(css = "//*[@id=\"menu-customer\"]/a")
+    @FindBy(xpath = "//*[@id=\"menu-customer\"]/a")
     private WebElement menuCustomers;
 
-       @FindBy(css = "//*[@id=\"collapse-5\"]/li[1]/a")
+       @FindBy(xpath = "//*[@id=\"collapse-5\"]/li[1]/a")
        private WebElement customers;
 
 
     //System Menu and Options
-    @FindBy(css = "//*[@id=\"menu-system\"]/a")
+    @FindBy(xpath = "//*[@id=\"menu-system\"]/a")
     private WebElement menuSystem;
 
-       @FindBy(css = "//*[@id=\"collapse-7\"]/li[1]/a")
+       @FindBy(xpath = "//*[@id=\"collapse-7\"]/li[1]/a")
        private WebElement settings;
 
-       @FindBy(css = "//*[@id=\"collapse-7\"]/li[2]/a")
+       @FindBy(xpath = "//*[@id=\"collapse-7\"]/li[2]/a")
        private WebElement menuUsers;
 
-          @FindBy(css = "//*[@id=\"collapse-7-1\"]/li[1]/a")
+          @FindBy(xpath = "//*[@id=\"collapse-7-1\"]/li[1]/a")
           private WebElement users;
 
-       @FindBy(css = "//*[@id=\"collapse-7\"]/li[3]/a")
+       @FindBy(xpath = "//*[@id=\"collapse-7\"]/li[3]/a")
        private WebElement menuLocalization;
 
     //Reports Menu and Options
-    @FindBy(css = "//*[@id=\"menu-report\"]/a")
+    @FindBy(xpath = "//*[@id=\"menu-report\"]/a")
     private WebElement menuReports;
 
     public LeftNavigationBar(WebDriver driver, WebDriverWait wait) {
@@ -92,4 +96,11 @@ public class LeftNavigationBar extends BasePage {
         return dashboardLNavBar;
     }
 
+    public void clickMenuCustomers(){
+        clickWebElement(menuCustomers);
+    }
+
+    public void clickCustomers(){
+        clickWebElement(customers);
+    }
 }

@@ -1,3 +1,5 @@
+package pageTest;
+
 import base.BaseTest;
 import components.LeftNavigationBar;
 import org.openqa.selenium.support.ui.ExpectedConditions;

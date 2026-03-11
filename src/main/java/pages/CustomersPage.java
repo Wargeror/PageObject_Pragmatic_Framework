@@ -4,6 +4,8 @@ import base.BasePage;
 import components.LeftNavigationBar;
 import components.TopBar;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CustomersPage extends BasePage { public String orderUrl;
@@ -14,6 +16,15 @@ public class CustomersPage extends BasePage { public String orderUrl;
 
     private String customerUrl;
 
+    @FindBy(xpath = "//i[@class='fa-solid fa-plus']/ ..")
+    private WebElement addButton;
+
+    @FindBy(css = "input#input-email")
+    private WebElement emailInputField;
+
+    @FindBy(css = "button#button-filter")
+    private WebElement filterButton;
+
     public CustomersPage(WebDriver driver, WebDriverWait wait){
         super(driver, wait);
         this.topBar = new TopBar(driver,wait);
@@ -23,5 +34,17 @@ public class CustomersPage extends BasePage { public String orderUrl;
 
     public boolean urlContains() {
         return urlContains(customerUrl);
+    }
+
+    public void clickAddButton(){
+        clickWebElement(addButton);
+    }
+
+    public void typeEmailInputField(String text){
+        typeText(emailInputField, text);
+    }
+
+    public void clickFilterButton(){
+        clickWebElement(filterButton);
     }
 }
