@@ -12,7 +12,7 @@ public class LoginTest extends BaseTest {
     //Successful login test
     @Test
     public void loginTest(){
-        login(); // Calls the login method from BaseTest
+        login();
 
         User user = input.getUser(0); // Get user for assertion
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
@@ -24,7 +24,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void unsuccessfulLoginTest() {
         User user = input.getUser(0);
-        driver.get(user.getSiteURL()); // Navigate to the site for unsuccessful login
+        driver.get(user.getSiteURL());
 
         LoginPage loginPage = new LoginPage(driver, wait);
         loginPage.typeTextUsernameField("");
