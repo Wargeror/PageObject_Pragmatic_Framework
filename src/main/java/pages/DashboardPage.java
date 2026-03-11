@@ -63,11 +63,14 @@ public class DashboardPage extends BasePage {
     private WebElement totalPeopleOnlineNumber;
 
     @FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[1]/div[4]/div/div[3]/a")
-    public WebElement peopleOnlineViewMore;
+    private WebElement peopleOnlineViewMore;
 
     //World Map Widget
     @FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[2]/div[1]/div/div[1]")
-    public WebElement worldMap;
+    private WebElement worldMap;
+
+    @FindBy(css = "#jqvmap1_ru")
+    private WebElement worldMapRussia;
 
     //Sales Analytics Widget
     @FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[2]/div[2]/div/div[1]/i")
@@ -75,7 +78,7 @@ public class DashboardPage extends BasePage {
 
     //Sales Analytics Time Frame Button
     @FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[2]/div[2]/div/div[1]/div/a/i[2]")
-    public WebElement salesAnalyticsTimeFrameButton;
+    private WebElement salesAnalyticsTimeFrameButton;
 
     //Sales Analytics Time Frame List Selector
     public final static String SALES_ANALYTICS_TIME_FRAME_LIST_SELECTOR = "div#range > a.dropdown-item:nth-of-type(";
@@ -138,10 +141,18 @@ public class DashboardPage extends BasePage {
     }
 
     public void invisibilityOfalesAnalyticsTimeFrameList(int index){
-        waitUntilElementIsInvisible(By.cssSelector(SalesAnalyticsTimeFrameListSelector(index)));
+        w8UntilElementIsInvisible(By.cssSelector(SalesAnalyticsTimeFrameListSelector(index)));
     }
 
     public void clickLatestOrder(){
         clickWebElement(latestOrder);
+    }
+
+    public void clickWorldMapRussia(){
+        clickWebElement(worldMapRussia);
+    }
+
+    public String getFillWorldMapRussia(){
+        return getFill(worldMapRussia);
     }
 }

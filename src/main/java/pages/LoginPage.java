@@ -1,6 +1,8 @@
 package pages;
 
 import base.BasePage;
+import data.Input;
+import data.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

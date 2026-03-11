@@ -81,7 +81,18 @@ public class DashboardTest {
         Assert.assertTrue(onlineReportPage.urlContains());
     }
 
+    //World Map Russia Select Test
+    @Test
+    public void WorldMapRussiaTest(){
+        login();
 
+        DashboardPage dashboardPage = new DashboardPage(driver, wait);
+        dashboardPage.clickWorldMapRussia();
+
+        Assert.assertEquals(dashboardPage.getFillWorldMapRussia(),"#666666");
+    }
+
+    //Sales Analytics Filter Test
     @Test
     public void SalesAnaliticsFilterTest() {
         login();
@@ -101,9 +112,7 @@ public class DashboardTest {
 
         dashboardPage.clicksalesAnalyticsTimeFrameButton();
         dashboardPage.clickSalesAnalyticsTimeFrameList(4);
-
-
-}
+    }
 
     //Latest Order Redirect Test
     @Test

@@ -49,7 +49,7 @@ public class BasePage {
     }
 
     // Waits for an element to be either invisible or not present on the DOM.
-    public void waitUntilElementIsInvisible(By locator){
+    public void w8UntilElementIsInvisible(By locator){
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
@@ -62,4 +62,9 @@ public class BasePage {
             throw new NullPointerException("The URL does not contain the specified page URL:");
         }
     }
+
+    public String getFill(WebElement element){
+        return element.getAttribute("fill");
+    }
+
 }
