@@ -14,7 +14,7 @@ public class LeftNavigationBar extends BasePage {
 
     //Catalog Menu and Options
     @FindBy(css = "li#menu-catalog > a.parent.collapsed")
-    private WebElement catalog;
+    private WebElement menuCatalog;
 
        @FindBy(xpath = "//*[@id=\"collapse-1\"]/li[1]/a")
        private WebElement categories;
@@ -29,10 +29,10 @@ public class LeftNavigationBar extends BasePage {
        private WebElement filters;
 
        @FindBy(xpath = "//*[@id=\"collapse-1\"]/li[5]/a")
-       private WebElement attributes;
+       private WebElement menuAttributes;
 
           @FindBy(xpath = "//*[@id=\"collapse-1-4\"]/li[1]/a")
-           private WebElement attributes1;
+           private WebElement attributes;
 
           @FindBy(xpath = "//*[@id=\"collapse-1-4\"]/li[2]/a")
            private WebElement attributeGroups;
@@ -54,25 +54,35 @@ public class LeftNavigationBar extends BasePage {
 
     //Extensions Menu and Options
     @FindBy(css = "//*[@id=\"menu-extension\"]/a")
-    private WebElement extensions;
+    private WebElement menuExtensions;
 
     //Customers Menu and Options
     @FindBy(css = "//*[@id=\"menu-customer\"]/a")
-    private WebElement customers;
+    private WebElement menuCustomers;
 
        @FindBy(css = "//*[@id=\"collapse-5\"]/li[1]/a")
-       private WebElement customers1;
+       private WebElement customers;
 
 
     //System Menu and Options
-    @FindBy(css = "//*[@id=\"menu-customer\"]/a")
-    private WebElement customers;
+    @FindBy(css = "//*[@id=\"menu-system\"]/a")
+    private WebElement menuSystem;
 
+       @FindBy(css = "//*[@id=\"collapse-7\"]/li[1]/a")
+       private WebElement settings;
 
+       @FindBy(css = "//*[@id=\"collapse-7\"]/li[2]/a")
+       private WebElement menuUsers;
+
+          @FindBy(css = "//*[@id=\"collapse-7-1\"]/li[1]/a")
+          private WebElement users;
+
+       @FindBy(css = "//*[@id=\"collapse-7\"]/li[3]/a")
+       private WebElement menuLocalization;
 
     //Reports Menu and Options
-    @FindBy(css = "//*[@id=\"menu-customer\"]/a")
-    private WebElement customers;
+    @FindBy(css = "//*[@id=\"menu-report\"]/a")
+    private WebElement menuReports;
 
     public LeftNavigationBar(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
