@@ -29,8 +29,6 @@ public class LoginPage extends BasePage {
     //Expected text for the alert
     public static final String EXPECTED_ALERT_TEXT = "No match for Username and/or Password.";
 
-
-
     //Constructor used to pass the existing WebDrive and wait to this object
     public LoginPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);

@@ -1,37 +1,15 @@
-import data.Input;
-import data.User;
+import base.BaseTest;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
 
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-
-public class DashboardTest {
-    WebDriver driver;
-    WebDriverWait wait;
-    Input input;
-
-    //Set up WebDriver before each test
-    @BeforeMethod
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        input = new Input();
-    }
+public class DashboardTest extends BaseTest {
 
     //Order "View more..." Redirect
     @Test
@@ -125,24 +103,6 @@ public class DashboardTest {
         OrderPage orderPage = new OrderPage(driver,wait);
         Assert.assertTrue(orderPage.urlContains());
     }
-
-    //Quit WebDriver after each test
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
-    }
-
-    //Login method
-    public void login(){
-        User user = input.getUser(0);
-        driver.get(user.getSiteURL());
-
-        LoginPage loginPage = new LoginPage(driver, wait);
-        loginPage.typeTextUsernameField(user.getUsername());
-        loginPage.typeTextPasswordField(user.getPassword());
-        loginPage.clickLoginButton();
-    }
-
 
 }
 
