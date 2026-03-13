@@ -67,6 +67,14 @@ public class LeftNavigationBar extends BasePage {
        @FindBy(xpath = "//*[@id=\"collapse-5\"]/li[1]/a")
        private WebElement customers;
 
+    //System Menu and Options
+    @FindBy(xpath = "//*[@id=\"menu-sale\"]/a")
+    private WebElement menuSales;
+
+       @FindBy(xpath = "//*[@id=\"collapse-4\"]/li[1]/a")
+       private WebElement orders;
+
+
 
     //System Menu and Options
     @FindBy(xpath = "//*[@id=\"menu-system\"]/a")
@@ -96,11 +104,28 @@ public class LeftNavigationBar extends BasePage {
         return dashboardLNavBar;
     }
 
+    public void clickMenuCatalog(){
+        clickWebElement(menuCatalog);
+    }
+
+    public void clickProducts(){
+        clickWebElement(products);
+    }
+
     public void clickMenuCustomers(){
         clickWebElement(menuCustomers);
     }
 
     public void clickCustomers(){
         clickWebElement(customers);
+    }
+
+    public void clickMenuSales(){
+        clickWebElement(menuSales);
+    }
+
+    public void clickOrders(){
+        clickWebElement(orders);
+
     }
 }

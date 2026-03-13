@@ -25,6 +25,7 @@ public class BasePage {
     }
 
     public void typeText(WebElement element, String text) {
+        wait.until(ExpectedConditions.visibilityOf(element));
         element.sendKeys(text);
     }
 
@@ -48,6 +49,10 @@ public class BasePage {
         }
     }
 
+    public void w8ForVisibility(WebElement element){
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     // Waits for an element to be either invisible or not present on the DOM.
     public void w8UntilElementIsInvisible(By locator){
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
@@ -63,8 +68,22 @@ public class BasePage {
         }
     }
 
+    public void w8iFrameAndMoveToIt(WebElement element){
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
+    }
+
+    public void w8PopUpAndMoveToIt(WebElement element){
+        wait.until(ExpectedConditions.visibilityOf(element));
+        driver.switchTo().frame(element);
+    }
+
     public String getFill(WebElement element){
         return element.getAttribute("fill");
+    }
+
+    public boolean isDisplayed(WebElement element){
+        wait.until(ExpectedConditions.visibilityOf(element));
+        return element.isDisplayed();
     }
 
 }

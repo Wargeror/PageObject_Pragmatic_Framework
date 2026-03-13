@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class AddCustomer extends BaseTest {
+public class CustomersTest extends BaseTest {
 
     //Add a customer and confirms that the user exists in the system
     @Test

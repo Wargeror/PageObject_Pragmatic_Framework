@@ -15,9 +15,12 @@ public class BaseTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Input input;
+    protected boolean closeDriver = true;
 
     @BeforeMethod
     public void setUp() {
+        System.out.println("Framework Created By Momchil Slavov");
+        closeDriver = true;
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -26,7 +29,7 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown() {
-        if (driver != null) {
+        if (driver != null && closeDriver) {
             driver.quit();
         }
     }
@@ -39,5 +42,9 @@ public class BaseTest {
         loginPage.typeTextUsernameField(user.getUsername());
         loginPage.typeTextPasswordField(user.getPassword());
         loginPage.clickLoginButton();
+    }
+
+    public void printDome(){
+        System.out.println(driver.getPageSource());
     }
 }

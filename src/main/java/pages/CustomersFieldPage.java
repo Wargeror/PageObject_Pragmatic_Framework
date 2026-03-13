@@ -1,8 +1,10 @@
 package pages;
 
 import base.BasePage;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CustomersFieldPage extends BasePage {
 
@@ -32,7 +34,7 @@ public class CustomersFieldPage extends BasePage {
     @FindBy(xpath = "//i[@class='fa-solid fa-floppy-disk']/ ..")
     private WebElement saveButton;
 
-    public CustomersFieldPage(org.openqa.selenium.WebDriver driver, org.openqa.selenium.support.ui.WebDriverWait wait) {
+    public CustomersFieldPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
         customerFormUrl = "https://auto.pragmatic.bg/manage/index.php?route=customer/customer.form";
     }

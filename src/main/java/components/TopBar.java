@@ -20,4 +20,8 @@ public class TopBar extends BasePage {
     public TopBar(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
+
+    public void scrollToTop(){
+        scrollToElement(h1PageName);
+    }
 }
