@@ -55,4 +55,12 @@ public class Components extends BasePage {
     public boolean isCartDisplayed(){
         return isDisplayed(cart);
     }
+
+    public WebElement getSearchField(){
+        return searchField;
+    }
+
+    public WebElement getSearchButton(){
+        return searchButton;
+    }
 }

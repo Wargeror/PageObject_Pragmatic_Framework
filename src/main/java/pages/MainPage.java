@@ -75,6 +75,13 @@ public class MainPage extends BasePage {
         return isDisplayed(secondBanner);
     }
 
+    public void typeSearchField(String text){
+        typeText(cmp.getSearchField(), text);
+    }
+
+    public void clickSearchButton(){
+        clickWebElement(cmp.getSearchButton());
+    }
 
     public void clickmacBookImg(){
         clickWebElement(macBookImg);

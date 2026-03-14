@@ -1,6 +1,7 @@
 package base;
 
 import data.Input;
+import data.Slavov;
 import data.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,7 +20,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        System.out.println("Framework Created By Momchil Slavov");
+        System.out.println(Slavov.MS());
         closeDriver = true;
         driver = new ChromeDriver();
         driver.manage().window().maximize();

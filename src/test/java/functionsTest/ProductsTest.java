@@ -29,27 +29,28 @@ public class ProductsTest extends BaseTest {
     @Test
     public void addProductTest() throws InterruptedException {
         login();
-        closeDriver = false;
         LeftNavigationBar navBar = new LeftNavigationBar(driver,wait);
         navBar.clickMenuCatalog();
         navBar.clickProducts();
 
         ProductsPage productsPage = new ProductsPage(driver,wait);
-        productsPage.clickProductUrl();
+        productsPage.clickAddNewButton();
 
         ProductsFormPage productsFormPage = new ProductsFormPage(driver,wait);
-        productsFormPage.typeProductName("Custom-Built Desktop PC");
+        productsFormPage.typeProductName("Custom-Built Desktop PC1");
         productsFormPage.clickNotfCancelButton();
         driver.switchTo().frame(productsFormPage.getiFrameDescription());
         productsFormPage.typeDescription(productsFormPage.getDescription());
         driver.switchTo().defaultContent();
-        productsFormPage.typeMetaTitle("Meta Title");
+        productsFormPage.typeMetaTitle("Custom PC");
         productsFormPage.typeProductTag("Desktop PC");
         productsFormPage.topBar.scrollToTop();
         productsFormPage.clickDataField();
         productsFormPage.typeModel("Custom-built 01");
         productsFormPage.scrollToTaxClassSelect();
         productsFormPage.typePrice("300");
+        productsFormPage.scrollToMinQuant();
+        productsFormPage.typeQuantity("200000");
         Select orderStatus = new Select(productsFormPage.getTaxClassSelect());
         orderStatus.selectByVisibleText("Taxable Goods");
         productsFormPage.topBar.scrollToTop();
@@ -58,11 +59,18 @@ public class ProductsTest extends BaseTest {
         productsFormPage.typeImgSearchField("MomchilPCImg");
         productsFormPage.clickImgSearchButton();
         productsFormPage.w84MomchilPCImgVisibility();
-        Thread.sleep(1000); // Wait for the image to be fully loaded/ready
+        Thread.sleep(400); // Wait for the image to be fully loaded/ready
         productsFormPage.clickMomchilPCImg();
         productsFormPage.clickSeoForm();
-        productsFormPage.typeSeoWord("custom-PC");
+        productsFormPage.typeSeoWord("custom-PC1");
         productsFormPage.clickSaveButton();
+        Assert.assertTrue(productsFormPage.isAlertDisplayed());
+        productsFormPage.clickAlertX();
+        navBar.clickProducts();
+        Assert.assertTrue(productsPage.newProductExists());
+        productsPage.selectNewProduct(true);
+        productsPage.clickDeleteButton();
+        productsFormPage.clickAlert(true);
     }
 
 }

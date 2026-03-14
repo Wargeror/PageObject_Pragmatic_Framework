@@ -19,6 +19,16 @@ public class ProductsPage  extends BasePage {
     @FindBy(css = "a.btn.btn-primary:nth-child(2)")
     private WebElement addNewButton;
 
+    @FindBy(xpath = "//*[@id=\"content\"]/div[1]/div/div/button[3]")
+    private WebElement deleteButton;
+
+    @FindBy(xpath = "//*[@id=\"form-product\"]/div[1]/table/tbody/tr[4]/td[3]")
+    private WebElement newProduct;
+
+    @FindBy(xpath = "//*[@id=\"form-product\"]/div[1]/table/tbody/tr[4]/td[1]/input")
+    private WebElement getNewProductCheckbox;
+
+
     public ProductsPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
         this.topBar = new TopBar(driver, wait);
@@ -26,8 +36,24 @@ public class ProductsPage  extends BasePage {
         productsUrl = "https://auto.pragmatic.bg/manage/index.php?route=catalog/product";
     }
 
-    public void clickProductUrl(){
+    public boolean urlContains(){
+        return urlContains(productsUrl);
+    }
+
+    public void clickAddNewButton(){
         clickWebElement(addNewButton);
+    }
+
+    public boolean newProductExists() {
+        return isDisplayed(newProduct);
+    }
+
+    public void selectNewProduct(Boolean selected){
+        selectCheckbox(getNewProductCheckbox, selected);
+    }
+
+    public void clickDeleteButton(){
+        clickWebElement(deleteButton);
     }
 
 }

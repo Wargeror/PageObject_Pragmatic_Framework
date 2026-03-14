@@ -42,20 +42,21 @@ public class CustomRandomStringGenerator {
         String symbols = "!@#$%&?";
         SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder(length);
+        StringBuilder pool = new StringBuilder(length);
         int totalDesiredLength = length * 3;
 
         for (int i = 0; i < totalDesiredLength; i++) {
             int sequenceStep = i % 3;
 
             if (sequenceStep == 0) {
-                sb.append(letters.charAt(random.nextInt(letters.length())));
+                pool.append(letters.charAt(random.nextInt(letters.length())));
             } else if (sequenceStep == 1) {
-                sb.append(numbers.charAt(random.nextInt(numbers.length())));
+                pool.append(numbers.charAt(random.nextInt(numbers.length())));
             } else {
-                sb.append(symbols.charAt(random.nextInt(symbols.length())));
+                pool.append(symbols.charAt(random.nextInt(symbols.length())));
             }
         }
-        String letterPool = sb.toString();
+        String letterPool = pool.toString();
         for (int i = 0; i < length; i++) {
             sb.append(letterPool.charAt(random.nextInt(letterPool.length())));
         }

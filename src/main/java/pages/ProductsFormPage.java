@@ -29,6 +29,12 @@ public class ProductsFormPage extends BasePage {
 
     private Description description;
 
+    @FindBy(xpath = "//*[@id=\"alert\"]/div")
+    private WebElement alert;
+
+    @FindBy(xpath = "//*[@id=\"alert\"]/div/button")
+    private WebElement alertX;
+
     @FindBy(css = ".float-end > button.btn.btn-primary:nth-child(1)")
     private WebElement saveButton;
 
@@ -69,6 +75,12 @@ public class ProductsFormPage extends BasePage {
 
        @FindBy(xpath = "//*[@id=\"input-tax-class\"]")
        private WebElement taxClassSelect;
+
+       @FindBy(xpath = "//*[@id=\"input-quantity\"]")
+       private WebElement quantityField;
+
+       @FindBy(xpath = "//*[@id=\"input-minimum\"]")
+       private WebElement minimumQField;
 
     @FindBy(xpath = "//*[@id=\"form-product\"]/ul/li[9]/a")
     private WebElement imgForm;
@@ -115,6 +127,15 @@ public class ProductsFormPage extends BasePage {
         this.description = new Description();
         productsFormUrl = "https://auto.pragmatic.bg/manage/index.php?route=catalog/product.form";
     }
+
+    public boolean isAlertDisplayed(){
+        return isDisplayed(alert);
+    }
+
+    public void clickAlertX(){
+        clickWebElement(alertX);
+    }
+
 
     public boolean urlContains() {
         return urlContains(productsFormUrl);
@@ -210,6 +231,14 @@ public class ProductsFormPage extends BasePage {
 
     public WebElement getTaxClassSelect(){
         return taxClassSelect;
+    }
+
+    public void typeQuantity(String quantity){
+        typeText(quantityField, quantity);
+    }
+
+    public void scrollToMinQuant(){
+        scrollToElement(minimumQField);
     }
 
     public void clickImgForm(){

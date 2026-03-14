@@ -86,4 +86,25 @@ public class BasePage {
         return element.isDisplayed();
     }
 
+    public void selectCheckbox(WebElement element, Boolean selected){
+        if(selected){
+            if(!element.isSelected()){
+                element.click();
+            }
+        } else {
+            if(element.isSelected()){
+                element.click();
+            }
+        }
+    }
+
+    public void clickAlert(Boolean accept){
+        if(accept){
+            driver.switchTo().alert().accept();
+        }
+        else{
+            driver.switchTo().alert().dismiss();
+        }
+    }
+
 }

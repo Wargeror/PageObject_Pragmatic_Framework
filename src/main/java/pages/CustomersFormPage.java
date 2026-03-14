@@ -6,9 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CustomersFieldPage extends BasePage {
+public class CustomersFormPage extends BasePage {
 
     private String customerFormUrl;
+
+    @FindBy(xpath = "//*[@id=\"alert\"]/div")
+    private WebElement alert;
+
+    @FindBy(xpath = "//*[@id=\"alert\"]/div/button")
+    private WebElement alertX;
 
     @FindBy(id = "input-firstname")
     private WebElement firstNameField;
@@ -34,9 +40,18 @@ public class CustomersFieldPage extends BasePage {
     @FindBy(xpath = "//i[@class='fa-solid fa-floppy-disk']/ ..")
     private WebElement saveButton;
 
-    public CustomersFieldPage(WebDriver driver, WebDriverWait wait) {
+    public CustomersFormPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
         customerFormUrl = "https://auto.pragmatic.bg/manage/index.php?route=customer/customer.form";
+    }
+
+
+    public boolean isAlertDisplayed(){
+        return isDisplayed(alert);
+    }
+
+    public void clickAlertX(){
+        clickWebElement(alertX);
     }
 
     public void typeFirstName(String firstName) {

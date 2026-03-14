@@ -19,11 +19,17 @@ public class CustomersPage extends BasePage { public String orderUrl;
     @FindBy(xpath = "//i[@class='fa-solid fa-plus']/ ..")
     private WebElement addButton;
 
+    @FindBy(xpath = "//*[@id=\"content\"]/div[1]/div/div/button[2]")
+    private WebElement deleteButton;
+
     @FindBy(css = "input#input-email")
     private WebElement emailInputField;
 
     @FindBy(css = "button#button-filter")
     private WebElement filterButton;
+
+    @FindBy(xpath = "//*[@id=\"form-customer\"]/div[1]/table/tbody/tr/td[1]/input")
+    private WebElement cuCheckbox;
 
     public CustomersPage(WebDriver driver, WebDriverWait wait){
         super(driver, wait);
@@ -46,5 +52,13 @@ public class CustomersPage extends BasePage { public String orderUrl;
 
     public void clickFilterButton(){
         clickWebElement(filterButton);
+    }
+
+    public void clickCuCheckbox(Boolean selected){
+        selectCheckbox(cuCheckbox, selected);
+    }
+
+    public void clickDeleteButton(){
+        clickWebElement(deleteButton);
     }
 }
