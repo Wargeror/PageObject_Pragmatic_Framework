@@ -32,6 +32,12 @@ public class ProductsFormPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"alert\"]/div")
     private WebElement alert;
 
+    @FindBy(xpath = "//div[contains(@class, 'alert')][normalize-space()='Warning: Please check the form carefully for errors!']")
+    private WebElement alertWarning;
+
+    @FindBy(xpath = "//div[contains(@class, 'alert')][normalize-space()='Success: You have modified products!']")
+    private WebElement alertSuccess;
+
     @FindBy(xpath = "//*[@id=\"alert\"]/div/button")
     private WebElement alertX;
 
@@ -128,8 +134,12 @@ public class ProductsFormPage extends BasePage {
         productsFormUrl = "https://auto.pragmatic.bg/manage/index.php?route=catalog/product.form";
     }
 
-    public boolean isAlertDisplayed(){
-        return isDisplayed(alert);
+    public boolean isAlertWarningDisplayed(){
+        return isDisplayed(alertWarning);
+    }
+
+    public boolean isAlertSuccessDisplayed(){
+        return isDisplayed(alertSuccess);
     }
 
     public void clickAlertX(){
@@ -159,7 +169,9 @@ public class ProductsFormPage extends BasePage {
     }
 
     public void typeDescription(String description){
+        driver.switchTo().frame(iFrameDescription); // Switch inside the method
         typeText(decriptionField, description);
+        driver.switchTo().defaultContent(); // Switch back
     }
 
     //This method reads the file content into of a txt file and then returns a String

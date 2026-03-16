@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pages.DashboardPage;
 import pages.LoginPage;
 
 import java.time.Duration;
@@ -36,13 +37,18 @@ public class BaseTest {
     }
 
     public void login() {
-        User user = input.getUser(0);
-        driver.get(user.getSiteURL());
+        loginAs(input.getUser(0)); // Default login
+    }
 
+    public void loginAs(User user) {
+        driver.get(user.getSiteURL());
         LoginPage loginPage = new LoginPage(driver, wait);
         loginPage.typeTextUsernameField(user.getUsername());
         loginPage.typeTextPasswordField(user.getPassword());
         loginPage.clickLoginButton();
+
+        DashboardPage dashPage = new DashboardPage(driver,wait);
+        dashPage.leftNavigationBar.w8NavBarToBeDisplayed();
     }
 
     public void printDome(){

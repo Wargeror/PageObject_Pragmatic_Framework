@@ -100,6 +100,10 @@ public class LeftNavigationBar extends BasePage {
         super(driver, wait);
     }
 
+    public void w8NavBarToBeDisplayed(){
+        w8ForVisibility(dashboardLNavBar);
+    }
+
     public WebElement getDashboardLNavBar(){
         return dashboardLNavBar;
     }

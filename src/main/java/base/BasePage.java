@@ -107,4 +107,28 @@ public class BasePage {
         }
     }
 
+    public String newUrl(String url) {
+        String currentUrl = driver.getCurrentUrl();
+        String token = "";
+
+        // Find the user_token in the current URL
+        int tokenIndex = currentUrl.indexOf("user_token=");
+        if (tokenIndex != -1) {
+            token = currentUrl.substring(tokenIndex);
+            // If there are other parameters after the token, cut them off
+            if (token.contains("&")) {
+                token = token.substring(0, token.indexOf("&"));
+            }
+        } else {
+            // Handle case where no token is found, maybe throw an exception or return the original url
+            return url;
+        }
+
+        // Append the token to the new URL
+        if (url.contains("?")) {
+            return url + "&" + token;
+        } else {
+            return url + "?" + token;
+        }
+    }
 }
