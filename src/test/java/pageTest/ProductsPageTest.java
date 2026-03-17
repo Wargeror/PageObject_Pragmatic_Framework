@@ -18,13 +18,38 @@ public class ProductsPageTest extends BaseTest {
         Assert.assertTrue(prodPage.isFilterFormDisplayed());
     }
 
-
     //Asserts if the Product Name Filter Works
     @Test
     public void productNameFilterTest(){
         ProductsPage prodPage = goTo();
 
         prodPage.typeProductName("Custom-Built Desktop PC");
+        prodPage.clickFilterButton();
+
+        Assert.assertTrue(prodPage.newProductExists());
+
+
+    }
+
+    //Asserts if the Product Model Filter Works
+    @Test
+    public void productModelFilterTest(){
+        ProductsPage prodPage = goTo();
+
+        prodPage.typeProductModel("Custom-built 01");
+        prodPage.clickFilterButton();
+
+        Assert.assertTrue(prodPage.newProductExists());
+
+
+    }
+
+    //Asserts if the Product Price Filter Works
+    @Test
+    public void productPriceFilterTest(){
+        ProductsPage prodPage = goTo();
+
+        prodPage.typeProductPrice("300");
         prodPage.clickFilterButton();
 
         Assert.assertTrue(prodPage.newProductExists());
