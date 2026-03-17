@@ -47,7 +47,7 @@ public class ProductsPage  extends BasePage {
        @FindBy(xpath = "//*[@id=\"input-quantity\"]")
        private WebElement productQuantityField;
 
-       @FindBy(xpath = "///*[@id=\"button-filter\"]")
+       @FindBy(xpath = "//*[@id=\"button-filter\"]")
        private WebElement filterButton;
 
 
