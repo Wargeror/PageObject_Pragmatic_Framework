@@ -11,6 +11,8 @@ public class Product4$Page extends BasePage {
 
     private String macBookUrl;
 
+    private  String customDesktop;
+
     @FindBy(css = "[class='btn btn-lg btn-inverse btn-block dropdown-toggle']")
     private WebElement cart;
 
@@ -28,6 +30,7 @@ public class Product4$Page extends BasePage {
     public Product4$Page(WebDriver driver, WebDriverWait wait){
         super(driver, wait);
         macBookUrl = "https://auto.pragmatic.bg/index.php?route=product/product&language=en-gb&product_id=43";
+        customDesktop = "https://auto.pragmatic.bg/index.php?route=product/product&language=en-gb&product_id=53&path=20_26";
     }
 
     public boolean urlContains() {
@@ -52,6 +55,10 @@ public class Product4$Page extends BasePage {
 
     public void waitSuccAddNotf(){
         w8UntilElementIsInvisible(By.cssSelector(succAddNotf));
+    }
+
+    public String getCustomDesktop(){
+        return customDesktop;
     }
 
 }

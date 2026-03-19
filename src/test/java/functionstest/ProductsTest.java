@@ -1,4 +1,4 @@
-package functionsTest;
+package functionstest;
 
 import base.BaseTest;
 import components.LeftNavigationBar;
@@ -15,14 +15,41 @@ public class ProductsTest extends BaseTest {
         MainPage mainPage = new MainPage(driver,wait);
         driver.get(mainPage.mainUrl());
         mainPage.clickmacBookImg();
-        Product4$Page prodPage = new Product4$Page(driver,wait);
-        prodPage.clickAddToCart();
-        prodPage.clickAlertX();
-        prodPage.clickCart();
-        prodPage.clickCheckout();
+        Product4$Page product4$Page = new Product4$Page(driver,wait);
+        product4$Page.clickAddToCart();
+        product4$Page.clickAlertX();
+        product4$Page.clickCart();
+        product4$Page.clickCheckout();
 
         CheckoutPage checkoutPage = new CheckoutPage(driver,wait);
         Assert.assertTrue(checkoutPage.urlContains());
+    }
+
+    //Test for buying a product
+    @Test
+    public void buyProductTest() {
+        Product4$Page product4$Page = new Product4$Page(driver, wait);
+        driver.get(product4$Page.getCustomDesktop());
+
+        product4$Page.clickAddToCart();
+        product4$Page.clickAlertX();
+        product4$Page.clickCart();
+        product4$Page.clickCheckout();
+
+        CheckoutPage checkoutPage = new CheckoutPage(driver, wait);
+        Assert.assertTrue(checkoutPage.urlContains());
+
+        //Needs to be finished
+
+    }
+
+    //Increase the quantity in the cart test
+    @Test
+    public void increaseQuantityTest() {
+        Product4$Page product4$Page = new Product4$Page(driver, wait);
+
+        //Needs to be finished
+
     }
 
     //Adding a Product

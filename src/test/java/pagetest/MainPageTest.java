@@ -1,4 +1,4 @@
-package pageTest;
+package pagetest;
 
 import base.BaseTest;
 import org.testng.Assert;

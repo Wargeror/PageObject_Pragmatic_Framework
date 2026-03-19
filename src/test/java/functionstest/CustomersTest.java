@@ -1,4 +1,4 @@
-package functionsTest;
+package functionstest;
 
 import base.BaseTest;
 import components.LeftNavigationBar;

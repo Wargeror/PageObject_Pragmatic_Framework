@@ -1,17 +1,14 @@
-package pageTest;
+package pagetest;
 
-import base.BasePage;
 import base.BaseTest;
 import components.LeftNavigationBar;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.OrderPage;
 import pages.OrdersPage;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class OrdersPageTest extends BaseTest {
