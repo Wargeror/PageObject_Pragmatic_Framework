@@ -47,6 +47,7 @@ public class ProductsFormPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"form-product\"]/ul/li[1]/a")
     private WebElement generalForm;
 
+       @SuppressWarnings("SpellCheckingInspection")
        @FindBy(xpath = "/html/body/div[3]/div/a")
        private WebElement notfCancelButton;
 
@@ -57,6 +58,7 @@ public class ProductsFormPage extends BasePage {
        @FindBy(css = "iframe.cke_wysiwyg_frame")
        private WebElement iFrameDescription;
 
+       @SuppressWarnings("SpellCheckingInspection")
        @FindBy(css = "body.cke_editable.cke_editable_themed.cke_contents_ltr.cke_show_blocks.cke_show_borders > p:only-child")
        private WebElement decriptionField;
 
@@ -97,9 +99,11 @@ public class ProductsFormPage extends BasePage {
           @FindBy(id = "modal-image")
           private WebElement popUPWindow;
 
+          @SuppressWarnings("SpellCheckingInspection")
           @FindBy(id = "filemanager")
           private WebElement fileManager;
 
+          @SuppressWarnings("SpellCheckingInspection")
           @FindBy(xpath = "//*[@id=\"filemanager\"]/div")
           private WebElement fileManagerD;
 
@@ -117,6 +121,7 @@ public class ProductsFormPage extends BasePage {
           @FindBy(xpath = "//*[@id=\"button-search\"]/i")
           private WebElement imgSearchButton;
 
+          @SuppressWarnings("SpellCheckingInspection")
           @FindBy(xpath = "//*[@id=\"filemanager\"]/div/div[2]/div[3]/div/div[1]/a/img")
           private WebElement momchilPCImg;
 
@@ -155,6 +160,7 @@ public class ProductsFormPage extends BasePage {
         clickWebElement(saveButton);
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     public void clickNotfCancelButton(){
         clickWebElement(notfCancelButton);
     }
@@ -164,6 +170,7 @@ public class ProductsFormPage extends BasePage {
         typeText(productNameField, productName);
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     public WebElement getiFrameDescription(){
         return iFrameDescription;
     }

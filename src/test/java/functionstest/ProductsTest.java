@@ -6,6 +6,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
+import utils.CustomRandomStringGenerator;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ProductsTest extends BaseTest {
 
@@ -14,7 +17,7 @@ public class ProductsTest extends BaseTest {
     public void checkoutTest(){
         MainPage mainPage = new MainPage(driver,wait);
         driver.get(mainPage.mainUrl());
-        mainPage.clickmacBookImg();
+        mainPage.clickMacBookImg();
         Product4$Page product4$Page = new Product4$Page(driver,wait);
         product4$Page.clickAddToCart();
         product4$Page.clickAlertX();
@@ -27,7 +30,7 @@ public class ProductsTest extends BaseTest {
 
     //Test for buying a product
     @Test
-    public void buyProductTest() {
+    public void buyProductTest() throws InterruptedException {
         Product4$Page product4$Page = new Product4$Page(driver, wait);
         driver.get(product4$Page.getCustomDesktop());
 
@@ -38,8 +41,32 @@ public class ProductsTest extends BaseTest {
 
         CheckoutPage checkoutPage = new CheckoutPage(driver, wait);
         Assert.assertTrue(checkoutPage.urlContains());
+        checkoutPage.clickGuessRadioButton();
+        checkoutPage.typeFirstNameField(CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)));
+        checkoutPage.typeLastNameField(CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)));
+        checkoutPage.typeEmailField(CustomRandomStringGenerator.generateEmail());
+        checkoutPage.typeAddressField(CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)));
+        checkoutPage.typeCityField(CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)));
+        checkoutPage.typeZipCodeField(CustomRandomStringGenerator.randomNumeric(4));
+        checkoutPage.scrollToRegisterButton();
+        checkoutPage.selectCountrySelect("United Kingdom");
+        checkoutPage.selectRegionSelect("Norfolk");
+        checkoutPage.clickRegisterButton();
+        checkoutPage.clickAlertX();
+        checkoutPage.clickShippingMethodButton();
+        Thread.sleep(400);
+        checkoutPage.clickFlatShippingRadioButton();
+        checkoutPage.clickShippingEndButton();
+        checkoutPage.clickPaymentMethodButton();
+        Thread.sleep(400);
+        checkoutPage.clickCashRadioButton();
+        checkoutPage.clickPaymentEndButton();
+        checkoutPage.clickConfirmButton();
 
-        //Needs to be finished
+        SuccessfulCheckout successfulCheckout = new SuccessfulCheckout(driver,wait);
+        successfulCheckout.w8ForH1();
+        Assert.assertTrue(successfulCheckout.urlContains());
+        Assert.assertTrue(successfulCheckout.isH1Displayed());
 
     }
 

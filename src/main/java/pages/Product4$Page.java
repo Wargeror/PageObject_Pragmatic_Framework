@@ -25,6 +25,7 @@ public class Product4$Page extends BasePage {
     @FindBy(id = "button-cart")
     private WebElement addToCart;
 
+    @SuppressWarnings("SpellCheckingInspection")
     public final static String succAddNotf = "[class='alert alert-success alert-dismissible']";
 
     public Product4$Page(WebDriver driver, WebDriverWait wait){
@@ -53,6 +54,7 @@ public class Product4$Page extends BasePage {
         clickWebElement(addToCart);
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     public void waitSuccAddNotf(){
         w8UntilElementIsInvisible(By.cssSelector(succAddNotf));
     }

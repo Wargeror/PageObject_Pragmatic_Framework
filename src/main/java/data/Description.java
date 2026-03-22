@@ -1,5 +1,6 @@
 package data;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class Description {
 
     private String pcDescription;

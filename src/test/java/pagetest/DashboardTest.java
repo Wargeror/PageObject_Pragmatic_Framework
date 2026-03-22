@@ -82,15 +82,15 @@ public class DashboardTest extends BaseTest {
         List<String> exp_options = Arrays.asList(new String[]{"Today", "Week", "Month","Year"});
 
         for (int i = 1; i < 4; i++) {
-            dashboardPage.clicksalesAnalyticsTimeFrameButton();
+            dashboardPage.clicksAlesAnalyticsTimeFrameButton();
             wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector(dashboardPage.SalesAnalyticsTimeFrameListSelector(i)))));
             WebElement selected = driver.findElement(By.cssSelector(dashboardPage.SalesAnalyticsTimeFrameListSelector(i)));
             Assert.assertEquals(selected.getText(), exp_options.get(i-1));
             dashboardPage.clickSalesAnalyticsTimeFrameList(i);
-            dashboardPage.invisibilityOfalesAnalyticsTimeFrameList(i);
+            dashboardPage.invisibilityOfAlesAnalyticsTimeFrameList(i);
         }
 
-        dashboardPage.clicksalesAnalyticsTimeFrameButton();
+        dashboardPage.clicksAlesAnalyticsTimeFrameButton();
         dashboardPage.clickSalesAnalyticsTimeFrameList(4);
     }
 

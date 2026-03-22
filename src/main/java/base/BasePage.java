@@ -1,13 +1,10 @@
 package base;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.TimeoutException;
 
 public class BasePage {
     protected WebDriver driver;
@@ -49,12 +46,12 @@ public class BasePage {
         }
     }
 
-    public void w8ForVisibility(WebElement element){
+    public void w8ForVisibility(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     // Waits for an element to be either invisible or not present on the DOM.
-    public void w8UntilElementIsInvisible(By locator){
+    public void w8UntilElementIsInvisible(By locator) {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
@@ -68,41 +65,40 @@ public class BasePage {
         }
     }
 
-    public void w8iFrameAndMoveToIt(WebElement element){
+    public void w8iFrameAndMoveToIt(WebElement element) {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
     }
 
-    public void w8PopUpAndMoveToIt(WebElement element){
+    public void w8PopUpAndMoveToIt(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
         driver.switchTo().frame(element);
     }
 
-    public String getFill(WebElement element){
+    public String getFill(WebElement element) {
         return element.getAttribute("fill");
     }
 
-    public boolean isDisplayed(WebElement element){
+    public boolean isDisplayed(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
         return element.isDisplayed();
     }
 
-    public void selectCheckbox(WebElement element, Boolean selected){
-        if(selected){
-            if(!element.isSelected()){
+    public void selectCheckbox(WebElement element, Boolean selected) {
+        if (selected) {
+            if (!element.isSelected()) {
                 element.click();
             }
         } else {
-            if(element.isSelected()){
+            if (element.isSelected()) {
                 element.click();
             }
         }
     }
 
-    public void clickAlert(Boolean accept){
-        if(accept){
+    public void clickAlert(Boolean accept) {
+        if (accept) {
             driver.switchTo().alert().accept();
-        }
-        else{
+        } else {
             driver.switchTo().alert().dismiss();
         }
     }
@@ -112,7 +108,7 @@ public class BasePage {
         String token = "";
 
         // Find the user_token in the current URL
-        int tokenIndex = currentUrl.indexOf("user_token=");
+       try{ int tokenIndex = currentUrl.indexOf("user_token=");
         if (tokenIndex != -1) {
             token = currentUrl.substring(tokenIndex);
             // If there are other parameters after the token, cut them off
@@ -122,7 +118,9 @@ public class BasePage {
         } else {
             // Handle case where no token is found, maybe throw an exception or return the original url
             return url;
-        }
+        }}catch (NullPointerException e){
+            return url;
+       }
 
         // Append the token to the new URL
         if (url.contains("?")) {
@@ -130,5 +128,21 @@ public class BasePage {
         } else {
             return url + "?" + token;
         }
+    }
+
+    public void clickRadioButton(WebElement element){
+        wait.until(ExpectedConditions.visibilityOf(element));
+        if(!element.isSelected()){
+            element.click();
+        }
+    }
+
+    public void selectFromSelect(WebElement element, String text){
+        Select select = new Select(element);
+        select.selectByVisibleText(text);
+    }
+
+    public void cleanField(WebElement element){
+        element.clear();
     }
 }

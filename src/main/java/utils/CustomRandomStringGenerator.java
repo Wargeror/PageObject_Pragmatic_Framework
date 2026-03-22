@@ -5,7 +5,7 @@ import java.security.SecureRandom;
 public class CustomRandomStringGenerator {
 
     public static String randomAlphaNumeric(int length) {
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        @SuppressWarnings("SpellCheckingInspection") String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
@@ -15,7 +15,7 @@ public class CustomRandomStringGenerator {
     }
 
     public static String randomAlphabetic(int length) {
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        @SuppressWarnings("SpellCheckingInspection") String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
@@ -25,8 +25,8 @@ public class CustomRandomStringGenerator {
     }
 
     public static String nameGenerator(int length){
-        String firstchar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        String chars = "abcdefghijklmnopqrstuvwxyz";
+        @SuppressWarnings("SpellCheckingInspection") String firstchar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        @SuppressWarnings("SpellCheckingInspection") String chars = "abcdefghijklmnopqrstuvwxyz";
         SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder(length);
         sb.append(firstchar.charAt(random.nextInt(firstchar.length())));
@@ -37,7 +37,7 @@ public class CustomRandomStringGenerator {
     }
 
     public static String passwordGenerator(int length){
-        String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        @SuppressWarnings("SpellCheckingInspection") String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         String numbers = "0123456789";
         String symbols = "!@#$%&?";
         SecureRandom random = new SecureRandom();

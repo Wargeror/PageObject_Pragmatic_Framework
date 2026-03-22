@@ -28,6 +28,7 @@ public class CustomersPage extends BasePage { public String orderUrl;
     @FindBy(css = "button#button-filter")
     private WebElement filterButton;
 
+    @SuppressWarnings("SpellCheckingInspection")
     @FindBy(xpath = "//*[@id=\"form-customer\"]/div[1]/table/tbody/tr/td[1]/input")
     private WebElement cuCheckbox;
 

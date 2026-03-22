@@ -26,9 +26,11 @@ public class ProductsPage  extends BasePage {
     private WebElement productForm;
 
 
+    @SuppressWarnings("SpellCheckingInspection")
     @FindBy(xpath = "//tbody//td[contains(normalize-space(), \"Custom-Built Desktop PC\")]")
     private WebElement customPcProduct;
 
+    @SuppressWarnings("SpellCheckingInspection")
     @FindBy(xpath = "//*[@id=\"form-product\"]/div[1]/table/tbody/tr[4]/td[1]/input")
     private WebElement getNewProductCheckbox;
 

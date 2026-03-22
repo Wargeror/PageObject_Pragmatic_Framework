@@ -92,6 +92,7 @@ public class DashboardPage extends BasePage {
     public WebElement latestOrders;
 
     //Latest order redirect
+    @SuppressWarnings("SpellCheckingInspection")
     @FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[3]/div[2]/div/div[2]/table/tbody/tr[1]/td[6]/a/i")
     private WebElement latestOrder;
 
@@ -129,7 +130,7 @@ public class DashboardPage extends BasePage {
 
     }
 
-    public void clicksalesAnalyticsTimeFrameButton(){
+    public void clicksAlesAnalyticsTimeFrameButton(){
         clickWebElement(salesAnalyticsTimeFrameButton);
     }
 
@@ -140,7 +141,7 @@ public class DashboardPage extends BasePage {
         driver.findElement(By.cssSelector(SalesAnalyticsTimeFrameListSelector(index))).click();
     }
 
-    public void invisibilityOfalesAnalyticsTimeFrameList(int index){
+    public void invisibilityOfAlesAnalyticsTimeFrameList(int index){
         w8UntilElementIsInvisible(By.cssSelector(SalesAnalyticsTimeFrameListSelector(index)));
     }
 

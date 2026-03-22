@@ -83,7 +83,7 @@ public class MainPage extends BasePage {
         clickWebElement(cmp.getSearchButton());
     }
 
-    public void clickmacBookImg(){
+    public void clickMacBookImg(){
         clickWebElement(macBookImg);
     }
 }
