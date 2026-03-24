@@ -3,10 +3,16 @@ package pages;
 import base.BasePage;
 import components.LeftNavigationBar;
 import components.TopBar;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.CustomRandomStringGenerator;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CustomersPage extends BasePage { public String orderUrl;
 
@@ -43,23 +49,45 @@ public class CustomersPage extends BasePage { public String orderUrl;
         return urlContains(customerUrl);
     }
 
-    public void clickAddButton(){
+    public CustomersFormPage clickAddButton(){
         clickWebElement(addButton);
+        return new CustomersFormPage(driver,wait);
     }
 
-    public void typeEmailInputField(String text){
+    public CustomersPage typeEmailInputField(String text){
         typeText(emailInputField, text);
+        return this;
     }
 
-    public void clickFilterButton(){
+    public CustomersPage clickFilterButton(){
         clickWebElement(filterButton);
+        return this;
     }
 
-    public void clickCuCheckbox(Boolean selected){
+    public CustomersPage clickCuCheckbox(Boolean selected){
         selectCheckbox(cuCheckbox, selected);
+        return this;
     }
 
-    public void clickDeleteButton(){
+    public CustomersPage clickDeleteButton(){
         clickWebElement(deleteButton);
+        return this;
+    }
+
+    public boolean isCustomerListed(String email) {
+        String xpath = "//td[@class='text-start' and contains(text(), '" + email + "')]";
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            return driver.findElement(By.xpath(xpath)).isDisplayed();
+        } catch (TimeoutException | org.openqa.selenium.NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public CustomersPage deleteCustomer(){
+        clickCuCheckbox(true)
+                .clickDeleteButton()
+                .clickAlert(true);
+        return this;
     }
 }

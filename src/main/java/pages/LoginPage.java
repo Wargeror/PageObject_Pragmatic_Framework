@@ -35,18 +35,21 @@ public class LoginPage extends BasePage {
     }
 
     //Method used to input text into the username input field
-    public void typeTextUsernameField(String text) {
+    public LoginPage typeTextUsernameField(String text) {
         typeText(usernameField, text);
+        return this;
     }
 
     //Method used to input text into the password input field
-    public void typeTextPasswordField(String text) {
+    public LoginPage typeTextPasswordField(String text) {
         typeText(passwordField, text);
+        return this;
     }
 
     //Method used to click the login button
-    public void clickLoginButton() {
+    public DashboardPage clickLoginButton() {
         clickWebElement(loginButton);
+        return new DashboardPage(driver, wait);
     }
 
     public String alertGetText(){

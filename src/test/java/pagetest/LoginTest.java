@@ -12,10 +12,10 @@ public class LoginTest extends BaseTest {
     //Successful login test
     @Test
     public void loginTest(){
-        login();
+        //Get to the DashboardPage By Login
+        DashboardPage dashboardPage = login();
 
         User user = input.getUser(0); // Get user for assertion
-        DashboardPage dashboardPage = new DashboardPage(driver, wait);
         Assert.assertEquals(dashboardPage.usernameGetText(), user.getExpectedDashboardUsername());
         Assert.assertTrue(dashboardPage.urlContains());
     }
@@ -27,9 +27,9 @@ public class LoginTest extends BaseTest {
         driver.get(user.getSiteURL());
 
         LoginPage loginPage = new LoginPage(driver, wait);
-        loginPage.typeTextUsernameField("");
-        loginPage.typeTextPasswordField("");
-        loginPage.clickLoginButton();
+        loginPage.typeTextUsernameField("")
+                 .typeTextPasswordField("")
+                 .clickLoginButton();
         Assert.assertEquals(loginPage.alertGetText(), LoginPage.EXPECTED_ALERT_TEXT);
     }
 
@@ -39,16 +39,17 @@ public class LoginTest extends BaseTest {
         User user = input.getUser(0);
         driver.get(user.getSiteURL());
 
-        LoginPage loginPage = new LoginPage(driver, wait);
-        loginPage.typeTextUsernameField(user.getUsername());
-        loginPage.typeTextPasswordField(user.getPassword());
+        LoginPage loginPage = new LoginPage(driver, wait)
+                 .typeTextUsernameField(user.getUsername())
+                 .typeTextPasswordField(user.getPassword());
+
         //Record the current time - Test start time
         long startTime = System.currentTimeMillis();
-        loginPage.clickLoginButton();
 
-        DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        // Wait for a key element on the dashboard to be visible to ensure the page has loaded
-        dashboardPage.leftNavigationBar.w8NavBarToBeDisplayed();
+        // Click the login button
+        loginPage.clickLoginButton()
+                .leftNavigationBar.w8NavBarToBeDisplayed();
+
         //Record the current time - Test end time
         long endTime = System.currentTimeMillis();
 

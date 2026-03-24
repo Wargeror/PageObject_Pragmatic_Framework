@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.CustomersPage;
 
 import java.beans.Visibility;
 
@@ -116,12 +117,14 @@ public class LeftNavigationBar extends BasePage {
         clickWebElement(products);
     }
 
-    public void clickMenuCustomers(){
+    public LeftNavigationBar clickMenuCustomers(){
         clickWebElement(menuCustomers);
+        return this;
     }
 
-    public void clickCustomers(){
+    public CustomersPage clickCustomers(){
         clickWebElement(customers);
+        return new CustomersPage(driver,wait);
     }
 
     public void clickMenuSales(){

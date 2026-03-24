@@ -47,19 +47,20 @@ public class BaseTest {
         }
     }
 
-    public void login() {
-        loginAs(input.getUser(0)); // Default login
+    public DashboardPage login() {
+       DashboardPage dashboardPage = loginAs(input.getUser(0));
+       return dashboardPage;
     }
 
-    public void loginAs(User user) {
+    public DashboardPage loginAs(User user) {
         driver.get(user.getSiteURL());
         LoginPage loginPage = new LoginPage(driver, wait);
-        loginPage.typeTextUsernameField(user.getUsername());
-        loginPage.typeTextPasswordField(user.getPassword());
-        loginPage.clickLoginButton();
-
-        DashboardPage dashPage = new DashboardPage(driver,wait);
-        dashPage.leftNavigationBar.w8NavBarToBeDisplayed();
+        DashboardPage dashboardPage = loginPage
+                .typeTextUsernameField(user.getUsername())
+                .typeTextPasswordField(user.getPassword())
+                .clickLoginButton()
+                .w8UserNameToBeDisplayed();
+        return dashboardPage;
     }
 
     public void printDome(){

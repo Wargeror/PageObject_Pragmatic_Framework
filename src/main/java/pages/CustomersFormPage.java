@@ -1,12 +1,23 @@
 package pages;
 
 import base.BasePage;
+import components.LeftNavigationBar;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.CustomRandomStringGenerator;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CustomersFormPage extends BasePage {
+
+    public LeftNavigationBar leftNavigationBar;
+
+    private String firstName = CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
+    private String lastName = CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
+    private String password = CustomRandomStringGenerator.passwordGenerator(ThreadLocalRandom.current().nextInt(5, 19));
+    private String randomEmailAddress = CustomRandomStringGenerator.generateEmail();
 
     private String customerFormUrl;
 
@@ -42,6 +53,7 @@ public class CustomersFormPage extends BasePage {
 
     public CustomersFormPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
+        this.leftNavigationBar = new LeftNavigationBar(driver, wait);
         customerFormUrl = "https://auto.pragmatic.bg/manage/index.php?route=customer/customer.form";
     }
 
@@ -50,61 +62,118 @@ public class CustomersFormPage extends BasePage {
         return isDisplayed(alert);
     }
 
-    public void clickAlertX(){
+    public CustomersFormPage clickAlertX(){
         clickWebElement(alertX);
+        return this;
     }
 
-    public void typeFirstName(String firstName) {
+    public CustomersFormPage typeFirstName(String firstName) {
         typeText(firstNameField, firstName);
+        return this;
     }
 
-    public void typeLastName(String lastName) {
+    public CustomersFormPage typeLastName(String lastName) {
         typeText(lastNameField, lastName);
+        return this;
     }
 
-    public void typeEmail(String email) {
+    public CustomersFormPage typeEmail(String email) {
         typeText(emailField, email);
+        return this;
     }
 
-    public void typePassword(String password) {
+    public CustomersFormPage typePassword(String password) {
         typeText(passwordField, password);
+        return this;
     }
 
-    public void typeConfirmPassword(String password) {
+    public CustomersFormPage typeConfirmPassword(String password) {
         typeText(confirmField, password);
+        return this;
     }
 
-    public void setNewsletter(boolean subscribe) {
+    public CustomersFormPage setNewsletter(boolean subscribe) {
         if (newsletterCheckbox.isSelected() != subscribe) {
             newsletterCheckbox.click();
         }
+        return this;
     }
 
-    public void setSafeAntiFraud(boolean subscribe) {
+    public CustomersFormPage setSafeAntiFraud(boolean subscribe) {
         if (safeAntiFraud.isSelected() != subscribe) {
             safeAntiFraud.click();
         }
+        return this;
     }
 
-    public void clickSave() {
+    public CustomersFormPage clickSave() {
         clickWebElement(saveButton);
+        return this;
     }
 
-    public void scrollToNewsletterCheckbox() {
+    public CustomersFormPage scrollToNewsletterCheckbox() {
         scrollToElement(newsletterCheckbox);
-
+        return this;
     }
 
-    public void scrollSafeAntiFraud() {
+    public CustomersFormPage scrollSafeAntiFraud() {
         scrollToElement(safeAntiFraud);
-
+        return this;
     }
 
-    public void scrollToSaveButton() {
+    public CustomersFormPage scrollToSaveButton() {
         scrollToElement(saveButton);
+        return this;
     }
 
     public boolean urlContains() {
         return urlContains(customerFormUrl);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRandomEmailAddress() {
+        return randomEmailAddress;
+    }
+
+    public void setRandomEmailAddress(String randomEmailAddress) {
+        this.randomEmailAddress = randomEmailAddress;
+    }
+
+    public CustomersFormPage fillForm(){
+        this.typeFirstName(firstName)
+                .typeLastName(lastName)
+                .typeEmail(randomEmailAddress)
+                .typePassword(password)
+                .typeConfirmPassword(password)
+                .scrollToNewsletterCheckbox()
+                .setNewsletter(true)
+                .scrollSafeAntiFraud()
+                .setSafeAntiFraud(true)
+                .scrollToSaveButton()
+                .clickSave();
+        return this;
     }
 }

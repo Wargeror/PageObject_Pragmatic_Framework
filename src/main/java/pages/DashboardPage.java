@@ -104,6 +104,11 @@ public class DashboardPage extends BasePage {
         urlDashboard = "https://auto.pragmatic.bg/manage/index.php?route=common/dashboard";
     }
 
+    public DashboardPage w8UserNameToBeDisplayed(){
+        w8ForVisibility(username);
+        return this;
+    }
+
     //Method used to get the username
     public String usernameGetText(){
         return w8AndGetText(username);
