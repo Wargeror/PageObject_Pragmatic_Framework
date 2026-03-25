@@ -72,8 +72,9 @@ public class ProductsPage  extends BasePage {
         return urlContains(productsUrl);
     }
 
-    public void clickAddNewButton(){
+    public ProductsFormPage clickAddNewButton(){
         clickWebElement(addNewButton);
+        return new ProductsFormPage(driver,wait);
     }
 
     public boolean newProductExists() {
@@ -96,8 +97,9 @@ public class ProductsPage  extends BasePage {
         return isDisplayed(filterForm);
     }
 
-    public void typeProductName(String productName){
+    public ProductsPage typeProductName(String productName){
         typeText(productNameField, productName);
+        return this;
     }
 
     public void typeProductModel(String productModel){
@@ -114,6 +116,13 @@ public class ProductsPage  extends BasePage {
 
     public void clickFilterButton(){
         clickWebElement(filterButton);
+    }
+
+    public ProductsPage deleteProduct(){
+        selectNewProduct(true);
+        clickDeleteButton();
+        clickAlert(true);
+        return this;
     }
 
 }

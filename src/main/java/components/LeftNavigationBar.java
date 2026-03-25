@@ -8,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.CustomersPage;
+import pages.OrdersPage;
+import pages.ProductsPage;
 
 import java.beans.Visibility;
 
@@ -109,12 +111,18 @@ public class LeftNavigationBar extends BasePage {
         return dashboardLNavBar;
     }
 
-    public void clickMenuCatalog(){
+    public LeftNavigationBar clickMenuCatalog(){
         clickWebElement(menuCatalog);
+        return this;
     }
 
-    public void clickProducts(){
+    public ProductsPage clickProducts(){
         clickWebElement(products);
+        return new ProductsPage(driver,wait);
+    }
+
+    public void clickMenuExtensions(){
+        clickWebElement(menuExtensions);
     }
 
     public LeftNavigationBar clickMenuCustomers(){
@@ -127,12 +135,18 @@ public class LeftNavigationBar extends BasePage {
         return new CustomersPage(driver,wait);
     }
 
-    public void clickMenuSales(){
+    public LeftNavigationBar clickMenuSales(){
         clickWebElement(menuSales);
+        return this;
     }
 
-    public void clickOrders(){
+    public OrdersPage clickOrders(){
         clickWebElement(orders);
+        return new OrdersPage(driver,wait);
+    }
+
+    public void clickMenuSystem(){
+        clickWebElement(menuSystem);
 
     }
 }

@@ -14,10 +14,10 @@ public class CustomersFormPage extends BasePage {
 
     public LeftNavigationBar leftNavigationBar;
 
-    private String firstName = CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
-    private String lastName = CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
-    private String password = CustomRandomStringGenerator.passwordGenerator(ThreadLocalRandom.current().nextInt(5, 19));
-    private String randomEmailAddress = CustomRandomStringGenerator.generateEmail();
+    private String firstName;
+    private String lastName;
+    private String password;
+    private String randomEmailAddress;
 
     private String customerFormUrl;
 
@@ -54,6 +54,10 @@ public class CustomersFormPage extends BasePage {
     public CustomersFormPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
         this.leftNavigationBar = new LeftNavigationBar(driver, wait);
+        String firstName = CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
+        String lastName = CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
+        String password = CustomRandomStringGenerator.passwordGenerator(ThreadLocalRandom.current().nextInt(5, 19));
+        String randomEmailAddress = CustomRandomStringGenerator.generateEmail();
         customerFormUrl = "https://auto.pragmatic.bg/manage/index.php?route=customer/customer.form";
     }
 

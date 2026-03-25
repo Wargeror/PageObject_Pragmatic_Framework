@@ -114,20 +114,24 @@ public class DashboardPage extends BasePage {
         return w8AndGetText(username);
     }
 
-    public void clickViewMoreOrders() {
+    public OrdersPage clickViewMoreOrders() {
         clickWebElement(totalOrdersViewMore);
+        return new OrdersPage(driver,wait);
     }
 
-    public void clickViewMoreSales() {
+    public OrdersPage clickViewMoreSales() {
         clickWebElement(totalSalesViewMore);
+        return new OrdersPage(driver,wait);
     }
 
-    public void clickViewMoreCustomers() {
+    public CustomersPage clickViewMoreCustomers() {
         clickWebElement(totalCustomersViewMore);
+        return new CustomersPage(driver,wait);
     }
 
-    public void clickViewMorePeopleOnline() {
+    public OnlineReportPage clickViewMorePeopleOnline() {
         clickWebElement(peopleOnlineViewMore);
+        return new OnlineReportPage(driver,wait);
     }
 
     public boolean urlContains() {
@@ -150,12 +154,14 @@ public class DashboardPage extends BasePage {
         w8UntilElementIsInvisible(By.cssSelector(SalesAnalyticsTimeFrameListSelector(index)));
     }
 
-    public void clickLatestOrder(){
+    public OrderPage clickLatestOrder(){
         clickWebElement(latestOrder);
+        return new OrderPage(driver,wait);
     }
 
-    public void clickWorldMapRussia(){
+    public DashboardPage clickWorldMapRussia(){
         clickWebElement(worldMapRussia);
+        return this;
     }
 
     public String getFillWorldMapRussia(){

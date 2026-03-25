@@ -24,25 +24,22 @@ public class LeftNavigationBarTest extends BaseTest {
     //Assert Orders Page Loads From Left Navigation Bar
     @Test
     public void orderStatusCheck() {
-        login();
+        OrdersPage ordersPage =
+                 login()
+                .leftNavigationBar.clickMenuSales()
+                                  .clickOrders();
 
-        LeftNavigationBar navBar = new LeftNavigationBar(driver, wait);
-        navBar.clickMenuSales();
-        navBar.clickOrders();
-
-        OrdersPage ordersPage = new OrdersPage(driver, wait);
         Assert.assertTrue(ordersPage.urlContains());
     }
 
     //Asserts that Products Page Loads From Left Navigation Bar
     @Test
     public void addProductTest() throws InterruptedException {
-        login();
-        LeftNavigationBar navBar = new LeftNavigationBar(driver, wait);
-        navBar.clickMenuCatalog();
-        navBar.clickProducts();
+        ProductsPage productsPage =
+                 login()
+                .leftNavigationBar.clickMenuCatalog()
+                                  .clickProducts();
 
-        ProductsPage productsPage = new ProductsPage(driver, wait);
         Assert.assertTrue(productsPage.urlContains());
     }
 }

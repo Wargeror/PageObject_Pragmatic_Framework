@@ -21,7 +21,8 @@ public class TopBar extends BasePage {
         super(driver, wait);
     }
 
-    public void scrollToTop(){
+    public TopBar scrollToTop(){
         scrollToElement(h1PageName);
+        return this;
     }
 }

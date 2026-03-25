@@ -16,13 +16,11 @@ public class OrdersPageTest extends BaseTest {
     //Check Orders Status Values
     @Test
     public void orderStatusCheck(){
-        login();
+        OrdersPage ordersPage =
+                login()
+                .leftNavigationBar.clickMenuSales()
+                                  .clickOrders();
 
-        LeftNavigationBar navBar = new LeftNavigationBar(driver,wait);
-        navBar.clickMenuSales();
-        navBar.clickOrders();
-
-        OrdersPage ordersPage = new OrdersPage(driver,wait);
         Select orderStatus = new Select(ordersPage.getOrderStatus());
         List<String> act_options = new ArrayList();
 

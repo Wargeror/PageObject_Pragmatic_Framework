@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
@@ -147,8 +148,13 @@ public class ProductsFormPage extends BasePage {
         return isDisplayed(alertSuccess);
     }
 
-    public void clickAlertX(){
+    public ProductsFormPage clickAlertX(){
         clickWebElement(alertX);
+        return this;
+    }
+
+    public boolean isAlertDisplayed(){
+        return isDisplayed(alert);
     }
 
 
@@ -156,18 +162,21 @@ public class ProductsFormPage extends BasePage {
         return urlContains(productsFormUrl);
     }
 
-    public void clickSaveButton(){
+    public ProductsFormPage clickSaveButton(){
         clickWebElement(saveButton);
+        return this;
     }
 
     @SuppressWarnings("SpellCheckingInspection")
-    public void clickNotfCancelButton(){
+    public ProductsFormPage clickNotfCancelButton(){
         clickWebElement(notfCancelButton);
+        return this;
     }
 
 
-    public void typeProductName(String productName){
+    public ProductsFormPage typeProductName(String productName){
         typeText(productNameField, productName);
+        return this;
     }
 
     @SuppressWarnings("SpellCheckingInspection")
@@ -175,10 +184,12 @@ public class ProductsFormPage extends BasePage {
         return iFrameDescription;
     }
 
-    public void typeDescription(String description){
+    public ProductsFormPage typeFromDescription(){
+        String description = getDescription();
         driver.switchTo().frame(iFrameDescription); // Switch inside the method
         typeText(decriptionField, description);
         driver.switchTo().defaultContent(); // Switch back
+        return this;
     }
 
     //This method reads the file content into of a txt file and then returns a String
@@ -192,12 +203,14 @@ public class ProductsFormPage extends BasePage {
         }
     }
 
-    public void typeMetaTitle(String metaTitle){
+    public ProductsFormPage typeMetaTitle(String metaTitle){
         typeText(metaTitleField, metaTitle);
+        return this;
     }
 
-    public void typeProductTag(String productTag){
+    public ProductsFormPage typeProductTag(String productTag){
         typeText(productTagField, productTag);
+        return this;
     }
 
     //This method iterates through every row and every column in the first sheet of your Excel file, joining them with a comma.
@@ -303,6 +316,39 @@ public class ProductsFormPage extends BasePage {
     public void sendPath(){
         inputFile.sendKeys(filePath);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("alert")));
+    }
+
+    public ProductsFormPage fillProductForm(){
+        typeProductName("Custom-Built Desktop PC1");
+        clickNotfCancelButton();
+        typeFromDescription();
+        typeMetaTitle("Custom PC");
+        typeProductTag("Desktop PC");
+        topBar.scrollToTop();
+        clickDataField();
+        typeModel("Custom-built 01");
+        scrollToTaxClassSelect();
+        typePrice("300");
+        scrollToMinQuant();
+        typeQuantity("200000");
+        Select orderStatus = new Select(getTaxClassSelect());
+        orderStatus.selectByVisibleText("Taxable Goods");
+        topBar.scrollToTop();
+        clickImgForm();
+        clickEditImg();
+        typeImgSearchField("MomchilPCImg");
+        clickImgSearchButton();
+        w84MomchilPCImgVisibility();
+        try {
+            Thread.sleep(400);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        clickMomchilPCImg();
+        clickSeoForm();
+        typeSeoWord("custom-PC2");
+        clickSaveButton();
+        return this;
     }
 
 }

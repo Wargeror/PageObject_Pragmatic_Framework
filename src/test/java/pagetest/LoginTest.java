@@ -47,7 +47,8 @@ public class LoginTest extends BaseTest {
         long startTime = System.currentTimeMillis();
 
         // Click the login button
-        loginPage.clickLoginButton()
+                loginPage
+                .clickLoginButton()
                 .leftNavigationBar.w8NavBarToBeDisplayed();
 
         //Record the current time - Test end time

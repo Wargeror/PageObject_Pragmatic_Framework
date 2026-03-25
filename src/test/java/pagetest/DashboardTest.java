@@ -16,58 +16,49 @@ public class DashboardTest extends BaseTest {
     //Order "View more..." Redirect
     @Test
     public void orderViewMoreTest() {
-        login();
+        OrdersPage ordersPage =
+                login()
+                .clickViewMoreOrders();
 
-        DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        dashboardPage.clickViewMoreOrders();
-
-        OrdersPage ordersPage = new OrdersPage(driver,wait);
         Assert.assertTrue(ordersPage.urlContains());
     }
 
     //Sales "View more..." Redirect
     @Test
     public void SalesViewMoreTest() {
-        login();
+        OrdersPage ordersPage =
+                login()
+                .clickViewMoreSales();
 
-        DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        dashboardPage.clickViewMoreSales();
-
-        OrdersPage ordersPage = new OrdersPage(driver,wait);
         Assert.assertTrue(ordersPage.urlContains());
     }
 
     //Customers "View more..." Redirect
     @Test
     public void CustomersViewMoreTest() {
-        login();
+        CustomersPage customersPage =
+                login()
+                .clickViewMoreCustomers();
 
-        DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        dashboardPage.clickViewMoreCustomers();
-
-        CustomersPage customersPage = new CustomersPage(driver,wait);
         Assert.assertTrue(customersPage.urlContains());
     }
 
     //People Online "View more..." Redirect
     @Test
     public void PeopleOnlineViewMoreTest() {
-        login();
+        OnlineReportPage onlineReportPage =
+                login()
+                .clickViewMorePeopleOnline();
 
-        DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        dashboardPage.clickViewMorePeopleOnline();
-
-        OnlineReportPage onlineReportPage = new OnlineReportPage(driver,wait);
         Assert.assertTrue(onlineReportPage.urlContains());
     }
 
     //World Map Russia Select Test
     @Test
     public void WorldMapRussiaTest(){
-        login();
-
-        DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        dashboardPage.clickWorldMapRussia();
+        DashboardPage dashboardPage =
+                 login()
+                .clickWorldMapRussia();
 
         Assert.assertEquals(dashboardPage.getFillWorldMapRussia(),"#666666");
     }
@@ -97,12 +88,10 @@ public class DashboardTest extends BaseTest {
     //Latest Order Redirect Test
     @Test
     public void LatestOrderRedirectTest(){
-        login();
+        OrderPage orderPage =
+                 login()
+                .clickLatestOrder();
 
-        DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        dashboardPage.clickLatestOrder();
-
-        OrderPage orderPage = new OrderPage(driver,wait);
         Assert.assertTrue(orderPage.urlContains());
     }
 

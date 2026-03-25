@@ -8,6 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.CustomRandomStringGenerator;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CheckoutPage extends BasePage {
 
@@ -96,52 +99,59 @@ public class CheckoutPage extends BasePage {
     }
 
 
-    public void clickGuessRadioButton(){
+    public CheckoutPage clickGuessRadioButton(){
         clickRadioButton(guessRadioButton);
+        return this;
     }
 
-    public void typeFirstNameField(String text){
+    public CheckoutPage typeFirstNameField(String text){
         typeText(firstNameField, text);
+        return this;
     }
 
     public void cleanFirstNameField(){
         cleanField(firstNameField);
     }
 
-    public void typeLastNameField(String text){
+    public CheckoutPage typeLastNameField(String text){
         typeText(lastNameField, text);
+        return this;
     }
 
     public void cleanLastNameField(){
         cleanField(lastNameField);
     }
 
-    public void typeEmailField(String text){
+    public CheckoutPage typeEmailField(String text){
         typeText(emailField, text);
+        return this;
     }
 
     public void cleanEmailField(){
         cleanField(emailField);
     }
 
-    public void typeAddressField(String text){
+    public CheckoutPage typeAddressField(String text){
         typeText(addressField, text);
+        return this;
     }
 
     public void cleanAddressField(){
         cleanField(addressField);
     }
 
-    public void typeCityField(String text){
+    public CheckoutPage typeCityField(String text){
         typeText(cityField, text);
+        return this;
     }
 
     public void cleanCityField(){
         cleanField(cityField);
     }
 
-    public void typeZipCodeField(String text){
+    public CheckoutPage typeZipCodeField(String text){
         typeText(zipCodeField, text);
+        return this;
     }
 
     public void cleanZipCodeField(){
@@ -157,51 +167,101 @@ public class CheckoutPage extends BasePage {
         cleanZipCodeField();
     }
 
-    public void selectCountrySelect(String text){
+    public CheckoutPage selectCountrySelect(String text){
         selectFromSelect(countrySelect, text);
+        return this;
     }
 
-    public void selectRegionSelect(String text){
+    public CheckoutPage selectRegionSelect(String text){
         selectFromSelect(regionSelect, text);
+        return this;
     }
 
-    public void scrollToRegisterButton(){
+    public CheckoutPage scrollToRegisterButton(){
         scrollToElement(registerButton);
+        return this;
     }
 
-    public void clickRegisterButton(){
+    public CheckoutPage clickRegisterButton(){
         clickWebElement(registerButton);
+        return this;
     }
 
-    public void clickAlertX(){
+    public boolean isAlertDisplayed(){
+        return isDisplayed(alert);
+    }
+
+    public CheckoutPage clickAlertX(){
         clickWebElement(alertX);
+        return this;
     }
 
-    public void clickShippingMethodButton(){
+    public CheckoutPage clickShippingMethodButton(){
         clickWebElement(shippingMethodButton);
+        try {
+            Thread.sleep(400);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return this;
     }
 
-    public void clickFlatShippingRadioButton(){
+    public CheckoutPage clickFlatShippingRadioButton(){
         clickRadioButton(flatShippingRadioButton);
+        return this;
     }
 
-    public void clickShippingEndButton(){
+    public CheckoutPage clickShippingEndButton(){
         clickWebElement(shippingEndButton);
+        return this;
     }
 
-    public void clickPaymentMethodButton(){
+    public CheckoutPage clickPaymentMethodButton(){
         clickWebElement(paymentMethodButton);
+        try {
+            Thread.sleep(400);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return this;
     }
 
-    public void clickCashRadioButton(){
+    public CheckoutPage clickCashRadioButton(){
         clickRadioButton(cashRadioButton);
+        return this;
     }
 
-    public void clickPaymentEndButton(){
+    public CheckoutPage clickPaymentEndButton(){
         clickWebElement(paymentEndButton);
+        return this;
     }
 
-    public void clickConfirmButton(){
+    public SuccessfulCheckout clickConfirmButton(){
         clickWebElement(confirmButton);
+        return new SuccessfulCheckout(driver,wait);
+    }
+
+    public SuccessfulCheckout fillCheckoutForm(){
+        SuccessfulCheckout successfulCheckout = clickGuessRadioButton()
+                .typeFirstNameField(CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
+                .typeLastNameField(CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
+                .typeEmailField(CustomRandomStringGenerator.generateEmail())
+                .typeAddressField(CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
+                .typeCityField(CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
+                .typeZipCodeField(CustomRandomStringGenerator.randomNumeric(4))
+                .scrollToRegisterButton()
+                .selectCountrySelect("United Kingdom")
+                .selectRegionSelect("Norfolk")
+                .clickRegisterButton()
+                .clickAlertX()
+                .clickShippingMethodButton()
+                .clickFlatShippingRadioButton()
+                .clickShippingEndButton()
+                .clickPaymentMethodButton()
+                .clickCashRadioButton()
+                .clickPaymentEndButton()
+                .clickConfirmButton()
+                .w8ForH1();
+        return successfulCheckout;
     }
 }

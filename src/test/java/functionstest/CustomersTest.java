@@ -24,7 +24,8 @@ public class CustomersTest extends BaseTest {
 
         Assert.assertTrue(cuField.isAlertDisplayed());
         
-        CustomersPage cuPage = cuField
+        CustomersPage cuPage =
+                cuField
                 .clickAlertX()
                 .leftNavigationBar.clickCustomers()
                 .typeEmailInputField(cuField.getRandomEmailAddress())

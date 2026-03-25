@@ -37,8 +37,6 @@ public class ProductsPageTest extends BaseTest {
         prodPage.clickFilterButton();
 
         Assert.assertTrue(prodPage.newProductExists());
-
-
     }
 
     //Asserts if the Product Price Filter Works
@@ -50,7 +48,6 @@ public class ProductsPageTest extends BaseTest {
         prodPage.clickFilterButton();
 
         Assert.assertTrue(prodPage.newProductExists());
-
 
     }
 

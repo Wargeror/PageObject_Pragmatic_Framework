@@ -34,8 +34,9 @@ public class SuccessfulCheckout extends BasePage {
         return urlContains(SucCheckUrl);
     }
 
-    public void w8ForH1(){
+    public SuccessfulCheckout w8ForH1(){
         w8ForVisibility(h1);
+        return this;
     }
 
     public boolean isH1Displayed(){

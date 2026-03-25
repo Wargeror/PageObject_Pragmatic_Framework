@@ -19,6 +19,9 @@ public class Product4$Page extends BasePage {
     @FindBy(xpath = "//*[@id=\"alert\"]/div/button")
     private WebElement alertX;
 
+    @FindBy(xpath = "//*[@id=\"header-cart\"]/div/ul/li/div/p/a[1]")
+    private WebElement viewCart;
+
     @FindBy(xpath = "//p[@class='text-end']/a[2]")
     private WebElement checkout;
 
@@ -38,20 +41,29 @@ public class Product4$Page extends BasePage {
         return urlContains(macBookUrl);
     }
 
-    public void clickAlertX(){
+    public Product4$Page clickAlertX(){
         clickWebElement(alertX);
+        return this;
     }
 
-    public void clickCart(){
+    public Product4$Page clickCart(){
         clickWebElement(cart);
+        return this;
     }
 
-    public void clickCheckout(){
+    public CartPage clickViewCart(){
+        clickWebElement(viewCart);
+        return new CartPage(driver,wait);
+    }
+
+    public CheckoutPage clickCheckout(){
         clickWebElement(checkout);
+        return new CheckoutPage(driver,wait);
     }
 
-    public void clickAddToCart(){
+    public Product4$Page clickAddToCart(){
         clickWebElement(addToCart);
+        return this;
     }
 
     @SuppressWarnings("SpellCheckingInspection")
@@ -61,6 +73,24 @@ public class Product4$Page extends BasePage {
 
     public String getCustomDesktop(){
         return customDesktop;
+    }
+
+    public CheckoutPage addAndGoCheckout(){
+        CheckoutPage checkoutPage =
+                clickAddToCart()
+                .clickAlertX()
+                .clickCart()
+                .clickCheckout();
+        return checkoutPage;
+    }
+
+    public CartPage addAndGoCart(){
+        CartPage cartPage =
+                clickAddToCart()
+                .clickAlertX()
+                .clickCart()
+                .clickViewCart();
+        return cartPage;
     }
 
 }

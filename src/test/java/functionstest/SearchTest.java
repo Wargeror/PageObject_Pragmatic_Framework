@@ -13,10 +13,11 @@ public class SearchTest extends BaseTest {
     public void iMacSearch(){
         MainPage mainPage = new MainPage(driver,wait);
         driver.get(mainPage.mainUrl());
-        mainPage.typeSearchField("iMac");
-        mainPage.clickSearchButton();
+        SearchPage searchPage =
+                mainPage
+                .typeSearchField("iMac")
+                .clickSearchButton();
 
-        SearchPage searchPage = new SearchPage(driver,wait);
         Assert.assertTrue(searchPage.isMacBookImgDisplayed());
     }
 

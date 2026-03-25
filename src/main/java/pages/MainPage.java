@@ -75,15 +75,28 @@ public class MainPage extends BasePage {
         return isDisplayed(secondBanner);
     }
 
-    public void typeSearchField(String text){
+    public MainPage typeSearchField(String text){
         typeText(cmp.getSearchField(), text);
+        return this;
     }
 
-    public void clickSearchButton(){
+    public SearchPage clickSearchButton(){
         clickWebElement(cmp.getSearchButton());
+        return new SearchPage(driver,wait);
     }
 
-    public void clickMacBookImg(){
+    public Product4$Page clickMacBookImg(){
         clickWebElement(macBookImg);
+        return new Product4$Page(driver,wait);
+    }
+
+    public CheckoutPage orderAndGoCheckout(){
+        CheckoutPage checkoutPage =
+                clickMacBookImg()
+                .clickAddToCart()
+                .clickAlertX()
+                .clickCart()
+                .clickCheckout();
+        return checkoutPage;
     }
 }
