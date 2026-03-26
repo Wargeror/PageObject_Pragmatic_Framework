@@ -11,6 +11,7 @@ public class MainPageTest extends BaseTest {
     public void displayTest(){
         MainPage mainPage = new MainPage(driver,wait);
         driver.get(mainPage.mainUrl());
+
         Assert.assertTrue(mainPage.highBar.isHighBarDisplayed());
         Assert.assertTrue(mainPage.cmp.isLogoDisplayed());
         Assert.assertTrue(mainPage.cmp.isSearchFieldDisplayed());
@@ -21,7 +22,9 @@ public class MainPageTest extends BaseTest {
         Assert.assertTrue(mainPage.isMacBookDisplayed());
         Assert.assertTrue(mainPage.isiPhoneDisplayed());
         Assert.assertTrue(mainPage.isCinema30Displayed());
+
         mainPage.scrollToSecondBanner();
+
         Assert.assertTrue(mainPage.isCanonDisplayed());
         Assert.assertTrue(mainPage.isSecondBannerDisplayed());
     }

@@ -30,6 +30,7 @@ public class LoginTest extends BaseTest {
         loginPage.typeTextUsernameField("")
                  .typeTextPasswordField("")
                  .clickLoginButton();
+
         Assert.assertEquals(loginPage.alertGetText(), LoginPage.EXPECTED_ALERT_TEXT);
     }
 

@@ -102,20 +102,23 @@ public class ProductsPage  extends BasePage {
         return this;
     }
 
-    public void typeProductModel(String productModel){
+    public ProductsPage typeProductModel(String productModel){
         typeText(productModelField, productModel);
+        return this;
     }
 
-    public void typeProductPrice(String productPrice){
+    public ProductsPage typeProductPrice(String productPrice){
         typeText(productPriceField, productPrice);
+        return this;
     }
 
     public void typeProductQuantity(String productQuantity){
         typeText(productQuantityField, productQuantity);
     }
 
-    public void clickFilterButton(){
+    public ProductsPage clickFilterButton(){
         clickWebElement(filterButton);
+        return this;
     }
 
     public ProductsPage deleteProduct(){

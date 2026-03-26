@@ -66,9 +66,9 @@ public class DashboardTest extends BaseTest {
     //Sales Analytics Filter Test
     @Test
     public void SalesAnaliticsFilterTest() {
-        login();
 
-        DashboardPage dashboardPage = new DashboardPage(driver, wait);
+        DashboardPage dashboardPage = login();
+
 
         List<String> exp_options = Arrays.asList(new String[]{"Today", "Week", "Month","Year"});
 

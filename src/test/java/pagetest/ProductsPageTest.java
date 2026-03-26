@@ -18,10 +18,10 @@ public class ProductsPageTest extends BaseTest {
     //Asserts if the Product Name Filter Works
     @Test
     public void productNameFilterTest(){
-        ProductsPage prodPage = goTo();
-
-        prodPage.typeProductName("Custom-Built Desktop PC");
-        prodPage.clickFilterButton();
+        ProductsPage prodPage =
+                goTo()
+                .typeProductName("Custom-Built Desktop PC")
+                .clickFilterButton();
 
         Assert.assertTrue(prodPage.newProductExists());
 
@@ -31,10 +31,10 @@ public class ProductsPageTest extends BaseTest {
     //Asserts if the Product Model Filter Works
     @Test
     public void productModelFilterTest(){
-        ProductsPage prodPage = goTo();
-
-        prodPage.typeProductModel("Custom-built 01");
-        prodPage.clickFilterButton();
+        ProductsPage prodPage =
+                goTo()
+                .typeProductModel("Custom-built 01")
+                .clickFilterButton();
 
         Assert.assertTrue(prodPage.newProductExists());
     }
@@ -42,10 +42,10 @@ public class ProductsPageTest extends BaseTest {
     //Asserts if the Product Price Filter Works
     @Test
     public void productPriceFilterTest(){
-        ProductsPage prodPage = goTo();
-
-        prodPage.typeProductPrice("300");
-        prodPage.clickFilterButton();
+        ProductsPage prodPage =
+                goTo()
+                .typeProductPrice("300")
+                .clickFilterButton();
 
         Assert.assertTrue(prodPage.newProductExists());
 
