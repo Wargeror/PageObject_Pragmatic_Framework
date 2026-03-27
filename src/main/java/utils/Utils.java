@@ -1,5 +1,6 @@
 package utils;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -113,5 +114,21 @@ public class Utils {
             System.err.println("Failed to capture screenshot: " + e.getMessage());
             return null;
         }
+    }
+
+    //Injects CSS into the current page to disable all CSS animations and transitions.
+
+    public static void disableAnimations(WebDriver driver) {
+        String css = "*, *::before, *::after {" +
+                "  transition: none !important;" +
+                "  animation: none !important;" +
+                "  transition-duration: 0s !important;" +
+                "  animation-duration: 0s !important;" +
+                "}";
+        String js = "var style = document.createElement('style');" +
+                "style.type = 'text/css';" +
+                "style.innerHTML = arguments[0];" +
+                "document.head.appendChild(style);";
+        ((JavascriptExecutor) driver).executeScript(js, css);
     }
 }

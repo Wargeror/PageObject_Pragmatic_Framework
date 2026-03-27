@@ -9,6 +9,7 @@ import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+import utils.Utils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -21,6 +22,9 @@ public class VisualTest extends BaseTest {
     public void MainPageVisual() {
         MainPage mainPage = new MainPage(driver, wait);
         driver.get(mainPage.mainUrl());
+
+        // Freeze animations to ensure consistent screenshots
+        Utils.disableAnimations(driver);
 
         // Use AShot to take a full-page screenshot
         Screenshot currentScreenshot = new AShot()
