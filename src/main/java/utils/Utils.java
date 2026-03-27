@@ -1,8 +1,17 @@
 package utils;
 
-import java.security.SecureRandom;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.io.FileHandler;
 
-public class CustomRandomStringGenerator {
+import java.io.File;
+import java.io.IOException;
+import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Utils {
 
     public static String randomAlphaNumeric(int length) {
         @SuppressWarnings("SpellCheckingInspection") String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -74,14 +83,35 @@ public class CustomRandomStringGenerator {
     }
 
     public static String generateEmail(){
-        String prefix = CustomRandomStringGenerator.randomAlphaNumeric(9);
-        String domain = CustomRandomStringGenerator.randomAlphabetic(6);
-        String randomEmailAddress = prefix + "@" + domain + ".com";
-        return randomEmailAddress;
+        String prefix = Utils.randomAlphaNumeric(9);
+        String domain = Utils.randomAlphabetic(6);
+        return prefix + "@" + domain + ".com";
     }
 
-}
+    /**
+     * Captures a screenshot of the current browser window and saves it to a file.
+     * The filename includes a timestamp to ensure uniqueness.
+     *
+     * @param driver   The WebDriver instance.
+     * @param testName The name of the test or a descriptive string for the screenshot.
+     * @return The absolute path of the saved screenshot, or null if it failed.
+     */
+    public static String takeScreenshot(WebDriver driver, String testName) {
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String fileName = testName + "_" + timestamp + ".png";
+        String directory = "target/screenshots/";
+        
+        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        File targetFile = new File(directory + fileName);
 
-//apache.commons-lang3
-//        String prefix = RandomStringUtils.randomAlphanumeric(9);
-//        String domain = RandomStringUtils.randomAlphabetic(6);
+        try {
+            FileHandler.createDir(new File(directory));
+            FileHandler.copy(screenshotFile, targetFile);
+            System.out.println("Screenshot saved to: " + targetFile.getAbsolutePath());
+            return targetFile.getAbsolutePath();
+        } catch (IOException e) {
+            System.err.println("Failed to capture screenshot: " + e.getMessage());
+            return null;
+        }
+    }
+}

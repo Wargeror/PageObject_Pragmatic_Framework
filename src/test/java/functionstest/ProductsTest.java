@@ -64,8 +64,7 @@ public class ProductsTest extends BaseTest {
     public void addProductTest() throws InterruptedException {
         ProductsFormPage productsFormPage =
                 login()
-                .leftNavigationBar.clickMenuCatalog()
-                                   .clickProducts()
+                .goToProdPage()
                 .clickAddNewButton()
                 .fillProductForm();
 
@@ -87,8 +86,7 @@ public class ProductsTest extends BaseTest {
     public void addProductAlertTest() throws InterruptedException {
         ProductsFormPage productsFormPage =
                 login()
-                .leftNavigationBar.clickMenuCatalog()
-                                  .clickProducts()
+                .goToProdPage()
                 .clickAddNewButton()
                 .clickNotfCancelButton()
                 .clickSaveButton();

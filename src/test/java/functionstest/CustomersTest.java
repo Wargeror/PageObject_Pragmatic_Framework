@@ -4,10 +4,7 @@ import base.BaseTest;
 import org.testng.Assert;
 import pages.CustomersFormPage;
 import pages.CustomersPage;
-import utils.CustomRandomStringGenerator;
 import org.testng.annotations.Test;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 public class CustomersTest extends BaseTest {
 
@@ -15,23 +12,19 @@ public class CustomersTest extends BaseTest {
     @Test
     public void addCustomerTest() {
 
-        CustomersFormPage cuField =
+        CustomersFormPage cuFormPage =
                  login()
-                .leftNavigationBar.clickMenuCustomers()
-                .clickCustomers()
+                .navigateToCuPage()
                 .clickAddButton()
                 .fillForm();
 
-        Assert.assertTrue(cuField.isAlertDisplayed());
+        Assert.assertTrue(cuFormPage.isAlertDisplayed());
         
         CustomersPage cuPage =
-                cuField
-                .clickAlertX()
-                .leftNavigationBar.clickCustomers()
-                .typeEmailInputField(cuField.getRandomEmailAddress())
-                .clickFilterButton();
+                cuFormPage
+                .filterForNewCu();
 
-        Assert.assertTrue(cuPage.isCustomerListed(cuField.getRandomEmailAddress()));
+        Assert.assertTrue(cuPage.isCustomerListed(cuFormPage.getRandomEmailAddress()));
 
         cuPage.deleteCustomer();
     }

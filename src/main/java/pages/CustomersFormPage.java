@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.CustomRandomStringGenerator;
+import utils.Utils;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -54,10 +54,10 @@ public class CustomersFormPage extends BasePage {
     public CustomersFormPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
         this.leftNavigationBar = new LeftNavigationBar(driver, wait);
-        String firstName = CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
-        String lastName = CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
-        String password = CustomRandomStringGenerator.passwordGenerator(ThreadLocalRandom.current().nextInt(5, 19));
-        String randomEmailAddress = CustomRandomStringGenerator.generateEmail();
+        String firstName = Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
+        String lastName = Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
+        String password = Utils.passwordGenerator(ThreadLocalRandom.current().nextInt(5, 19));
+        String randomEmailAddress = Utils.generateEmail();
         customerFormUrl = "https://auto.pragmatic.bg/manage/index.php?route=customer/customer.form";
     }
 
@@ -180,4 +180,13 @@ public class CustomersFormPage extends BasePage {
                 .clickSave();
         return this;
     }
+
+   public CustomersPage filterForNewCu(){
+       return
+               clickAlertX()
+               .leftNavigationBar.clickCustomers()
+               .typeEmailInputField(getRandomEmailAddress())
+               .clickFilterButton();
+
+   }
 }

@@ -91,12 +91,12 @@ public class MainPage extends BasePage {
     }
 
     public CheckoutPage orderAndGoCheckout(){
-        CheckoutPage checkoutPage =
+        return
                 clickMacBookImg()
                 .clickAddToCart()
                 .clickAlertX()
                 .clickCart()
                 .clickCheckout();
-        return checkoutPage;
+
     }
 }

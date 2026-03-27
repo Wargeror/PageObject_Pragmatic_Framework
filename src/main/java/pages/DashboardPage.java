@@ -164,6 +164,21 @@ public class DashboardPage extends BasePage {
         return this;
     }
 
+    public  CustomersPage navigateToCuPage(){
+         return leftNavigationBar.clickMenuCustomers()
+                 .clickCustomers();
+    }
+
+    public ProductsPage goToProdPage(){
+        return leftNavigationBar.clickMenuCatalog()
+                .clickProducts();
+    }
+
+    public OrdersPage goToOrdersPage(){
+        return  leftNavigationBar.clickMenuSales()
+                .clickOrders();
+    }
+
     public String getFillWorldMapRussia(){
         return getFill(worldMapRussia);
     }

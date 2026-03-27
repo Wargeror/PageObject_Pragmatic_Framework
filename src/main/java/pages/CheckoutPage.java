@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.CustomRandomStringGenerator;
+import utils.Utils;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -242,13 +242,14 @@ public class CheckoutPage extends BasePage {
     }
 
     public SuccessfulCheckout fillCheckoutForm(){
-        SuccessfulCheckout successfulCheckout = clickGuessRadioButton()
-                .typeFirstNameField(CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
-                .typeLastNameField(CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
-                .typeEmailField(CustomRandomStringGenerator.generateEmail())
-                .typeAddressField(CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
-                .typeCityField(CustomRandomStringGenerator.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
-                .typeZipCodeField(CustomRandomStringGenerator.randomNumeric(4))
+        return
+                clickGuessRadioButton()
+                .typeFirstNameField(Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
+                .typeLastNameField(Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
+                .typeEmailField(Utils.generateEmail())
+                .typeAddressField(Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
+                .typeCityField(Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
+                .typeZipCodeField(Utils.randomNumeric(4))
                 .scrollToRegisterButton()
                 .selectCountrySelect("United Kingdom")
                 .selectRegionSelect("Norfolk")
@@ -262,6 +263,5 @@ public class CheckoutPage extends BasePage {
                 .clickPaymentEndButton()
                 .clickConfirmButton()
                 .w8ForH1();
-        return successfulCheckout;
     }
 }

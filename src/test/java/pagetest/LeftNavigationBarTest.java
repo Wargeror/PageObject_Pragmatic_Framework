@@ -26,8 +26,7 @@ public class LeftNavigationBarTest extends BaseTest {
     public void orderStatusCheck() {
         OrdersPage ordersPage =
                  login()
-                .leftNavigationBar.clickMenuSales()
-                                  .clickOrders();
+                .goToOrdersPage();
 
         Assert.assertTrue(ordersPage.urlContains());
     }
@@ -37,8 +36,7 @@ public class LeftNavigationBarTest extends BaseTest {
     public void addProductTest() throws InterruptedException {
         ProductsPage productsPage =
                  login()
-                .leftNavigationBar.clickMenuCatalog()
-                                  .clickProducts();
+                .goToProdPage();
 
         Assert.assertTrue(productsPage.urlContains());
     }

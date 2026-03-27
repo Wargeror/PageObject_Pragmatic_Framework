@@ -18,8 +18,7 @@ public class OrdersPageTest extends BaseTest {
     public void orderStatusCheck(){
         OrdersPage ordersPage =
                 login()
-                .leftNavigationBar.clickMenuSales()
-                                  .clickOrders();
+                .goToOrdersPage();
 
         Select orderStatus = new Select(ordersPage.getOrderStatus());
         List<String> act_options = new ArrayList();

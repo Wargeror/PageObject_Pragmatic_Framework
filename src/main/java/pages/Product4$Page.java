@@ -76,21 +76,19 @@ public class Product4$Page extends BasePage {
     }
 
     public CheckoutPage addAndGoCheckout(){
-        CheckoutPage checkoutPage =
+        return
                 clickAddToCart()
                 .clickAlertX()
                 .clickCart()
                 .clickCheckout();
-        return checkoutPage;
     }
 
     public CartPage addAndGoCart(){
-        CartPage cartPage =
+        return
                 clickAddToCart()
                 .clickAlertX()
                 .clickCart()
                 .clickViewCart();
-        return cartPage;
     }
 
 }

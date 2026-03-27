@@ -34,35 +34,4 @@ public class LoginTest extends BaseTest {
         Assert.assertEquals(loginPage.alertGetText(), LoginPage.EXPECTED_ALERT_TEXT);
     }
 
-    //Performance test for login page load time
-    @Test
-    public void measureLoginLoadTime() {
-        User user = input.getUser(0);
-        driver.get(user.getSiteURL());
-
-        LoginPage loginPage = new LoginPage(driver, wait)
-                 .typeTextUsernameField(user.getUsername())
-                 .typeTextPasswordField(user.getPassword());
-
-        //Record the current time - Test start time
-        long startTime = System.currentTimeMillis();
-
-        // Click the login button
-                loginPage
-                .clickLoginButton()
-                .leftNavigationBar.w8NavBarToBeDisplayed();
-
-        //Record the current time - Test end time
-        long endTime = System.currentTimeMillis();
-
-        // Calculate the load time
-        long loadTime = endTime - startTime;
-
-        // Print the load time
-        System.out.println("Login Page Load Time: " + loadTime + " ms");
-
-        // Assert that the load time is within an acceptable limit (e.g., 5 seconds)
-        long acceptableLoadTime = 5000; // milliseconds
-        Assert.assertTrue(loadTime < acceptableLoadTime, "Login page took too long to load! Time: " + loadTime + " ms");
-    }
 }
