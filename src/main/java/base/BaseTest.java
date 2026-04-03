@@ -3,15 +3,23 @@ package base;
 import data.Input;
 import data.Slavov;
 import data.User;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.DashboardPage;
 import pages.LoginPage;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +49,29 @@ public class BaseTest {
     }
 
     @AfterMethod
+    public void takeScreenshot2(ITestResult result) {
+        if (driver != null) {
+            if (result.getStatus() == ITestResult.FAILURE){
+            var camera = (TakesScreenshot) driver;
+            File screenshot = camera.getScreenshotAs(OutputType.FILE);
+            
+            Path destinationDir = Paths.get("resources/screenshots");
+            Path destinationFile = destinationDir.resolve(result.getName() + ".png");
+
+            try {
+                if (!Files.exists(destinationDir)) {
+                    Files.createDirectories(destinationDir);
+                }
+                Files.move(screenshot.toPath(), destinationFile);
+                System.out.println("The taken screenshot was saved to: " + destinationFile.toAbsolutePath());
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            }
+        }
+    }
+
+    @AfterMethod(dependsOnMethods = "takeScreenshot2", alwaysRun = true)
     public void tearDown() {
         if (driver != null && closeDriver) {
             driver.quit();
