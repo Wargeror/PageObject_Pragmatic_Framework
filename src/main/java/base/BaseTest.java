@@ -3,6 +3,7 @@ package base;
 import data.Input;
 import data.Slavov;
 import data.User;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +24,7 @@ import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class BaseTest {
     protected WebDriver driver;
@@ -96,5 +98,13 @@ public class BaseTest {
 
     public void printDome(){
         System.out.println(driver.getPageSource());
+    }
+
+    public void printCookies() {
+        Set<Cookie> cookies = driver.manage().getCookies();
+        System.out.println("Total cookies: " + cookies.size());
+        for (Cookie cookie : cookies) {
+            System.out.println(cookie.toString());
+        }
     }
 }
