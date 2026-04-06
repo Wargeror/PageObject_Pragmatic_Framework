@@ -17,6 +17,10 @@ public class MainPage extends BasePage {
 
     private String mainUrl;
 
+    @FindBy(css = ".img-fluid")
+    private WebElement logo;
+
+
     @FindBy(id = "carousel-banner-0")
     private WebElement banner;
 
@@ -73,6 +77,10 @@ public class MainPage extends BasePage {
 
     public boolean isSecondBannerDisplayed(){
         return isDisplayed(secondBanner);
+    }
+
+    public WebElement getLogo(){
+        return logo;
     }
 
     public MainPage typeSearchField(String text){

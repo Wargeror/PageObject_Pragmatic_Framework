@@ -1,6 +1,8 @@
 package visual;
 
 import base.BaseTest;
+import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -16,7 +18,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class VisualTest extends BaseTest {
+public class VisualRegressionTest extends BaseTest {
 
     @Test
     public void MainPageVisual() {
@@ -58,6 +60,46 @@ public class VisualTest extends BaseTest {
                 String diffPath = "target/visual-diffs/MainPage_diff.png";
                 saveImage(diff.getMarkedImage(), diffPath);
                 Assert.fail("Visual comparison failed! Difference found. Diff image saved at: " + diffPath);
+            }
+        }
+    }
+
+    @Test
+    public void testLogo(){
+        MainPage mainPage = new MainPage(driver, wait);
+        driver.get(mainPage.mainUrl());
+
+        // 1. Assert Size of the element
+        Rectangle logoRect = mainPage.getLogo().getRect();
+        Assert.assertEquals(logoRect.getWidth(), 200, "Logo width is incorrect");
+        Assert.assertEquals(logoRect.getHeight(), 39, "Logo height is incorrect");
+
+        // 2. Visual Comparison of the Logo element
+        Screenshot logoScreenshot = new AShot()
+                .takeScreenshot(driver, mainPage.getLogo());
+        BufferedImage currentLogoImage = logoScreenshot.getImage();
+
+        String baselinePath = "src/test/resources/visual/baseline/Logo.png";
+        File baselineFile = new File(baselinePath);
+
+        if (!baselineFile.exists()) {
+            saveImage(currentLogoImage, baselinePath);
+            Assert.fail("Baseline logo image not found. Saved current logo as baseline at: " + baselinePath);
+        } else {
+            BufferedImage expectedLogoImage;
+            try {
+                expectedLogoImage = ImageIO.read(baselineFile);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to read baseline logo image", e);
+            }
+
+            ImageDiffer imgDiffer = new ImageDiffer();
+            ImageDiff diff = imgDiffer.makeDiff(expectedLogoImage, currentLogoImage);
+
+            if (diff.hasDiff()) {
+                String diffPath = "target/visual-diffs/Logo_diff.png";
+                saveImage(diff.getMarkedImage(), diffPath);
+                Assert.assertFalse(diff.hasDiff(), "Logo visual comparison failed! Diff image saved at: " + diffPath);
             }
         }
     }

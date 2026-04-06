@@ -62,8 +62,8 @@ public class LoginTest extends BaseTest {
         driver.get(user.getSiteURL());
 
         LoginPage loginPage = new LoginPage(driver, wait);
-        loginPage.typeTextUsernameField("invalidUser")
-                 .typeTextPasswordField("invalidPass")
+        loginPage.typeTextUsernameField("")
+                 .typeTextPasswordField("")
                  .clickLoginButton();
 
         // Small wait to ensure logs are captured before the test ends
