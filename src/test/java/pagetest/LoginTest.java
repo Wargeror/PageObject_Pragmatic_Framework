@@ -29,9 +29,9 @@ public class LoginTest extends BaseTest {
     @Test
     public void unsuccessfulLoginTest() {
         User user = input.getUser(0);
-        driver.get(user.getSiteURL());
+        getDriver().get(user.getSiteURL());
 
-        LoginPage loginPage = new LoginPage(driver, wait);
+        LoginPage loginPage = new LoginPage(getDriver(), getWait());
         loginPage.typeTextUsernameField("")
                  .typeTextPasswordField("")
                  .clickLoginButton();
@@ -43,7 +43,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void consoleLogsOnUnsuccessfulLoginTest(){
         // Cast driver to ChromeDriver to access DevTools
-        ChromeDriver chromeDriver = (ChromeDriver) driver;
+        ChromeDriver chromeDriver = (ChromeDriver) getDriver();
         DevTools devTools = chromeDriver.getDevTools();
         devTools.createSession();
         devTools.send(Log.enable());
@@ -59,9 +59,9 @@ public class LoginTest extends BaseTest {
 
         // Perform the unsuccessful login action
         User user = input.getUser(0);
-        driver.get(user.getSiteURL());
+        getDriver().get(user.getSiteURL());
 
-        LoginPage loginPage = new LoginPage(driver, wait);
+        LoginPage loginPage = new LoginPage(getDriver(), getWait());
         loginPage.typeTextUsernameField("")
                  .typeTextPasswordField("")
                  .clickLoginButton();

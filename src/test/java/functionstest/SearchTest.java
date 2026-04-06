@@ -11,8 +11,8 @@ public class SearchTest extends BaseTest {
     //Search for an object to assert that the search works
     @Test
     public void iMacSearch(){
-        MainPage mainPage = new MainPage(driver,wait);
-        driver.get(mainPage.mainUrl());
+        MainPage mainPage = new MainPage(getDriver(), getWait());
+        getDriver().get(mainPage.mainUrl());
         SearchPage searchPage =
                 mainPage
                 .typeSearchField("iMac")

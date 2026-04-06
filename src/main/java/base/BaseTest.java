@@ -27,8 +27,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class BaseTest {
-    protected WebDriver driver;
-    protected WebDriverWait wait;
+    protected static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    protected static ThreadLocal<WebDriverWait> wait = new ThreadLocal<>();
     protected Input input;
     protected boolean closeDriver;
 
@@ -44,17 +44,28 @@ public class BaseTest {
         prefs.put("autofill.profile_enabled", false);
         options.setExperimentalOption("prefs", prefs);
 
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriver localDriver = new ChromeDriver(options);
+        localDriver.manage().window().maximize();
+        driver.set(localDriver);
+        
+        wait.set(new WebDriverWait(localDriver, Duration.ofSeconds(10)));
         input = new Input();
+    }
+
+    public WebDriver getDriver() {
+        return driver.get();
+    }
+
+    public WebDriverWait getWait() {
+        return wait.get();
     }
 
     @AfterMethod
     public void takeScreenshot2(ITestResult result) {
-        if (driver != null) {
+        WebDriver currentDriver = getDriver();
+        if (currentDriver != null) {
             if (result.getStatus() == ITestResult.FAILURE){
-            var camera = (TakesScreenshot) driver;
+            var camera = (TakesScreenshot) currentDriver;
             File screenshot = camera.getScreenshotAs(OutputType.FILE);
             
             Path destinationDir = Paths.get("resources/screenshots");
@@ -75,8 +86,11 @@ public class BaseTest {
 
     @AfterMethod(dependsOnMethods = "takeScreenshot2", alwaysRun = true)
     public void tearDown() {
-        if (driver != null && closeDriver) {
-            driver.quit();
+        WebDriver currentDriver = getDriver();
+        if (currentDriver != null && closeDriver) {
+            currentDriver.quit();
+            driver.remove();
+            wait.remove();
         }
     }
 
@@ -86,8 +100,8 @@ public class BaseTest {
     }
 
     public DashboardPage loginAs(User user) {
-        driver.get(user.getSiteURL());
-        LoginPage loginPage = new LoginPage(driver, wait);
+        getDriver().get(user.getSiteURL());
+        LoginPage loginPage = new LoginPage(getDriver(), getWait());
         DashboardPage dashboardPage = loginPage
                 .typeTextUsernameField(user.getUsername())
                 .typeTextPasswordField(user.getPassword())
@@ -97,11 +111,11 @@ public class BaseTest {
     }
 
     public void printDome(){
-        System.out.println(driver.getPageSource());
+        System.out.println(getDriver().getPageSource());
     }
 
     public void printCookies() {
-        Set<Cookie> cookies = driver.manage().getCookies();
+        Set<Cookie> cookies = getDriver().manage().getCookies();
         System.out.println("Total cookies: " + cookies.size());
         for (Cookie cookie : cookies) {
             System.out.println(cookie.toString());

@@ -22,16 +22,16 @@ public class VisualRegressionTest extends BaseTest {
 
     @Test
     public void MainPageVisual() {
-        MainPage mainPage = new MainPage(driver, wait);
-        driver.get(mainPage.mainUrl());
+        MainPage mainPage = new MainPage(getDriver(), getWait());
+        getDriver().get(mainPage.mainUrl());
 
         // Freeze animations to ensure consistent screenshots
-        Utils.disableAnimations(driver);
+        Utils.disableAnimations(getDriver());
 
         // Use AShot to take a full-page screenshot
         Screenshot currentScreenshot = new AShot()
                 .shootingStrategy(ShootingStrategies.viewportPasting(1000))
-                .takeScreenshot(driver);
+                .takeScreenshot(getDriver());
 
         BufferedImage currentImage = currentScreenshot.getImage();
 
@@ -66,8 +66,8 @@ public class VisualRegressionTest extends BaseTest {
 
     @Test
     public void testLogo(){
-        MainPage mainPage = new MainPage(driver, wait);
-        driver.get(mainPage.mainUrl());
+        MainPage mainPage = new MainPage(getDriver(), getWait());
+        getDriver().get(mainPage.mainUrl());
 
         // 1. Assert Size of the element
         Rectangle logoRect = mainPage.getLogo().getRect();
@@ -76,7 +76,7 @@ public class VisualRegressionTest extends BaseTest {
 
         // 2. Visual Comparison of the Logo element
         Screenshot logoScreenshot = new AShot()
-                .takeScreenshot(driver, mainPage.getLogo());
+                .takeScreenshot(getDriver(), mainPage.getLogo());
         BufferedImage currentLogoImage = logoScreenshot.getImage();
 
         String baselinePath = "src/test/resources/visual/baseline/Logo.png";

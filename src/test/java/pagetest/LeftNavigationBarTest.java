@@ -15,8 +15,8 @@ public class LeftNavigationBarTest extends BaseTest {
     public void NavBarIsDisplayed(){
         login();
 
-        LeftNavigationBar navBar = new LeftNavigationBar(driver,wait);
-        wait.until(ExpectedConditions.visibilityOf(navBar.getDashboardLNavBar()));
+        LeftNavigationBar navBar = new LeftNavigationBar(getDriver(), getWait());
+        getWait().until(ExpectedConditions.visibilityOf(navBar.getDashboardLNavBar()));
 
         Assert.assertTrue(navBar.getDashboardLNavBar().isDisplayed());
     }

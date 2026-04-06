@@ -9,8 +9,8 @@ public class MainPageTest extends BaseTest {
 
     @Test
     public void displayTest(){
-        MainPage mainPage = new MainPage(driver,wait);
-        driver.get(mainPage.mainUrl());
+        MainPage mainPage = new MainPage(getDriver(), getWait());
+        getDriver().get(mainPage.mainUrl());
 
         Assert.assertTrue(mainPage.highBar.isHighBarDisplayed());
         Assert.assertTrue(mainPage.cmp.isLogoDisplayed());

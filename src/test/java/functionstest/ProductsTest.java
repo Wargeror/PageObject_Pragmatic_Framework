@@ -12,8 +12,8 @@ public class ProductsTest extends BaseTest {
     //Test adding product and going to checkout page
     @Test
     public void checkoutTest(){
-        MainPage mainPage = new MainPage(driver,wait);
-        driver.get(mainPage.mainUrl());
+        MainPage mainPage = new MainPage(getDriver(), getWait());
+        getDriver().get(mainPage.mainUrl());
         CheckoutPage checkoutPage =
                 mainPage
                 .orderAndGoCheckout();
@@ -24,8 +24,8 @@ public class ProductsTest extends BaseTest {
     //Test for buying a product
     @Test
     public void buyProductTest() throws InterruptedException {
-        Product4$Page product4$Page = new Product4$Page(driver, wait);
-        driver.get(product4$Page.getCustomDesktop());
+        Product4$Page product4$Page = new Product4$Page(getDriver(), getWait());
+        getDriver().get(product4$Page.getCustomDesktop());
 
         CheckoutPage checkoutPage =
                 product4$Page
@@ -45,8 +45,8 @@ public class ProductsTest extends BaseTest {
     //Increase the quantity in the cart test
     @Test
     public void increaseQuantityTest() {
-        Product4$Page product4$Page = new Product4$Page(driver, wait);
-        driver.get(product4$Page.getCustomDesktop());
+        Product4$Page product4$Page = new Product4$Page(getDriver(), getWait());
+        getDriver().get(product4$Page.getCustomDesktop());
 
         CartPage cartPage =
                 product4$Page

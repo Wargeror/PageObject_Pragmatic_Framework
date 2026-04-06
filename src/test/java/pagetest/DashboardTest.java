@@ -74,8 +74,8 @@ public class DashboardTest extends BaseTest {
 
         for (int i = 1; i < 4; i++) {
             dashboardPage.clicksAlesAnalyticsTimeFrameButton();
-            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector(dashboardPage.SalesAnalyticsTimeFrameListSelector(i)))));
-            WebElement selected = driver.findElement(By.cssSelector(dashboardPage.SalesAnalyticsTimeFrameListSelector(i)));
+            getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.cssSelector(dashboardPage.SalesAnalyticsTimeFrameListSelector(i)))));
+            WebElement selected = getDriver().findElement(By.cssSelector(dashboardPage.SalesAnalyticsTimeFrameListSelector(i)));
             Assert.assertEquals(selected.getText(), exp_options.get(i-1));
             dashboardPage.clickSalesAnalyticsTimeFrameList(i);
             dashboardPage.invisibilityOfAlesAnalyticsTimeFrameList(i);

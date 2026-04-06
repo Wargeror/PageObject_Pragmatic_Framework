@@ -13,9 +13,9 @@ public class PerformanceTests extends BaseTest {
     @Test
     public void measureLoginLoadTime() {
         User user = input.getUser(0);
-        driver.get(user.getSiteURL());
+        getDriver().get(user.getSiteURL());
 
-        LoginPage loginPage = new LoginPage(driver, wait)
+        LoginPage loginPage = new LoginPage(getDriver(), getWait())
                  .typeTextUsernameField(user.getUsername())
                  .typeTextPasswordField(user.getPassword());
 

@@ -54,10 +54,10 @@ public class CustomersFormPage extends BasePage {
     public CustomersFormPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
         this.leftNavigationBar = new LeftNavigationBar(driver, wait);
-        String firstName = Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
-        String lastName = Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
-        String password = Utils.passwordGenerator(ThreadLocalRandom.current().nextInt(5, 19));
-        String randomEmailAddress = Utils.generateEmail();
+        this.firstName = Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
+        this.lastName = Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
+        this.password = Utils.passwordGenerator(ThreadLocalRandom.current().nextInt(5, 19));
+        this.randomEmailAddress = Utils.generateEmail();
         customerFormUrl = "https://auto.pragmatic.bg/manage/index.php?route=customer/customer.form";
     }
 
