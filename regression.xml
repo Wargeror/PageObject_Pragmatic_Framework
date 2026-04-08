@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Full Regression Suite">
+    <test name="All Functional and Page Tests">
+        <packages>
+            <package name="functionstest" />
+            <package name="pagetest" />
+            <package name="visual" />
+        </packages>
+    </test>
+</suite>

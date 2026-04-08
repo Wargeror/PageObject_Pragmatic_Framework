@@ -1,105 +1,98 @@
 # Selenium Test Automation Framework
 
-This is a Test Automation Framework built with Selenium, Java, and TestNG for automated testing of a web application. It follows the Page Object Model (POM) design pattern and is designed to be robust, maintainable, and scalable.
+A robust, multi-threaded Selenium automation framework built with Java and TestNG, following the Page Object Model (POM) and Fluid Syntax design patterns.
 
 ## Table of Contents
 - [Core Technologies](#core-technologies)
 - [Framework Architecture](#framework-architecture)
+- [Key Features](#key-features)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Setup](#setup)
-  - [Running Tests](#running-tests)
-- [Key Features](#key-features)
-- [Writing New Tests](#writing-new-tests)
+  - [Running Tests from Console](#running-tests-from-console)
+- [Visual Regression Testing](#visual-regression-testing)
+- [Contribution Guide](#contribution-guide)
 
 ---
 
 ## Core Technologies
 
-*   **Java**: The core programming language.
-*   **Selenium WebDriver**: For browser automation.
-*   **TestNG**: As the testing framework for assertions, test execution, and reporting.
-*   **Maven**: For project dependency management and build automation.
+*   **Java 25**: Core programming language.
+*   **Selenium WebDriver 4.40**: For browser automation.
+*   **TestNG 7.12**: Testing framework for assertions and parallel execution.
+*   **Maven**: Build and dependency management.
+*   **AShot**: For advanced visual regression and full-page screenshots.
 
 ---
 
 ## Framework Architecture
 
-The framework is structured into several packages, each with a distinct responsibility:
-
 ### `base`
-*   `BasePage.java`: The foundation for all page objects. It contains generic methods for interacting with WebElements (e.g., `clickWebElement`, `typeText`, `scrollToElement`) and handles common `WebDriverWait` conditions.
-*   `BaseTest.java`: The foundation for all test classes. It manages the `WebDriver` lifecycle (`setUp` and `tearDown`), initializes `WebDriverWait`, and provides a default `login()` method.
+*   `BasePage.java`: Generic interaction methods (`click`, `type`, `scroll`).
+*   `BaseTest.java`: Manages the `ThreadLocal` WebDriver lifecycle and automatic failure screenshots.
 
 ### `pages`
-Contains Page Object classes representing specific pages (e.g., `LoginPage`, `DashboardPage`, `CustomersPage`). These classes encapsulate locators and business-specific methods. Most methods use **Fluid Syntax** (returning `this` or a new page object) to allow method chaining in tests.
-
-### `components`
-Holds classes representing reusable UI components found across multiple pages, such as:
-*   `LeftNavigationBar.java`: The main side navigation menu.
-*   `TopBar.java`: The top navigation/action bar.
-
-### `data`
-Manages test data and configuration.
-*   `Input.java`: Loads configuration from `config.properties`.
-*   `User.java`: Model class for user credentials.
-
-### `utils`
-Contains utility classes for common tasks.
-*   `CustomRandomStringGenerator.java`: Generates random names, emails, and passwords for dynamic test data.
+Page Objects representing web pages (e.g., `LoginPage`, `DashboardPage`). Methods are designed with **Fluid Syntax** to allow chaining:
+`login().goToOrdersPage().clickFilterButton();`
 
 ### `pagetest` & `functionstest`
-*   `pagetest`: Contains tests focused on individual page functionality and UI elements.
-*   `functionstest`: Contains end-to-end functional tests and complex business flows (e.g., `CustomersTest.addCustomerTest`).
+*   `pagetest`: Unit-like tests for individual page elements.
+*   `functionstest`: End-to-end functional flows (e.g., creating and deleting customers).
+
+### `visual`
+Contains `VisualRegressionTest.java` for image-based testing of the UI components.
+
+### `utils`
+*   `Utils.java`: Random data generation, screenshot capture, and browser animation freezing.
+
+---
+
+## Key Features
+
+*   **Parallel Execution**: Run tests in multiple threads using `ThreadLocal` for 4x faster execution.
+*   **Auto-Screenshots**: Screenshots are automatically saved to `resources/screenshots/` upon assertion failure.
+*   **Visual Regression**: Compare current UI state against baseline images with automatic diff generation.
+*   **Animation Control**: Custom JS injection to freeze CSS/JS animations for stable testing.
+*   **Dynamic Data**: Built-in random string and email generators for unique test data.
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
-*   Java Development Kit (JDK) 11 or higher.
-*   Apache Maven.
+*   JDK 25 or higher.
+*   Maven installed and in System PATH.
 *   Google Chrome browser.
 
 ### Setup
-1.  **Clone the repository.**
-2.  **Create the configuration file:** In the root directory, create `config.properties`:
+1.  **Clone the project.**
+2.  **Configuration**: Create `config.properties` in the root:
     ```properties
     test.username=your_username
     test.password=your_password
     site.url=https://auto.pragmatic.bg/manage/
-    expected.dashboard.username=Your Expected Username
+    expected.dashboard.username= Expected Username
     ```
-3.  **Build the project:** Run `mvn clean install` or import into your IDE.
 
-### Running Tests
-*   **Via Maven:** `mvn clean test`
-*   **From IDE:** Run individual test classes or methods.
+### Running Tests from Console
+If you are using **PowerShell** (default in VS Code/IntelliJ), use double quotes for arguments:
 
----
-
-## Key Features
-
-*   **Page Object Model (POM):** Clean separation of concerns.
-*   **Fluid Syntax / Method Chaining**: Enhances test readability and reduces boilerplate code.
-*   **Component-Based Design:** High reusability of UI elements.
-*   **Data-Driven:** Configuration is externalized for security and flexibility.
-*   **Robust Dynamic Waits:** Centralized wait logic in `BasePage` to prevent flakiness.
+*   **Standard Run (Sequential)**:
+    `mvn clean test`
+*   **Smoke Suite (Critical Path)**:
+    `mvn clean test "-DsuiteXmlFile=smoke.xml"`
+*   **Parallel Run (4 Threads)**:
+    `mvn clean test "-DsuiteXmlFile=parallel.xml"`
+*   **Full Regression**:
+    `mvn clean test "-DsuiteXmlFile=regression.xml"`
 
 ---
 
-## Writing New Tests
+## Visual Regression Testing
+This framework uses **AShot**.
+1.  **First Run**: If no baseline exists in `src/test/resources/visual/baseline/`, the test saves the current screen and fails.
+2.  **Comparison**: Subsequent runs compare the screen to the baseline.
+3.  **Failures**: Differences are saved as highlighted images in `target/visual-diffs/`.
 
-### Creating a New Page Object
-1.  Extend `BasePage`.
-2.  Add `@FindBy` locators.
-3.  Initialize components in the constructor.
-4.  **Use Fluid Syntax**: Ensure methods that perform actions return `this` (if staying on the same page) or the next `PageObject`.
-
-### Creating a New Test Class
-1.  Extend `BaseTest`.
-2.  Use the `login()` method from `BaseTest` to start the flow.
-3.  Chain actions using the fluid API and use TestNG `Assert` for validations.
-
-*Framework By Momchil Slavov*
 ---
+*Framework developed by Momchil Slavov*
