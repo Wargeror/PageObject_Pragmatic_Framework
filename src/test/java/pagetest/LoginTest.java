@@ -2,6 +2,7 @@ package pagetest;
 
 import base.BaseTest;
 import data.User;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v144.log.Log;
@@ -10,7 +11,7 @@ import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LoginPage;
 
-import java.util.Optional;
+import java.util.Set;
 
 public class LoginTest extends BaseTest {
 
@@ -69,4 +70,18 @@ public class LoginTest extends BaseTest {
         // Small wait to ensure logs are captured before the test ends
         try { Thread.sleep(2000); } catch (InterruptedException e) { e.printStackTrace(); }
     }
+
+    @Test
+    public void cookiesOnSuccessfulLoginTest() {
+        login();
+
+        Set<Cookie> cookies = printCookies();
+        
+        boolean isCookiePresent = isCookiePresent(cookies, "OCSESSID");
+
+        Assert.assertTrue(isCookiePresent, "Cookie 'OCSESSID' was not found after successful login.");
+    }
+
+
+
 }

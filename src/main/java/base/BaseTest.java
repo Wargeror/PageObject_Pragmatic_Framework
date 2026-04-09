@@ -114,11 +114,36 @@ public class BaseTest {
         System.out.println(getDriver().getPageSource());
     }
 
-    public void printCookies() {
+    public Set<Cookie> printCookies() {
         Set<Cookie> cookies = getDriver().manage().getCookies();
         System.out.println("Total cookies: " + cookies.size());
         for (Cookie cookie : cookies) {
             System.out.println(cookie.toString());
         }
+        return cookies;
+    }
+
+    public boolean isCookiePresent(Set<Cookie> cookies, String cookieName){
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(cookieName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    
+    public Cookie getCookieByName(Set<Cookie> cookies, String cookieName) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(cookieName)) {
+                return cookie;
+            }
+        }
+        return null;
+    }
+
+
+    public void injectCookie(Cookie cookie) {
+        getDriver().manage().addCookie(cookie);
     }
 }
