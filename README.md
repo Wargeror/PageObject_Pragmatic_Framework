@@ -71,7 +71,7 @@ Contains `VisualRegressionTest.java` for image-based testing of the UI component
     test.username=your_username
     test.password=your_password
     site.url=https://auto.pragmatic.bg/manage/
-    expected.dashboard.username= Expected Username
+    expected.dashboard.username=\   John Doe
     ```
 
 ### Running Tests from Console

@@ -6,6 +6,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.io.FileHandler;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
@@ -117,7 +119,6 @@ public class Utils {
     }
 
     //Injects CSS into the current page to disable all CSS animations and transitions.
-
     public static void disableAnimations(WebDriver driver) {
         String css = "*, *::before, *::after {" +
                 "  transition: none !important;" +
@@ -130,5 +131,19 @@ public class Utils {
                 "style.innerHTML = arguments[0];" +
                 "document.head.appendChild(style);";
         ((JavascriptExecutor) driver).executeScript(js, css);
+    }
+
+
+    public static void saveImage(BufferedImage image, String path) {
+        File file = new File(path);
+        File parentDir = file.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+        try {
+            ImageIO.write(image, "PNG", file);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to save image to: " + path, e);
+        }
     }
 }

@@ -3,6 +3,7 @@ package pagetest;
 import base.BaseTest;
 import data.User;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v144.log.Log;
@@ -41,6 +42,7 @@ public class LoginTest extends BaseTest {
     }
 
 
+    //Console Logs On Unsuccessful Login
     @Test
     public void consoleLogsOnUnsuccessfulLoginTest(){
         // Cast driver to ChromeDriver to access DevTools
@@ -58,7 +60,6 @@ public class LoginTest extends BaseTest {
                     System.out.println("-----------------------------");
                 });
 
-        // Perform the unsuccessful login action
         User user = input.getUser(0);
         getDriver().get(user.getSiteURL());
 
@@ -71,6 +72,7 @@ public class LoginTest extends BaseTest {
         try { Thread.sleep(2000); } catch (InterruptedException e) { e.printStackTrace(); }
     }
 
+    //Tests that the correct cookies are loaded on successful login.
     @Test
     public void cookiesOnSuccessfulLoginTest() {
         login();
@@ -82,6 +84,25 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(isCookiePresent, "Cookie 'OCSESSID' was not found after successful login.");
     }
 
+    //Confirms that cookie injection doesn't work
+    @Test
+    public void negativeCookiesInjectionTest(){
+        closeDriver = false; // Keep browser open for manual inspection if needed
+        DashboardPage dashboardPage = login();
 
+        Cookie sessionCookie = getCookieByName(printCookies(), "OCSESSID");
+        String sucLoginURL = getDriver().getCurrentUrl();
+        Assert.assertNotNull(sessionCookie, "Session cookie 'OCSESSID' not found!");
+
+        getDriver().switchTo().newWindow(WindowType.TAB);
+        getDriver().get(dashboardPage.getUrlDashboard());
+
+        getDriver().manage().deleteAllCookies();
+        injectCookie(sessionCookie);
+        getDriver().navigate().refresh();
+        String failedLoginURL = getDriver().getCurrentUrl();
+
+        Assert.assertFalse(sucLoginURL.equals(failedLoginURL));
+    }
 
 }

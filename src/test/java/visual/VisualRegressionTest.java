@@ -40,7 +40,7 @@ public class VisualRegressionTest extends BaseTest {
 
         if (!baselineFile.exists()) {
             // First time running the test: save current screenshot as baseline
-            saveImage(currentImage, baselinePath);
+            Utils.saveImage(currentImage, baselinePath);
             Assert.fail("Baseline image was not found. Current screenshot saved as baseline at: " + baselinePath + ". Please run the test again.");
         } else {
             // Load the baseline image
@@ -58,14 +58,14 @@ public class VisualRegressionTest extends BaseTest {
             if (diff.hasDiff()) {
                 // Save diff image for debugging
                 String diffPath = "target/visual-diffs/MainPage_diff.png";
-                saveImage(diff.getMarkedImage(), diffPath);
+                Utils.saveImage(diff.getMarkedImage(), diffPath);
                 Assert.fail("Visual comparison failed! Difference found. Diff image saved at: " + diffPath);
             }
         }
     }
 
     @Test
-    public void testLogo(){
+    public void correctLogoTest(){
         MainPage mainPage = new MainPage(getDriver(), getWait());
         getDriver().get(mainPage.mainUrl());
 
@@ -83,7 +83,7 @@ public class VisualRegressionTest extends BaseTest {
         File baselineFile = new File(baselinePath);
 
         if (!baselineFile.exists()) {
-            saveImage(currentLogoImage, baselinePath);
+            Utils.saveImage(currentLogoImage, baselinePath);
             Assert.fail("Baseline logo image not found. Saved current logo as baseline at: " + baselinePath);
         } else {
             BufferedImage expectedLogoImage;
@@ -98,22 +98,9 @@ public class VisualRegressionTest extends BaseTest {
 
             if (diff.hasDiff()) {
                 String diffPath = "target/visual-diffs/Logo_diff.png";
-                saveImage(diff.getMarkedImage(), diffPath);
+                Utils.saveImage(diff.getMarkedImage(), diffPath);
                 Assert.assertFalse(diff.hasDiff(), "Logo visual comparison failed! Diff image saved at: " + diffPath);
             }
-        }
-    }
-
-    private void saveImage(BufferedImage image, String path) {
-        File file = new File(path);
-        File parentDir = file.getParentFile();
-        if (parentDir != null && !parentDir.exists()) {
-            parentDir.mkdirs();
-        }
-        try {
-            ImageIO.write(image, "PNG", file);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to save image to: " + path, e);
         }
     }
 }
