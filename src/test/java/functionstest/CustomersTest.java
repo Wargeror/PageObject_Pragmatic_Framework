@@ -18,13 +18,13 @@ public class CustomersTest extends BaseTest {
                 .clickAddButton()
                 .fillForm();
 
-        Assert.assertTrue(cuFormPage.isAlertDisplayed());
+        Assert.assertTrue(cuFormPage.isAlertDisplayed(), "Failure CustomersTest/addCustomerTest: Success alert was not displayed after adding a customer.");
         
         CustomersPage cuPage =
                 cuFormPage
                 .filterForNewCu();
 
-        Assert.assertTrue(cuPage.isCustomerListed(cuFormPage.getRandomEmailAddress()));
+        Assert.assertTrue(cuPage.isCustomerListed(cuFormPage.getRandomEmailAddress()), "Failure CustomersTest/addCustomerTest: Newly added customer was not found in the customer list.");
 
         cuPage.deleteCustomer();
     }

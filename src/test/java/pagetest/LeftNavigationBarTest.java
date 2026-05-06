@@ -18,7 +18,7 @@ public class LeftNavigationBarTest extends BaseTest {
         LeftNavigationBar navBar = new LeftNavigationBar(getDriver(), getWait());
         getWait().until(ExpectedConditions.visibilityOf(navBar.getDashboardLNavBar()));
 
-        Assert.assertTrue(navBar.getDashboardLNavBar().isDisplayed());
+        Assert.assertTrue(navBar.getDashboardLNavBar().isDisplayed(), "Failure LeftNavigationBarTest/NavBarIsDisplayed: Left Navigation Bar is not displayed.");
     }
 
     //Assert Orders Page Loads From Left Navigation Bar
@@ -28,7 +28,7 @@ public class LeftNavigationBarTest extends BaseTest {
                  login()
                 .goToOrdersPage();
 
-        Assert.assertTrue(ordersPage.urlContains());
+        Assert.assertTrue(ordersPage.urlContains(), "Failure LeftNavigationBarTest/orderStatusCheck: Orders page URL does not contain expected string.");
     }
 
     //Asserts that Products Page Loads From Left Navigation Bar
@@ -38,6 +38,6 @@ public class LeftNavigationBarTest extends BaseTest {
                  login()
                 .goToProdPage();
 
-        Assert.assertTrue(productsPage.urlContains());
+        Assert.assertTrue(productsPage.urlContains(), "Failure LeftNavigationBarTest/addProductTest: Products page URL does not contain expected string.");
     }
 }

@@ -18,7 +18,7 @@ public class SearchTest extends BaseTest {
                 .typeSearchField("iMac")
                 .clickSearchButton();
 
-        Assert.assertTrue(searchPage.isMacBookImgDisplayed());
+        Assert.assertTrue(searchPage.isMacBookImgDisplayed(), "Failure SearchTest/iMacSearch: MacBook image was not displayed after searching for 'iMac'.");
     }
 
 }

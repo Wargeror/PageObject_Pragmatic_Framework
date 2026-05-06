@@ -12,20 +12,20 @@ public class MainPageTest extends BaseTest {
         MainPage mainPage = new MainPage(getDriver(), getWait());
         getDriver().get(mainPage.mainUrl());
 
-        Assert.assertTrue(mainPage.highBar.isHighBarDisplayed());
-        Assert.assertTrue(mainPage.cmp.isLogoDisplayed());
-        Assert.assertTrue(mainPage.cmp.isSearchFieldDisplayed());
-        Assert.assertTrue(mainPage.cmp.isSearchButtonDisplayed());
-        Assert.assertTrue(mainPage.cmp.isCartDisplayed());
-        Assert.assertTrue(mainPage.topBarM.isTopBarDisplayed());
-        Assert.assertTrue(mainPage.isBannerDisplayed());
-        Assert.assertTrue(mainPage.isMacBookDisplayed());
-        Assert.assertTrue(mainPage.isiPhoneDisplayed());
-        Assert.assertTrue(mainPage.isCinema30Displayed());
+        Assert.assertTrue(mainPage.highBar.isHighBarDisplayed(), "Failure MainPageTest/displayTest: High bar is not displayed.");
+        Assert.assertTrue(mainPage.cmp.isLogoDisplayed(), "Failure MainPageTest/displayTest: Logo is not displayed.");
+        Assert.assertTrue(mainPage.cmp.isSearchFieldDisplayed(), "Failure MainPageTest/displayTest: Search field is not displayed.");
+        Assert.assertTrue(mainPage.cmp.isSearchButtonDisplayed(), "Failure MainPageTest/displayTest: Search button is not displayed.");
+        Assert.assertTrue(mainPage.cmp.isCartDisplayed(), "Failure MainPageTest/displayTest: Cart is not displayed.");
+        Assert.assertTrue(mainPage.topBarM.isTopBarDisplayed(), "Failure MainPageTest/displayTest: Top bar is not displayed.");
+        Assert.assertTrue(mainPage.isBannerDisplayed(), "Failure MainPageTest/displayTest: Main banner is not displayed.");
+        Assert.assertTrue(mainPage.isMacBookDisplayed(), "Failure MainPageTest/displayTest: MacBook image is not displayed.");
+        Assert.assertTrue(mainPage.isiPhoneDisplayed(), "Failure MainPageTest/displayTest: iPhone image is not displayed.");
+        Assert.assertTrue(mainPage.isCinema30Displayed(), "Failure MainPageTest/displayTest: Apple Cinema 30\" image is not displayed.");
 
         mainPage.scrollToSecondBanner();
 
-        Assert.assertTrue(mainPage.isCanonDisplayed());
-        Assert.assertTrue(mainPage.isSecondBannerDisplayed());
+        Assert.assertTrue(mainPage.isCanonDisplayed(), "Failure MainPageTest/displayTest: Canon EOS 5D image is not displayed after scrolling.");
+        Assert.assertTrue(mainPage.isSecondBannerDisplayed(), "Failure MainPageTest/displayTest: Second banner is not displayed after scrolling.");
     }
 }

@@ -38,6 +38,6 @@ public class PerformanceTests extends BaseTest {
 
         // Assert that the load time is within an acceptable limit (e.g., 5 seconds)
         long acceptableLoadTime = 5000; // milliseconds
-        Assert.assertTrue(loadTime < acceptableLoadTime, "Login page took too long to load! Time: " + loadTime + " ms");
+        Assert.assertTrue(loadTime < acceptableLoadTime, "Failure PerformanceTests/measureLoginLoadTime: Login page took too long to load! Time: " + loadTime + " ms");
     }
 }

@@ -11,8 +11,8 @@ public class ProductsPageTest extends BaseTest {
     @Test
     public void productsPageTest(){
         ProductsPage prodPage = goTo();
-        Assert.assertTrue(prodPage.isProductFormDisplayed());
-        Assert.assertTrue(prodPage.isFilterFormDisplayed());
+        Assert.assertTrue(prodPage.isProductFormDisplayed(), "Failure ProductsPageTest/productsPageTest: Product form is not displayed.");
+        Assert.assertTrue(prodPage.isFilterFormDisplayed(), "Failure ProductsPageTest/productsPageTest: Filter form is not displayed.");
     }
 
     //Asserts if the Product Name Filter Works
@@ -23,9 +23,7 @@ public class ProductsPageTest extends BaseTest {
                 .typeProductName("Custom-Built Desktop PC")
                 .clickFilterButton();
 
-        Assert.assertTrue(prodPage.newProductExists());
-
-
+        Assert.assertTrue(prodPage.newProductExists(), "Failure ProductsPageTest/productNameFilterTest: Product 'Custom-Built Desktop PC' not found after filtering by name.");
     }
 
     //Asserts if the Product Model Filter Works
@@ -36,7 +34,7 @@ public class ProductsPageTest extends BaseTest {
                 .typeProductModel("Custom-built 01")
                 .clickFilterButton();
 
-        Assert.assertTrue(prodPage.newProductExists());
+        Assert.assertTrue(prodPage.newProductExists(), "Failure ProductsPageTest/productModelFilterTest: Product 'Custom-built 01' not found after filtering by model.");
     }
 
     //Asserts if the Product Price Filter Works
@@ -47,8 +45,7 @@ public class ProductsPageTest extends BaseTest {
                 .typeProductPrice("300")
                 .clickFilterButton();
 
-        Assert.assertTrue(prodPage.newProductExists());
-
+        Assert.assertTrue(prodPage.newProductExists(), "Failure ProductsPageTest/productPriceFilterTest: Product with price '300' not found after filtering by price.");
     }
 
     public ProductsPage goTo(){

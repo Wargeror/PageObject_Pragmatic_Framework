@@ -9,8 +9,10 @@ import java.util.Properties;
 public class Input {
     private List<User> users;
 
+    private Properties props; // Store properties as a field
+
     public Input() {
-        Properties props = new Properties();
+        props = new Properties();
         try (FileInputStream in = new FileInputStream("config.properties")) {
             props.load(in);
         } catch (IOException e) {
@@ -31,5 +33,14 @@ public class Input {
             return users.get(index);
         }
         else throw new IndexOutOfBoundsException("User index out of bounds: " + index);
+    }
+
+    // New method to get URL from config.properties
+    public String getUrl(String key) {
+        String url = props.getProperty(key);
+        if (url == null) {
+            throw new IllegalArgumentException("URL key '" + key + "' not found in config.properties.");
+        }
+        return url;
     }
 }

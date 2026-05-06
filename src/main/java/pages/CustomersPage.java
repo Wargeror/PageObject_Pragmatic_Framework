@@ -3,6 +3,7 @@ package pages;
 import base.BasePage;
 import components.LeftNavigationBar;
 import components.TopBar;
+import data.Input; // Added import
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,8 @@ public class CustomersPage extends BasePage { public String orderUrl;
     public LeftNavigationBar leftNavigationBar;
 
     private String customerUrl;
+
+    private Input input;
 
     @FindBy(xpath = "//i[@class='fa-solid fa-plus']/ ..")
     private WebElement addButton;
@@ -39,7 +42,8 @@ public class CustomersPage extends BasePage { public String orderUrl;
         super(driver, wait);
         this.topBar = new TopBar(driver,wait);
         this.leftNavigationBar = new LeftNavigationBar(driver,wait);
-        customerUrl = "https://auto.pragmatic.bg/manage/index.php?route=customer/customer";
+        this.input = new Input();
+        customerUrl = input.getUrl("customer.url");
     }
 
     public boolean urlContains() {

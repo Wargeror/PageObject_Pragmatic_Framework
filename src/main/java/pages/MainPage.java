@@ -2,6 +2,7 @@ package pages;
 
 import base.BasePage;
 import components.*;
+import data.Input; // Added import
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,6 +17,8 @@ public class MainPage extends BasePage {
     public Components cmp;
 
     private String mainUrl;
+
+    private Input input;
 
     @FindBy(css = ".img-fluid")
     private WebElement logo;
@@ -44,7 +47,8 @@ public class MainPage extends BasePage {
         this.topBarM = new TopBarMain(driver, wait);
         this.highBar = new HighBar(driver, wait);
         this.cmp = new Components(driver, wait);
-        mainUrl = "https://auto.pragmatic.bg/index.php?route=common/home&language=en-gb";
+        this.input = new Input();
+        mainUrl = input.getUrl("main.url");
     }
 
     public String mainUrl() {

@@ -3,6 +3,7 @@ package pages;
 import base.BasePage;
 import components.LeftNavigationBar;
 import components.TopBar;
+import data.Input; // Added import
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,6 +16,8 @@ public class ProductsPage  extends BasePage {
     LeftNavigationBar navBar;
 
     private String productsUrl;
+
+    private Input input;
 
     @FindBy(css = "a.btn.btn-primary:nth-child(2)")
     private WebElement addNewButton;
@@ -57,7 +60,8 @@ public class ProductsPage  extends BasePage {
         super(driver, wait);
         this.topBar = new TopBar(driver, wait);
         this.navBar = new LeftNavigationBar(driver, wait);
-        productsUrl = "https://auto.pragmatic.bg/manage/index.php?route=catalog/product";
+        this.input = new Input();
+        productsUrl = input.getUrl("products.url");
     }
 
     public String getProductsUrl(){

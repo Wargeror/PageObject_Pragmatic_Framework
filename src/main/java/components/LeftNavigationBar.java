@@ -53,10 +53,10 @@ public class LeftNavigationBar extends BasePage {
        @FindBy(xpath = "//*[@id=\"collapse-1\"]/li[8]/a")
        private WebElement downloads;
 
-       @FindBy(xpath = "//*[@id=\"collapse-1\"]/li[7]/a")
+       @FindBy(xpath = "//*[@id=\"collapse-1\"]/li[9]/a")
        private WebElement reviews;
 
-       @FindBy(xpath = "//*[@id=\"collapse-1\"]/li[8]/a")
+       @FindBy(xpath = "//*[@id=\"collapse-1\"]/li[10]/a")
        private WebElement information;
 
     //Extensions Menu and Options

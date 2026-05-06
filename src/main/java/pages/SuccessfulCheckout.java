@@ -4,6 +4,7 @@ import base.BasePage;
 import components.Components;
 import components.HighBar;
 import components.TopBarMain;
+import data.Input;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,8 @@ public class SuccessfulCheckout extends BasePage {
 
     public String SucCheckUrl;
 
+    private Input input;
+
     @FindBy(xpath = "//div[@id='content']/h1[contains(text(), \"Your order has been placed!\")]")
     private WebElement h1;
 
@@ -27,6 +30,8 @@ public class SuccessfulCheckout extends BasePage {
         this.topBarM = new TopBarMain(driver, wait);
         this.highBar = new HighBar(driver, wait);
         this.cmp = new Components(driver, wait);
+        this.input = new Input();
+        SucCheckUrl = input.getUrl("successfull.checkout.url");
         SucCheckUrl = "https://auto.pragmatic.bg/index.php?route=checkout/success";
     }
 

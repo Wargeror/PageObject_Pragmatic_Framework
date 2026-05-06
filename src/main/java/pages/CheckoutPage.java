@@ -4,6 +4,7 @@ import base.BasePage;
 import components.Components;
 import components.HighBar;
 import components.TopBarMain;
+import data.Input; // Added import
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,10 @@ public class CheckoutPage extends BasePage {
     public HighBar highBar;
 
     public Components cmp;
+
+    private String checkoutUrl;
+
+    private Input input;
 
     @FindBy(xpath = "//*[@id=\"alert\"]/div")
     private WebElement alert;
@@ -83,15 +88,13 @@ public class CheckoutPage extends BasePage {
     @FindBy(id = "button-confirm")
     private WebElement confirmButton;
 
-
-    private String checkoutUrl;
-
     public CheckoutPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
         this.topBarM = new TopBarMain(driver, wait);
         this.highBar = new HighBar(driver, wait);
         this.cmp = new Components(driver, wait);
-        checkoutUrl = "https://auto.pragmatic.bg/index.php?route=checkout/checkout";
+        this.input = new Input();
+        checkoutUrl = input.getUrl("checkout.url");
     }
 
     public boolean urlContains() {

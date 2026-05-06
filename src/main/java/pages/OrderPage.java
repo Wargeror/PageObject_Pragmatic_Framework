@@ -3,6 +3,7 @@ package pages;
 import base.BasePage;
 import components.LeftNavigationBar;
 import components.TopBar;
+import data.Input; // Added import
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -14,11 +15,14 @@ public class OrderPage extends BasePage {
 
     private String orderUrl;
 
+    private Input input;
+
     public OrderPage(WebDriver driver, WebDriverWait wait){
         super(driver, wait);
         this.topBar = new TopBar(driver,wait);
         this.leftNavigationBar = new LeftNavigationBar(driver,wait);
-        orderUrl = "https://auto.pragmatic.bg/manage/index.php?route=sale/order.info";
+        this.input = new Input();
+        orderUrl = input.getUrl("order.url");
     }
 
     public String GetUrl(){
@@ -30,4 +34,3 @@ public class OrderPage extends BasePage {
     }
 
 }
-

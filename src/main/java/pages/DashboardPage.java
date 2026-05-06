@@ -3,6 +3,7 @@ package pages;
 import base.BasePage;
 import components.LeftNavigationBar;
 import components.TopBar;
+import data.Input; // Added import
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,17 +18,19 @@ public class DashboardPage extends BasePage {
 
     private String urlDashboard;
 
+    private Input input;
+
     //The WebElement for the username
     @FindBy(css = "#nav-profile span")
-    public WebElement username;
+    private WebElement username; // Changed to private
 
 
-    @FindBy(css = "//*[@id=\"button-setting\"]/i")
+    @FindBy(xpath = "//*[@id=\"button-setting\"]/i")
     public WebElement settingWheel;
 
     //Orders Widget
     @FindBy(xpath = "//div[@class='tile-heading'][contains(., 'Total Orders')]")
-    public WebElement totalOrdersPercentage;
+    private WebElement totalOrdersPercentage; // Changed to private
 
     @FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[1]/div[1]/div/div[2]/h2")
     public WebElement totalOrdersNumber;
@@ -37,7 +40,7 @@ public class DashboardPage extends BasePage {
 
     //Sales Widget
     @FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[1]/div[2]/div/div[1]")
-    public WebElement totalSalesPercentage;
+    private WebElement totalSalesPercentage; // Changed to private
 
     @FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[1]/div[2]/div/div[2]/h2")
     public WebElement totalSalesNumber;
@@ -74,7 +77,7 @@ public class DashboardPage extends BasePage {
 
     //Sales Analytics Widget
     @FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[2]/div[2]/div/div[1]/i")
-    public WebElement salesAnalytics;
+    private WebElement salesAnalytics; // Changed to private
 
     //Sales Analytics Time Frame Button
     @FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[2]/div[2]/div/div[1]/div/a/i[2]")
@@ -101,7 +104,8 @@ public class DashboardPage extends BasePage {
         super(driver, wait);
         this.topBar = new TopBar(driver,wait);
         this.leftNavigationBar = new LeftNavigationBar(driver,wait);
-        urlDashboard = "https://auto.pragmatic.bg/manage/index.php?route=common/dashboard";
+        this.input = new Input();
+        urlDashboard = input.getUrl("dashboard.url");
     }
 
     public String getUrlDashboard(){
@@ -121,6 +125,26 @@ public class DashboardPage extends BasePage {
     //Method used to get the username
     public String usernameGetText(){
         return w8AndGetText(username);
+    }
+
+    // Getter for username
+    public WebElement getUsername() {
+        return username;
+    }
+
+    // Getter for totalOrdersPercentage
+    public WebElement getTotalOrdersPercentage() {
+        return totalOrdersPercentage;
+    }
+
+    // Getter for totalSalesPercentage
+    public WebElement getTotalSalesPercentage() {
+        return totalSalesPercentage;
+    }
+
+    // Getter for salesAnalytics
+    public WebElement getSalesAnalytics() {
+        return salesAnalytics;
     }
 
     public OrdersPage clickViewMoreOrders() {

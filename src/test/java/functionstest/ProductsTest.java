@@ -18,7 +18,7 @@ public class ProductsTest extends BaseTest {
                 mainPage
                 .orderAndGoCheckout();
 
-        Assert.assertTrue(checkoutPage.urlContains());
+        Assert.assertTrue(checkoutPage.urlContains(), "Failure ProductsTest/checkoutTest: Checkout page URL does not contain expected string.");
     }
 
     //Test for buying a product
@@ -31,14 +31,14 @@ public class ProductsTest extends BaseTest {
                 product4$Page
                 .addAndGoCheckout();
 
-        Assert.assertTrue(checkoutPage.urlContains());
+        Assert.assertTrue(checkoutPage.urlContains(), "Failure ProductsTest/buyProductTest: Checkout page URL does not contain expected string after adding product.");
 
        SuccessfulCheckout successfulCheckout =
                 checkoutPage
                 .fillCheckoutForm();
 
-        Assert.assertTrue(successfulCheckout.urlContains());
-        Assert.assertTrue(successfulCheckout.isH1Displayed());
+        Assert.assertTrue(successfulCheckout.urlContains(), "Failure ProductsTest/buyProductTest: Successful checkout page URL does not contain expected string.");
+        Assert.assertTrue(successfulCheckout.isH1Displayed(), "Failure ProductsTest/buyProductTest: H1 element is not displayed on successful checkout page.");
 
     }
 
@@ -55,7 +55,7 @@ public class ProductsTest extends BaseTest {
         cartPage
                 .updateQuantity("2");
 
-        Assert.assertEquals(cartPage.getQuantityValue(), "2");
+        Assert.assertEquals(cartPage.getQuantityValue(), "2", "Failure ProductsTest/increaseQuantityTest: Cart quantity value is not '2' after update.");
 
     }
 
@@ -68,14 +68,14 @@ public class ProductsTest extends BaseTest {
                 .clickAddNewButton()
                 .fillProductForm();
 
-        Assert.assertTrue(productsFormPage.isAlertSuccessDisplayed());
+        Assert.assertTrue(productsFormPage.isAlertSuccessDisplayed(), "Failure ProductsTest/addProductTest: Success alert was not displayed after adding product.");
 
         ProductsPage productsPage =
                 productsFormPage
                 .clickAlertX()
                 .navBar.clickProducts();
 
-        Assert.assertTrue(productsPage.newProductExists());
+        Assert.assertTrue(productsPage.newProductExists(), "Failure ProductsTest/addProductTest: Newly added product does not exist in the products list.");
 
         productsPage
                 .deleteProduct();
@@ -91,7 +91,7 @@ public class ProductsTest extends BaseTest {
                 .clickNotfCancelButton()
                 .clickSaveButton();
 
-        Assert.assertTrue(productsFormPage.isAlertWarningDisplayed());
+        Assert.assertTrue(productsFormPage.isAlertWarningDisplayed(), "Failure ProductsTest/addProductAlertTest: Warning alert was not displayed for invalid product submission.");
     }
 
 }

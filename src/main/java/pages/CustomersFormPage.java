@@ -2,6 +2,7 @@ package pages;
 
 import base.BasePage;
 import components.LeftNavigationBar;
+import data.Input; // Added import
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +21,7 @@ public class CustomersFormPage extends BasePage {
     private String randomEmailAddress;
 
     private String customerFormUrl;
+    private Input input;
 
     @FindBy(xpath = "//*[@id=\"alert\"]/div")
     private WebElement alert;
@@ -58,7 +60,8 @@ public class CustomersFormPage extends BasePage {
         this.lastName = Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
         this.password = Utils.passwordGenerator(ThreadLocalRandom.current().nextInt(5, 19));
         this.randomEmailAddress = Utils.generateEmail();
-        customerFormUrl = "https://auto.pragmatic.bg/manage/index.php?route=customer/customer.form";
+        this.input = new Input();
+        customerFormUrl = input.getUrl("customer.form.url");
     }
 
 

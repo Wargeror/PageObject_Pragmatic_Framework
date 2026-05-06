@@ -20,7 +20,7 @@ public class DashboardTest extends BaseTest {
                 login()
                 .clickViewMoreOrders();
 
-        Assert.assertTrue(ordersPage.urlContains());
+        Assert.assertTrue(ordersPage.urlContains(), "Failure DashboardTest/orderViewMoreTest: Orders page URL does not contain expected string.");
     }
 
     //Sales "View more..." Redirect
@@ -30,7 +30,7 @@ public class DashboardTest extends BaseTest {
                 login()
                 .clickViewMoreSales();
 
-        Assert.assertTrue(ordersPage.urlContains());
+        Assert.assertTrue(ordersPage.urlContains(), "Failure DashboardTest/SalesViewMoreTest: Sales page URL does not contain expected string.");
     }
 
     //Customers "View more..." Redirect
@@ -40,7 +40,7 @@ public class DashboardTest extends BaseTest {
                 login()
                 .clickViewMoreCustomers();
 
-        Assert.assertTrue(customersPage.urlContains());
+        Assert.assertTrue(customersPage.urlContains(), "Failure DashboardTest/CustomersViewMoreTest: Customers page URL does not contain expected string.");
     }
 
     //People Online "View more..." Redirect
@@ -50,7 +50,7 @@ public class DashboardTest extends BaseTest {
                 login()
                 .clickViewMorePeopleOnline();
 
-        Assert.assertTrue(onlineReportPage.urlContains());
+        Assert.assertTrue(onlineReportPage.urlContains(), "Failure DashboardTest/PeopleOnlineViewMoreTest: Online Report page URL does not contain expected string.");
     }
 
     //World Map Russia Select Test
@@ -60,7 +60,7 @@ public class DashboardTest extends BaseTest {
                  login()
                 .clickWorldMapRussia();
 
-        Assert.assertEquals(dashboardPage.getFillWorldMapRussia(),"#666666");
+        Assert.assertEquals(dashboardPage.getFillWorldMapRussia(),"#666666", "Failure DashboardTest/WorldMapRussiaTest: World map Russia fill color is not as expected.");
     }
 
     //Sales Analytics Filter Test
@@ -76,7 +76,7 @@ public class DashboardTest extends BaseTest {
             dashboardPage.clicksAlesAnalyticsTimeFrameButton();
             getWait().until(ExpectedConditions.visibilityOf(getDriver().findElement(By.cssSelector(dashboardPage.SalesAnalyticsTimeFrameListSelector(i)))));
             WebElement selected = getDriver().findElement(By.cssSelector(dashboardPage.SalesAnalyticsTimeFrameListSelector(i)));
-            Assert.assertEquals(selected.getText(), exp_options.get(i-1));
+            Assert.assertEquals(selected.getText(), exp_options.get(i-1), "Failure DashboardTest/SalesAnaliticsFilterTest: Sales analytics time frame option text mismatch for index " + (i-1));
             dashboardPage.clickSalesAnalyticsTimeFrameList(i);
             dashboardPage.invisibilityOfAlesAnalyticsTimeFrameList(i);
         }
@@ -92,7 +92,7 @@ public class DashboardTest extends BaseTest {
                  login()
                 .clickLatestOrder();
 
-        Assert.assertTrue(orderPage.urlContains());
+        Assert.assertTrue(orderPage.urlContains(), "Failure DashboardTest/LatestOrderRedirectTest: Order page URL does not contain expected string.");
     }
 
 }

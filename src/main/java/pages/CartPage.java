@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import data.Input; // Added import
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CartPage extends BasePage {
     private String cartUrl;
+
+    private Input input;
 
     @FindBy(xpath = "//div[@class='input-group']/input[@name='quantity']")
     private WebElement quantityField;
@@ -23,7 +26,8 @@ public class CartPage extends BasePage {
 
     public CartPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
-        this.cartUrl = "https://auto.pragmatic.bg/index.php?route=checkout/cart&language=en-gb";
+        this.input = new Input();
+        this.cartUrl = input.getUrl("cart.url");
     }
 
     public boolean urlContains() {

@@ -23,8 +23,8 @@ public class LoginTest extends BaseTest {
         DashboardPage dashboardPage = login();
 
         User user = input.getUser(0); // Get user for assertion
-        Assert.assertEquals(dashboardPage.usernameGetText(), user.getExpectedDashboardUsername());
-        Assert.assertTrue(dashboardPage.urlContains());
+        Assert.assertEquals(dashboardPage.usernameGetText(), user.getExpectedDashboardUsername(), "Failure LoginTest/loginTest: Dashboard username does not match expected username.");
+        Assert.assertTrue(dashboardPage.urlContains(), "Failure LoginTest/loginTest: Dashboard page URL does not contain expected string after successful login.");
     }
 
     //Unsuccessful login test
@@ -38,7 +38,7 @@ public class LoginTest extends BaseTest {
                  .typeTextPasswordField("")
                  .clickLoginButton();
 
-        Assert.assertEquals(loginPage.alertGetText(), LoginPage.EXPECTED_ALERT_TEXT);
+        Assert.assertEquals(loginPage.alertGetText(), LoginPage.EXPECTED_ALERT_TEXT, "Failure LoginTest/unsuccessfulLoginTest: Alert message for unsuccessful login does not match expected text.");
     }
 
 
@@ -81,7 +81,7 @@ public class LoginTest extends BaseTest {
         
         boolean isCookiePresent = isCookiePresent(cookies, "OCSESSID");
 
-        Assert.assertTrue(isCookiePresent, "Cookie 'OCSESSID' was not found after successful login.");
+        Assert.assertTrue(isCookiePresent, "Failure LoginTest/cookiesOnSuccessfulLoginTest: Cookie 'OCSESSID' was not found after successful login.");
     }
 
     //Confirms that cookie injection doesn't work
@@ -92,7 +92,7 @@ public class LoginTest extends BaseTest {
 
         Cookie sessionCookie = getCookieByName(printCookies(), "OCSESSID");
         String sucLoginURL = getDriver().getCurrentUrl();
-        Assert.assertNotNull(sessionCookie, "Session cookie 'OCSESSID' not found!");
+        Assert.assertNotNull(sessionCookie, "Failure LoginTest/negativeCookiesInjectionTest: Session cookie 'OCSESSID' not found after successful login!");
 
         getDriver().switchTo().newWindow(WindowType.TAB);
         getDriver().get(dashboardPage.getUrlDashboard());
@@ -102,7 +102,7 @@ public class LoginTest extends BaseTest {
         getDriver().navigate().refresh();
         String failedLoginURL = getDriver().getCurrentUrl();
 
-        Assert.assertFalse(sucLoginURL.equals(failedLoginURL));
+        Assert.assertFalse(sucLoginURL.equals(failedLoginURL), "Failure LoginTest/negativeCookiesInjectionTest: URL remained the same after attempting cookie injection, indicating a potential vulnerability.");
     }
 
 }

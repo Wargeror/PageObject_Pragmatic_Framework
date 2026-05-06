@@ -26,6 +26,6 @@ public class OrdersPageTest extends BaseTest {
             act_options.add(option.getText());
         }
 
-        Assert.assertEquals(act_options, ordersPage.getExp_options());
+        Assert.assertEquals(act_options, ordersPage.getExp_options(), "Failure OrdersPageTest/orderStatusCheck: Actual order status options do not match expected options.");
     }
 }

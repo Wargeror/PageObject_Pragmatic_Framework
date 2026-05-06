@@ -41,14 +41,14 @@ public class VisualRegressionTest extends BaseTest {
         if (!baselineFile.exists()) {
             // First time running the test: save current screenshot as baseline
             Utils.saveImage(currentImage, baselinePath);
-            Assert.fail("Baseline image was not found. Current screenshot saved as baseline at: " + baselinePath + ". Please run the test again.");
+            Assert.fail("Failure VisualRegressionTest/MainPageVisual: Baseline image was not found. Current screenshot saved as baseline at: " + baselinePath + ". Please run the test again.");
         } else {
             // Load the baseline image
             BufferedImage expectedImage;
             try {
                 expectedImage = ImageIO.read(baselineFile);
             } catch (IOException e) {
-                throw new RuntimeException("Failed to read baseline image: " + baselinePath, e);
+                throw new RuntimeException("Failure VisualRegressionTest/MainPageVisual: Failed to read baseline image: " + baselinePath, e);
             }
 
             // Compare images
@@ -59,7 +59,7 @@ public class VisualRegressionTest extends BaseTest {
                 // Save diff image for debugging
                 String diffPath = "target/visual-diffs/MainPage_diff.png";
                 Utils.saveImage(diff.getMarkedImage(), diffPath);
-                Assert.fail("Visual comparison failed! Difference found. Diff image saved at: " + diffPath);
+                Assert.fail("Failure VisualRegressionTest/MainPageVisual: Visual comparison failed! Difference found. Diff image saved at: " + diffPath);
             }
         }
     }
@@ -71,8 +71,8 @@ public class VisualRegressionTest extends BaseTest {
 
         // 1. Assert Size of the element
         Rectangle logoRect = mainPage.getLogo().getRect();
-        Assert.assertEquals(logoRect.getWidth(), 200, "Logo width is incorrect");
-        Assert.assertEquals(logoRect.getHeight(), 39, "Logo height is incorrect");
+        Assert.assertEquals(logoRect.getWidth(), 200, "Failure VisualRegressionTest/correctLogoTest: Logo width is incorrect.");
+        Assert.assertEquals(logoRect.getHeight(), 39, "Failure VisualRegressionTest/correctLogoTest: Logo height is incorrect.");
 
         // 2. Visual Comparison of the Logo element
         Screenshot logoScreenshot = new AShot()
@@ -84,13 +84,13 @@ public class VisualRegressionTest extends BaseTest {
 
         if (!baselineFile.exists()) {
             Utils.saveImage(currentLogoImage, baselinePath);
-            Assert.fail("Baseline logo image not found. Saved current logo as baseline at: " + baselinePath);
+            Assert.fail("Failure VisualRegressionTest/correctLogoTest: Baseline logo image not found. Saved current logo as baseline at: " + baselinePath);
         } else {
             BufferedImage expectedLogoImage;
             try {
                 expectedLogoImage = ImageIO.read(baselineFile);
             } catch (IOException e) {
-                throw new RuntimeException("Failed to read baseline logo image", e);
+                throw new RuntimeException("Failure VisualRegressionTest/correctLogoTest: Failed to read baseline logo image", e);
             }
 
             ImageDiffer imgDiffer = new ImageDiffer();
@@ -99,7 +99,7 @@ public class VisualRegressionTest extends BaseTest {
             if (diff.hasDiff()) {
                 String diffPath = "target/visual-diffs/Logo_diff.png";
                 Utils.saveImage(diff.getMarkedImage(), diffPath);
-                Assert.assertFalse(diff.hasDiff(), "Logo visual comparison failed! Diff image saved at: " + diffPath);
+                Assert.assertFalse(diff.hasDiff(), "Failure VisualRegressionTest/correctLogoTest: Logo visual comparison failed! Diff image saved at: " + diffPath);
             }
         }
     }

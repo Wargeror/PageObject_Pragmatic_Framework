@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import data.Input; // Added import
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,8 @@ public class Product4$Page extends BasePage {
     private String macBookUrl;
 
     private  String customDesktop;
+
+    private Input input;
 
     @FindBy(css = "[class='btn btn-lg btn-inverse btn-block dropdown-toggle']")
     private WebElement cart;
@@ -33,8 +36,9 @@ public class Product4$Page extends BasePage {
 
     public Product4$Page(WebDriver driver, WebDriverWait wait){
         super(driver, wait);
-        macBookUrl = "https://auto.pragmatic.bg/index.php?route=product/product&language=en-gb&product_id=43";
-        customDesktop = "https://auto.pragmatic.bg/index.php?route=product/product&language=en-gb&product_id=53&path=20_26";
+        this.input = new Input();
+        macBookUrl = input.getUrl("macbook.url");
+        customDesktop = input.getUrl("customdesktop.url");
     }
 
     public boolean urlContains() {

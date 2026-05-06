@@ -4,6 +4,7 @@ import base.BasePage;
 import components.LeftNavigationBar;
 import components.TopBar;
 import data.Description;
+import data.Input; // Added import
 import org.apache.poi.ss.usermodel.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -29,6 +30,8 @@ public class ProductsFormPage extends BasePage {
     private String productsFormUrl;
 
     private Description description;
+
+    private Input input;
 
     @FindBy(xpath = "//*[@id=\"alert\"]/div")
     private WebElement alert;
@@ -63,7 +66,7 @@ public class ProductsFormPage extends BasePage {
        @FindBy(css = "body.cke_editable.cke_editable_themed.cke_contents_ltr.cke_show_blocks.cke_show_borders > p:only-child")
        private WebElement decriptionField;
 
-       private final static String descriptionPath = "C:\\Users\\Momchil\\IdeaProjects\\TestFramework\\product";
+       private final static String descriptionPath = "product";
 
        @FindBy(xpath = "//*[@id=\"input-meta-title-1\"]")
        private WebElement metaTitleField;
@@ -71,7 +74,7 @@ public class ProductsFormPage extends BasePage {
        @FindBy(xpath = "//*[@id=\"input-tag-1\"]")
        private WebElement productTagField;
 
-       private final static String excelPath = "C:\\Users\\Momchil\\IdeaProjects\\TestFramework\\product\\tags.xlsx";
+       private final static String excelPath = "product/tags.xlsx";
 
     @FindBy(xpath = "//*[@id=\"form-product\"]/ul/li[2]/a")
     private WebElement dataForm;
@@ -114,7 +117,7 @@ public class ProductsFormPage extends BasePage {
           @FindBy(id = "input#input-directory")
           private WebElement inputFile;
 
-          private final static String filePath = "C:\\Users\\Momchil\\IdeaProjects\\TestFramework\\product\\MomchilPCImag.png";
+          private final static String filePath = "product/MomchilPCImag.png";
 
           @FindBy(css = ".input-group > input#input-search")
           private WebElement imgSearchField;
@@ -137,7 +140,8 @@ public class ProductsFormPage extends BasePage {
         this.topBar = new TopBar(driver, wait);
         this.navBar = new LeftNavigationBar(driver, wait);
         this.description = new Description();
-        productsFormUrl = "https://auto.pragmatic.bg/manage/index.php?route=catalog/product.form";
+        this.input = new Input();
+        productsFormUrl = input.getUrl("products.form.url");
     }
 
     public boolean isAlertWarningDisplayed(){
