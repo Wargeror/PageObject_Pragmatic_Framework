@@ -54,6 +54,8 @@ Contains `VisualRegressionTest.java` for image-based testing of the UI component
 *   **Visual Regression**: Compare current UI state against baseline images with automatic diff generation.
 *   **Animation Control**: Custom JS injection to freeze CSS/JS animations for stable testing.
 *   **Dynamic Data**: Built-in random string and email generators for unique test data.
+*   **Centralized Configuration**: All URLs and sensitive data are managed in a `config.properties` file, which is excluded from version control via `.gitignore`.
+*   **Descriptive Assertions**: All TestNG assertions include detailed failure messages to aid in debugging from logs.
 
 ---
 
@@ -66,12 +68,28 @@ Contains `VisualRegressionTest.java` for image-based testing of the UI component
 
 ### Setup
 1.  **Clone the project.**
-2.  **Configuration**: Create `config.properties` in the root:
+2.  **Configuration**: Create `config.properties` in the root and populate it with the necessary key-value pairs. An example of the required properties is shown below:
     ```properties
     test.username=your_username
     test.password=your_password
     site.url=https://auto.pragmatic.bg/manage/
     expected.dashboard.username=\   John Doe
+    main.url=https://auto.pragmatic.bg/index.php?route=common/home&language=en-gb
+    cart.url=https://auto.pragmatic.bg/index.php?route=checkout/cart&language=en-gb
+    order.url=https://auto.pragmatic.bg/manage/index.php?route=sale/order.info
+    orders.url=https://auto.pragmatic.bg/manage/index.php?route=sale/order
+    checkout.url=https://auto.pragmatic.bg/index.php?route=checkout/checkout
+    products.url=https://auto.pragmatic.bg/manage/index.php?route=catalog/product
+    customer.url=https://auto.pragmatic.bg/manage/index.php?route=customer/customer
+    dashboard.url=https://auto.pragmatic.bg/manage/index.php?route=common/dashboard
+    macbook.url=https://auto.pragmatic.bg/index.php?route=product/product&language=en-gb&product_id=43
+    customdesktop.url=https://auto.pragmatic.bg/index.php?route=product/product&language=en-gb&product_id=53&path=20_26
+    online.report.url=https://auto.pragmatic.bg/manage/index.php?route=report/online
+    products.form.url=https://auto.pragmatic.bg/manage/index.php?route=catalog/product.form
+    product.description.path=product
+    product.tags.excel.path=product/tags.xlsx
+    product.image.file.path=product/MomchilPCImag.png
+    customer.form.url=https://auto.pragmatic.bg/manage/index.php?route=customer/customer.form
     ```
 
 ### Running Tests from Console
