@@ -13,8 +13,10 @@ import java.util.List;
 
 public class DashboardTest extends BaseTest {
 
-    //Order "View more..." Redirect
-    @Test
+    @Test(
+            testName = "Order 'View More' Redirect Test",
+            description = "Verifies that clicking the 'View More' link on the Total Orders widget redirects to the Orders page."
+    )
     public void orderViewMoreTest() {
         OrdersPage ordersPage =
                 login()
@@ -23,8 +25,10 @@ public class DashboardTest extends BaseTest {
         Assert.assertTrue(ordersPage.urlContains(), "Failure DashboardTest/orderViewMoreTest: Orders page URL does not contain expected string.");
     }
 
-    //Sales "View more..." Redirect
-    @Test
+    @Test(
+            testName = "Sales 'View More' Redirect Test",
+            description = "Verifies that clicking the 'View More' link on the Total Sales widget redirects to the Orders page."
+    )
     public void SalesViewMoreTest() {
         OrdersPage ordersPage =
                 login()
@@ -33,8 +37,10 @@ public class DashboardTest extends BaseTest {
         Assert.assertTrue(ordersPage.urlContains(), "Failure DashboardTest/SalesViewMoreTest: Sales page URL does not contain expected string.");
     }
 
-    //Customers "View more..." Redirect
-    @Test
+    @Test(
+            testName = "Customers 'View More' Redirect Test",
+            description = "Verifies that clicking the 'View More' link on the Total Customers widget redirects to the Customers page."
+    )
     public void CustomersViewMoreTest() {
         CustomersPage customersPage =
                 login()
@@ -43,8 +49,10 @@ public class DashboardTest extends BaseTest {
         Assert.assertTrue(customersPage.urlContains(), "Failure DashboardTest/CustomersViewMoreTest: Customers page URL does not contain expected string.");
     }
 
-    //People Online "View more..." Redirect
-    @Test
+    @Test(
+            testName = "People Online 'View More' Redirect Test",
+            description = "Verifies that clicking the 'View More' link on the People Online widget redirects to the Online Report page."
+    )
     public void PeopleOnlineViewMoreTest() {
         OnlineReportPage onlineReportPage =
                 login()
@@ -53,8 +61,10 @@ public class DashboardTest extends BaseTest {
         Assert.assertTrue(onlineReportPage.urlContains(), "Failure DashboardTest/PeopleOnlineViewMoreTest: Online Report page URL does not contain expected string.");
     }
 
-    //World Map Russia Select Test
-    @Test
+    @Test(
+            testName = "World Map Russia Selection Test",
+            description = "Verifies that clicking on Russia in the world map widget correctly highlights it."
+    )
     public void WorldMapRussiaTest(){
         DashboardPage dashboardPage =
                  login()
@@ -63,8 +73,10 @@ public class DashboardTest extends BaseTest {
         Assert.assertEquals(dashboardPage.getFillWorldMapRussia(),"#666666", "Failure DashboardTest/WorldMapRussiaTest: World map Russia fill color is not as expected.");
     }
 
-    //Sales Analytics Filter Test
-    @Test
+    @Test(
+            testName = "Sales Analytics Filter Test",
+            description = "Verifies that the time frame filter in the Sales Analytics widget functions correctly."
+    )
     public void SalesAnaliticsFilterTest() {
 
         DashboardPage dashboardPage = login();
@@ -85,8 +97,10 @@ public class DashboardTest extends BaseTest {
         dashboardPage.clickSalesAnalyticsTimeFrameList(4);
     }
 
-    //Latest Order Redirect Test
-    @Test
+    @Test(
+            testName = "Latest Order Redirect Test",
+            description = "Verifies that clicking on the latest order in the Latest Orders widget redirects to the correct order page."
+    )
     public void LatestOrderRedirectTest(){
         OrderPage orderPage =
                  login()

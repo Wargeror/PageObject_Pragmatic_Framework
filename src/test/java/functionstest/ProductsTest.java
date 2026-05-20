@@ -9,8 +9,10 @@ import pages.*;
 
 public class ProductsTest extends BaseTest {
 
-    //Test adding product and going to checkout page
-    @Test
+    @Test(
+            testName = "Checkout Navigation Test",
+            description = "Tests the end-to-end flow of adding a product to the cart and navigating to the checkout page."
+    )
     public void checkoutTest(){
         MainPage mainPage = new MainPage(getDriver(), getWait());
         getDriver().get(mainPage.mainUrl());
@@ -21,8 +23,10 @@ public class ProductsTest extends BaseTest {
         Assert.assertTrue(checkoutPage.urlContains(), "Failure ProductsTest/checkoutTest: Checkout page URL does not contain expected string.");
     }
 
-    //Test for buying a product
-    @Test
+    @Test(
+            testName = "Buy Product End-to-End Test",
+            description = "Tests the complete process of buying a product, from adding it to the cart to successful checkout."
+    )
     public void buyProductTest() throws InterruptedException {
         Product4$Page product4$Page = new Product4$Page(getDriver(), getWait());
         getDriver().get(product4$Page.getCustomDesktop());
@@ -42,8 +46,10 @@ public class ProductsTest extends BaseTest {
 
     }
 
-    //Increase the quantity in the cart test
-    @Test
+    @Test(
+            testName = "Increase Product Quantity in Cart",
+            description = "Verifies that the quantity of a product in the cart can be successfully increased."
+    )
     public void increaseQuantityTest() {
         Product4$Page product4$Page = new Product4$Page(getDriver(), getWait());
         getDriver().get(product4$Page.getCustomDesktop());
@@ -59,8 +65,10 @@ public class ProductsTest extends BaseTest {
 
     }
 
-    //Adding a Product
-    @Test
+    @Test(
+            testName = "Add and Delete Product",
+            description = "Tests the full lifecycle of a product: adding a new product, verifying its existence, and then deleting it."
+    )
     public void addProductTest() throws InterruptedException {
         ProductsFormPage productsFormPage =
                 login()
@@ -81,8 +89,10 @@ public class ProductsTest extends BaseTest {
                 .deleteProduct();
     }
 
-    //Negative Test For Adding A Product
-    @Test
+    @Test(
+            testName = "Negative: Add Product with Invalid Data",
+            description = "Verifies that a warning alert is displayed when attempting to add a product with invalid or incomplete data."
+    )
     public void addProductAlertTest() throws InterruptedException {
         ProductsFormPage productsFormPage =
                 login()

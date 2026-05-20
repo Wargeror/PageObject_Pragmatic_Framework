@@ -9,8 +9,10 @@ import pages.LoginPage;
 
 public class PerformanceTests extends BaseTest {
 
-    //Performance test for login page load time
-    @Test
+    @Test(
+            testName = "Login Page Load Time Performance Test",
+            description = "Measures the time it takes for the login page to load and asserts that it is within an acceptable limit."
+    )
     public void measureLoginLoadTime() {
         User user = input.getUser(0);
         getDriver().get(user.getSiteURL());

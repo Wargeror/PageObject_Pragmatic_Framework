@@ -8,8 +8,10 @@ import org.testng.annotations.Test;
 
 public class CustomersTest extends BaseTest {
 
-    //Add a customer and confirms that the user exists in the system and deletes it.
-    @Test
+    @Test(
+            testName = "Add and Delete Customer",
+            description = "Tests the full lifecycle of a customer: adding a new customer, verifying their existence, and then deleting them."
+    )
     public void addCustomerTest() {
 
         CustomersFormPage cuFormPage =

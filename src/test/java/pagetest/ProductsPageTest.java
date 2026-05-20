@@ -7,16 +7,20 @@ import pages.ProductsPage;
 
 public class ProductsPageTest extends BaseTest {
 
-    //Asserts if the main products page element load
-    @Test
+    @Test(
+            testName = "Products Page Element Display Test",
+            description = "Asserts that the main elements on the products page, such as the product form and filter form, are displayed."
+    )
     public void productsPageTest(){
         ProductsPage prodPage = goTo();
         Assert.assertTrue(prodPage.isProductFormDisplayed(), "Failure ProductsPageTest/productsPageTest: Product form is not displayed.");
         Assert.assertTrue(prodPage.isFilterFormDisplayed(), "Failure ProductsPageTest/productsPageTest: Filter form is not displayed.");
     }
 
-    //Asserts if the Product Name Filter Works
-    @Test
+    @Test(
+            testName = "Product Name Filter Test",
+            description = "Verifies that the product filter works correctly when filtering by product name."
+    )
     public void productNameFilterTest(){
         ProductsPage prodPage =
                 goTo()
@@ -26,8 +30,10 @@ public class ProductsPageTest extends BaseTest {
         Assert.assertTrue(prodPage.newProductExists(), "Failure ProductsPageTest/productNameFilterTest: Product 'Custom-Built Desktop PC' not found after filtering by name.");
     }
 
-    //Asserts if the Product Model Filter Works
-    @Test
+    @Test(
+            testName = "Product Model Filter Test",
+            description = "Verifies that the product filter works correctly when filtering by product model."
+    )
     public void productModelFilterTest(){
         ProductsPage prodPage =
                 goTo()
@@ -37,8 +43,10 @@ public class ProductsPageTest extends BaseTest {
         Assert.assertTrue(prodPage.newProductExists(), "Failure ProductsPageTest/productModelFilterTest: Product 'Custom-built 01' not found after filtering by model.");
     }
 
-    //Asserts if the Product Price Filter Works
-    @Test
+    @Test(
+            testName = "Product Price Filter Test",
+            description = "Verifies that the product filter works correctly when filtering by product price."
+    )
     public void productPriceFilterTest(){
         ProductsPage prodPage =
                 goTo()

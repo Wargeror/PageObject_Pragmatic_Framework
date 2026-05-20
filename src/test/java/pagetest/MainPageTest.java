@@ -7,7 +7,10 @@ import pages.MainPage;
 
 public class MainPageTest extends BaseTest {
 
-    @Test
+    @Test(
+            testName = "Main Page Element Display Test",
+            description = "Verifies that all critical elements on the main page are displayed correctly upon loading."
+    )
     public void displayTest(){
         MainPage mainPage = new MainPage(getDriver(), getWait());
         getDriver().get(mainPage.mainUrl());

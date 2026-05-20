@@ -16,8 +16,10 @@ import java.util.Set;
 
 public class LoginTest extends BaseTest {
 
-    //Successful login test
-    @Test
+    @Test(
+            testName = "Successful Login Test",
+            description = "Verifies that a user can log in with valid credentials and is redirected to the dashboard."
+    )
     public void loginTest(){
         //Get to the DashboardPage By Login
         DashboardPage dashboardPage = login();
@@ -27,8 +29,10 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(dashboardPage.urlContains(), "Failure LoginTest/loginTest: Dashboard page URL does not contain expected string after successful login.");
     }
 
-    //Unsuccessful login test
-    @Test
+    @Test(
+            testName = "Unsuccessful Login Test",
+            description = "Verifies that an appropriate error message is displayed when a user attempts to log in with invalid credentials."
+    )
     public void unsuccessfulLoginTest() {
         User user = input.getUser(0);
         getDriver().get(user.getSiteURL());
@@ -42,8 +46,10 @@ public class LoginTest extends BaseTest {
     }
 
 
-    //Console Logs On Unsuccessful Login
-    @Test
+    @Test(
+            testName = "Console Logs on Unsuccessful Login",
+            description = "Captures and prints console logs during an unsuccessful login attempt for debugging purposes."
+    )
     public void consoleLogsOnUnsuccessfulLoginTest(){
         // Cast driver to ChromeDriver to access DevTools
         ChromeDriver chromeDriver = (ChromeDriver) getDriver();
@@ -72,8 +78,10 @@ public class LoginTest extends BaseTest {
         try { Thread.sleep(2000); } catch (InterruptedException e) { e.printStackTrace(); }
     }
 
-    //Tests that the correct cookies are loaded on successful login.
-    @Test
+    @Test(
+            testName = "Cookie Presence on Successful Login",
+            description = "Verifies that the 'OCSESSID' session cookie is present after a successful login."
+    )
     public void cookiesOnSuccessfulLoginTest() {
         login();
 
@@ -84,8 +92,10 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(isCookiePresent, "Failure LoginTest/cookiesOnSuccessfulLoginTest: Cookie 'OCSESSID' was not found after successful login.");
     }
 
-    //Confirms that cookie injection doesn't work
-    @Test
+    @Test(
+            testName = "Negative Cookie Injection Test",
+            description = "Confirms that injecting a session cookie into a new tab does not grant access, preventing session hijacking."
+    )
     public void negativeCookiesInjectionTest(){
         closeDriver = false; // Keep browser open for manual inspection if needed
         DashboardPage dashboardPage = login();

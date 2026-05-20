@@ -10,8 +10,10 @@ import pages.ProductsPage;
 
 public class LeftNavigationBarTest extends BaseTest {
 
-    //Assert that the Left Navigation Bar is displayed
-    @Test
+    @Test(
+            testName = "Left Navigation Bar Display Test",
+            description = "Asserts that the Left Navigation Bar is displayed after a successful login."
+    )
     public void NavBarIsDisplayed(){
         login();
 
@@ -21,8 +23,10 @@ public class LeftNavigationBarTest extends BaseTest {
         Assert.assertTrue(navBar.getDashboardLNavBar().isDisplayed(), "Failure LeftNavigationBarTest/NavBarIsDisplayed: Left Navigation Bar is not displayed.");
     }
 
-    //Assert Orders Page Loads From Left Navigation Bar
-    @Test
+    @Test(
+            testName = "Orders Page Navigation Test",
+            description = "Asserts that the Orders Page loads correctly when accessed from the Left Navigation Bar."
+    )
     public void orderStatusCheck() {
         OrdersPage ordersPage =
                  login()
@@ -31,8 +35,10 @@ public class LeftNavigationBarTest extends BaseTest {
         Assert.assertTrue(ordersPage.urlContains(), "Failure LeftNavigationBarTest/orderStatusCheck: Orders page URL does not contain expected string.");
     }
 
-    //Asserts that Products Page Loads From Left Navigation Bar
-    @Test
+    @Test(
+            testName = "Products Page Navigation Test",
+            description = "Asserts that the Products Page loads correctly when accessed from the Left Navigation Bar."
+    )
     public void addProductTest() throws InterruptedException {
         ProductsPage productsPage =
                  login()

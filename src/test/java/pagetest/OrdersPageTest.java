@@ -12,8 +12,10 @@ import java.util.List;
 
 public class OrdersPageTest extends BaseTest {
 
-    //Check Orders Status Values
-    @Test
+    @Test(
+            testName = "Order Status Dropdown Verification",
+            description = "Verifies that the order status dropdown on the Orders page contains all expected values."
+    )
     public void orderStatusCheck(){
         OrdersPage ordersPage =
                 login()

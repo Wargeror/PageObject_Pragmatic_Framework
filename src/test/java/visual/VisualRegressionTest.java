@@ -20,7 +20,10 @@ import java.io.IOException;
 
 public class VisualRegressionTest extends BaseTest {
 
-    @Test
+    @Test(
+            testName = "Main Page Visual Regression",
+            description = "Performs a full-page visual comparison of the main page against a baseline image."
+    )
     public void MainPageVisual() {
         MainPage mainPage = new MainPage(getDriver(), getWait());
         getDriver().get(mainPage.mainUrl());
@@ -64,7 +67,10 @@ public class VisualRegressionTest extends BaseTest {
         }
     }
 
-    @Test
+    @Test(
+            testName = "Logo Size and Visual Validation",
+            description = "Verifies the dimensions and visual appearance of the site logo against a baseline."
+    )
     public void correctLogoTest(){
         MainPage mainPage = new MainPage(getDriver(), getWait());
         getDriver().get(mainPage.mainUrl());

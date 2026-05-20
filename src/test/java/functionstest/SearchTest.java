@@ -8,8 +8,10 @@ import pages.SearchPage;
 
 public class SearchTest extends BaseTest {
 
-    //Search for an object to assert that the search works
-    @Test
+    @Test(
+            testName = "iMac Search Test",
+            description = "Searches for 'iMac' and asserts that the corresponding product image is displayed on the search results page."
+    )
     public void iMacSearch(){
         MainPage mainPage = new MainPage(getDriver(), getWait());
         getDriver().get(mainPage.mainUrl());
