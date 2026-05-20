@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import components.LeftNavigationBar;
 import components.TopBar;
 import data.Input; // Added import
@@ -17,10 +18,10 @@ public class OrderPage extends BasePage {
 
     private Input input;
 
-    public OrderPage(WebDriver driver, WebDriverWait wait){
-        super(driver, wait);
-        this.topBar = new TopBar(driver,wait);
-        this.leftNavigationBar = new LeftNavigationBar(driver,wait);
+    public OrderPage(WebDriver driver, WebDriverWait wait, WebApp webApp){
+        super(driver, wait, webApp);
+        this.topBar = new TopBar(driver,wait, webApp);
+        this.leftNavigationBar = new LeftNavigationBar(driver,wait, webApp);
         this.input = new Input();
         orderUrl = input.getUrl("order.url");
     }

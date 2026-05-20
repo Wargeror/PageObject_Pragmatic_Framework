@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import components.LeftNavigationBar;
 import components.TopBar;
 import data.Input; // Added import
@@ -56,10 +57,10 @@ public class ProductsPage  extends BasePage {
        private WebElement filterButton;
 
 
-    public ProductsPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-        this.topBar = new TopBar(driver, wait);
-        this.navBar = new LeftNavigationBar(driver, wait);
+    public ProductsPage(WebDriver driver, WebDriverWait wait, WebApp webApp) {
+        super(driver, wait, webApp);
+        this.topBar = new TopBar(driver, wait, webApp);
+        this.navBar = new LeftNavigationBar(driver, wait, webApp);
         this.input = new Input();
         productsUrl = input.getUrl("products.url");
     }
@@ -78,7 +79,7 @@ public class ProductsPage  extends BasePage {
 
     public ProductsFormPage clickAddNewButton(){
         clickWebElement(addNewButton);
-        return new ProductsFormPage(driver,wait);
+        return webApp.productsFormPage();
     }
 
     public boolean newProductExists() {

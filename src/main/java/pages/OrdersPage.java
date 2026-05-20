@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import components.LeftNavigationBar;
 import components.TopBar;
 import data.Input; // Added import
@@ -28,10 +29,10 @@ public class OrdersPage extends BasePage {
     private WebElement orderStatus;
 
 
-    public OrdersPage(WebDriver driver, WebDriverWait wait){
-        super(driver, wait);
-        this.topBar = new TopBar(driver,wait);
-        this.leftNavigationBar = new LeftNavigationBar(driver,wait);
+    public OrdersPage(WebDriver driver, WebDriverWait wait, WebApp webApp){
+        super(driver, wait, webApp);
+        this.topBar = new TopBar(driver,wait, webApp);
+        this.leftNavigationBar = new LeftNavigationBar(driver,wait, webApp);
         this.input = new Input();
         ordersUrl = input.getUrl("orders.url");
         exp_options = Arrays.asList("", "Missing Orders", "Canceled", "Canceled Reversal", "Chargeback", "Complete", "Denied", "Expired", "Failed", "Pending", "Processed", "Processing", "Refunded", "Reversed", "Shipped", "Voided");

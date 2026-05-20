@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import components.LeftNavigationBar;
 import components.TopBar;
 import data.Description;
@@ -135,10 +136,10 @@ public class ProductsFormPage extends BasePage {
       @FindBy(xpath = "//*[@id=\"input-keyword-0-1\"]")
       private WebElement seoKeywordField;
 
-    public ProductsFormPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-        this.topBar = new TopBar(driver, wait);
-        this.navBar = new LeftNavigationBar(driver, wait);
+    public ProductsFormPage(WebDriver driver, WebDriverWait wait, WebApp webApp) {
+        super(driver, wait, webApp);
+        this.topBar = new TopBar(driver, wait, webApp);
+        this.navBar = new LeftNavigationBar(driver, wait, webApp);
         this.description = new Description();
         this.input = new Input();
         productsFormUrl = input.getUrl("products.form.url");

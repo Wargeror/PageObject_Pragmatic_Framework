@@ -13,7 +13,7 @@ public class SearchTest extends BaseTest {
             description = "Searches for 'iMac' and asserts that the corresponding product image is displayed on the search results page."
     )
     public void iMacSearch(){
-        MainPage mainPage = new MainPage(getDriver(), getWait());
+        MainPage mainPage = webApp.mainPage();
         getDriver().get(mainPage.mainUrl());
         SearchPage searchPage =
                 mainPage

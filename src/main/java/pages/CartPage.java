@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import data.Input; // Added import
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,8 +25,8 @@ public class CartPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"alert\"]/div/button")
     private WebElement alertX;
 
-    public CartPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public CartPage(WebDriver driver, WebDriverWait wait, WebApp webApp) {
+        super(driver, wait, webApp);
         this.input = new Input();
         this.cartUrl = input.getUrl("cart.url");
     }

@@ -1,6 +1,7 @@
 package components;
 
 import base.BasePage;
+import base.WebApp;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -52,8 +53,8 @@ public class TopBarMain extends BasePage {
       @FindBy(xpath = "//*[@id=\"narbar-menu\"]/ul/li[8]/a")
       private WebElement menuMP3;
 
-   public TopBarMain(WebDriver driver, WebDriverWait wait){
-       super(driver, wait);
+   public TopBarMain(WebDriver driver, WebDriverWait wait, WebApp webApp){
+       super(driver, wait, webApp);
    }
 
    public boolean isTopBarDisplayed(){

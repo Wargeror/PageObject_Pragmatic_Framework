@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import components.Components;
 import components.HighBar;
 import components.TopBarMain;
@@ -25,11 +26,11 @@ public class SuccessfulCheckout extends BasePage {
     @FindBy(xpath = "//div[@id='content']/h1[contains(text(), \"Your order has been placed!\")]")
     private WebElement h1;
 
-    public SuccessfulCheckout(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-        this.topBarM = new TopBarMain(driver, wait);
-        this.highBar = new HighBar(driver, wait);
-        this.cmp = new Components(driver, wait);
+    public SuccessfulCheckout(WebDriver driver, WebDriverWait wait, WebApp webApp) {
+        super(driver, wait, webApp);
+        this.topBarM = new TopBarMain(driver, wait, webApp);
+        this.highBar = new HighBar(driver, wait, webApp);
+        this.cmp = new Components(driver, wait, webApp);
         this.input = new Input();
         SucCheckUrl = input.getUrl("successfull.checkout.url");
         SucCheckUrl = "https://auto.pragmatic.bg/index.php?route=checkout/success";

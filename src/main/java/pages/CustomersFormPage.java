@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import components.LeftNavigationBar;
 import data.Input; // Added import
 import org.openqa.selenium.WebDriver;
@@ -53,9 +54,9 @@ public class CustomersFormPage extends BasePage {
     @FindBy(xpath = "//i[@class='fa-solid fa-floppy-disk']/ ..")
     private WebElement saveButton;
 
-    public CustomersFormPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-        this.leftNavigationBar = new LeftNavigationBar(driver, wait);
+    public CustomersFormPage(WebDriver driver, WebDriverWait wait, WebApp webApp) {
+        super(driver, wait, webApp);
+        this.leftNavigationBar = new LeftNavigationBar(driver, wait, webApp);
         this.firstName = Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
         this.lastName = Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
         this.password = Utils.passwordGenerator(ThreadLocalRandom.current().nextInt(5, 19));

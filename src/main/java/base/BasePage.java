@@ -9,10 +9,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
+    protected WebApp webApp;
 
-    public BasePage(WebDriver driver, WebDriverWait wait) {
+    public BasePage(WebDriver driver, WebDriverWait wait, WebApp webApp) {
         this.driver = driver;
         this.wait = wait;
+        this.webApp = webApp;
         PageFactory.initElements(driver, this);
     }
 

@@ -14,7 +14,7 @@ public class ProductsTest extends BaseTest {
             description = "Tests the end-to-end flow of adding a product to the cart and navigating to the checkout page."
     )
     public void checkoutTest(){
-        MainPage mainPage = new MainPage(getDriver(), getWait());
+        MainPage mainPage = webApp.mainPage();
         getDriver().get(mainPage.mainUrl());
         CheckoutPage checkoutPage =
                 mainPage
@@ -28,7 +28,7 @@ public class ProductsTest extends BaseTest {
             description = "Tests the complete process of buying a product, from adding it to the cart to successful checkout."
     )
     public void buyProductTest() throws InterruptedException {
-        Product4$Page product4$Page = new Product4$Page(getDriver(), getWait());
+        Product4$Page product4$Page = webApp.product4$Page();
         getDriver().get(product4$Page.getCustomDesktop());
 
         CheckoutPage checkoutPage =
@@ -51,7 +51,7 @@ public class ProductsTest extends BaseTest {
             description = "Verifies that the quantity of a product in the cart can be successfully increased."
     )
     public void increaseQuantityTest() {
-        Product4$Page product4$Page = new Product4$Page(getDriver(), getWait());
+        Product4$Page product4$Page = webApp.product4$Page();
         getDriver().get(product4$Page.getCustomDesktop());
 
         CartPage cartPage =

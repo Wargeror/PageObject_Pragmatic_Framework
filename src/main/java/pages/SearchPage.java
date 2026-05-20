@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import components.Components;
 import components.HighBar;
 import components.TopBarMain;
@@ -22,9 +23,11 @@ public class SearchPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"product-list\"]/div/div/div[1]/a/img")
     private WebElement macBookImg;
 
-    public SearchPage(WebDriver driver, WebDriverWait wait){
-        super(driver, wait);
-        this.topBarM = new TopBarMain(driver, wait);
+    public SearchPage(WebDriver driver, WebDriverWait wait, WebApp webApp){
+        super(driver, wait, webApp);
+        this.topBarM = new TopBarMain(driver, wait, webApp);
+        this.highBar = new HighBar(driver, wait, webApp);
+        this.cmp = new Components(driver, wait, webApp);
     }
 
     public boolean isMacBookImgDisplayed(){

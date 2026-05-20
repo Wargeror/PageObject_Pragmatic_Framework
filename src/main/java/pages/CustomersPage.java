@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import components.LeftNavigationBar;
 import components.TopBar;
 import data.Input; // Added import
@@ -38,10 +39,10 @@ public class CustomersPage extends BasePage { public String orderUrl;
     @FindBy(xpath = "//*[@id=\"form-customer\"]/div[1]/table/tbody/tr/td[1]/input")
     private WebElement cuCheckbox;
 
-    public CustomersPage(WebDriver driver, WebDriverWait wait){
-        super(driver, wait);
-        this.topBar = new TopBar(driver,wait);
-        this.leftNavigationBar = new LeftNavigationBar(driver,wait);
+    public CustomersPage(WebDriver driver, WebDriverWait wait, WebApp webApp){
+        super(driver, wait, webApp);
+        this.topBar = new TopBar(driver,wait, webApp);
+        this.leftNavigationBar = new LeftNavigationBar(driver,wait, webApp);
         this.input = new Input();
         customerUrl = input.getUrl("customer.url");
     }
@@ -52,7 +53,7 @@ public class CustomersPage extends BasePage { public String orderUrl;
 
     public CustomersFormPage clickAddButton(){
         clickWebElement(addButton);
-        return new CustomersFormPage(driver,wait);
+        return webApp.customersFormPage();
     }
 
     public CustomersPage typeEmailInputField(String text){

@@ -17,7 +17,7 @@ public class PerformanceTests extends BaseTest {
         User user = input.getUser(0);
         getDriver().get(user.getSiteURL());
 
-        LoginPage loginPage = new LoginPage(getDriver(), getWait())
+        LoginPage loginPage = webApp.loginPage()
                  .typeTextUsernameField(user.getUsername())
                  .typeTextPasswordField(user.getPassword());
 

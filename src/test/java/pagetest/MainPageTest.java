@@ -12,7 +12,7 @@ public class MainPageTest extends BaseTest {
             description = "Verifies that all critical elements on the main page are displayed correctly upon loading."
     )
     public void displayTest(){
-        MainPage mainPage = new MainPage(getDriver(), getWait());
+        MainPage mainPage = webApp.mainPage();
         getDriver().get(mainPage.mainUrl());
 
         Assert.assertTrue(mainPage.highBar.isHighBarDisplayed(), "Failure MainPageTest/displayTest: High bar is not displayed.");

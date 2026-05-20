@@ -59,8 +59,8 @@ public class ProductsPageTest extends BaseTest {
     public ProductsPage goTo(){
         login();
 
-        ProductsPage productsPage = new ProductsPage(getDriver(), getWait());
+        ProductsPage productsPage = webApp.productsPage();
         getDriver().get(productsPage.newUrl());
-        return new ProductsPage(getDriver(), getWait());
+        return webApp.productsPage();
     }
 }

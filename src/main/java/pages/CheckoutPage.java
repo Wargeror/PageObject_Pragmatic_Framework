@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import components.Components;
 import components.HighBar;
 import components.TopBarMain;
@@ -88,11 +89,11 @@ public class CheckoutPage extends BasePage {
     @FindBy(id = "button-confirm")
     private WebElement confirmButton;
 
-    public CheckoutPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-        this.topBarM = new TopBarMain(driver, wait);
-        this.highBar = new HighBar(driver, wait);
-        this.cmp = new Components(driver, wait);
+    public CheckoutPage(WebDriver driver, WebDriverWait wait, WebApp webApp) {
+        super(driver, wait, webApp);
+        this.topBarM = new TopBarMain(driver, wait, webApp);
+        this.highBar = new HighBar(driver, wait, webApp);
+        this.cmp = new Components(driver, wait, webApp);
         this.input = new Input();
         checkoutUrl = input.getUrl("checkout.url");
     }
@@ -241,7 +242,7 @@ public class CheckoutPage extends BasePage {
 
     public SuccessfulCheckout clickConfirmButton(){
         clickWebElement(confirmButton);
-        return new SuccessfulCheckout(driver,wait);
+        return webApp.successfulCheckout();
     }
 
     public SuccessfulCheckout fillCheckoutForm(){

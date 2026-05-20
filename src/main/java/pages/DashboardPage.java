@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import components.LeftNavigationBar;
 import components.TopBar;
 import data.Input; // Added import
@@ -100,10 +101,10 @@ public class DashboardPage extends BasePage {
     private WebElement latestOrder;
 
     //Constructor used to pass the existing WebDrive and wait to this object
-    public DashboardPage(WebDriver driver, WebDriverWait wait){
-        super(driver, wait);
-        this.topBar = new TopBar(driver,wait);
-        this.leftNavigationBar = new LeftNavigationBar(driver,wait);
+    public DashboardPage(WebDriver driver, WebDriverWait wait, WebApp webApp){
+        super(driver, wait, webApp);
+        this.topBar = new TopBar(driver,wait, webApp);
+        this.leftNavigationBar = new LeftNavigationBar(driver,wait, webApp);
         this.input = new Input();
         urlDashboard = input.getUrl("dashboard.url");
     }
@@ -149,22 +150,22 @@ public class DashboardPage extends BasePage {
 
     public OrdersPage clickViewMoreOrders() {
         clickWebElement(totalOrdersViewMore);
-        return new OrdersPage(driver,wait);
+        return webApp.ordersPage();
     }
 
     public OrdersPage clickViewMoreSales() {
         clickWebElement(totalSalesViewMore);
-        return new OrdersPage(driver,wait);
+        return webApp.ordersPage();
     }
 
     public CustomersPage clickViewMoreCustomers() {
         clickWebElement(totalCustomersViewMore);
-        return new CustomersPage(driver,wait);
+        return webApp.customersPage();
     }
 
     public OnlineReportPage clickViewMorePeopleOnline() {
         clickWebElement(peopleOnlineViewMore);
-        return new OnlineReportPage(driver,wait);
+        return webApp.onlineReportPage();
     }
 
     public boolean urlContains() {
@@ -189,7 +190,7 @@ public class DashboardPage extends BasePage {
 
     public OrderPage clickLatestOrder(){
         clickWebElement(latestOrder);
-        return new OrderPage(driver,wait);
+        return webApp.orderPage();
     }
 
     public DashboardPage clickWorldMapRussia(){

@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import data.Input;
 import data.User;
 import org.openqa.selenium.WebDriver;
@@ -30,8 +31,8 @@ public class LoginPage extends BasePage {
     public static final String EXPECTED_ALERT_TEXT = "No match for Username and/or Password.";
 
     //Constructor used to pass the existing WebDrive and wait to this object
-    public LoginPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public LoginPage(WebDriver driver, WebDriverWait wait, WebApp webApp) {
+        super(driver, wait, webApp);
     }
 
     //Method used to input text into the username input field
@@ -49,7 +50,7 @@ public class LoginPage extends BasePage {
     //Method used to click the login button
     public DashboardPage clickLoginButton() {
         clickWebElement(loginButton);
-        return new DashboardPage(driver, wait);
+        return webApp.dashboardPage();
     }
 
     public String alertGetText(){

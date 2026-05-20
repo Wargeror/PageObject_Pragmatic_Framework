@@ -1,6 +1,7 @@
 package components;
 
 import base.BasePage;
+import base.WebApp;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,8 +21,8 @@ public class Components extends BasePage {
     @FindBy(xpath = "//*[@id=\"header-cart\"]/div/button")
     private WebElement cart;
 
-    public Components(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public Components(WebDriver driver, WebDriverWait wait, WebApp webApp) {
+        super(driver, wait, webApp);
     }
 
     public void clickLogo(){

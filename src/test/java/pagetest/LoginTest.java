@@ -37,7 +37,7 @@ public class LoginTest extends BaseTest {
         User user = input.getUser(0);
         getDriver().get(user.getSiteURL());
 
-        LoginPage loginPage = new LoginPage(getDriver(), getWait());
+        LoginPage loginPage = webApp.loginPage();
         loginPage.typeTextUsernameField("")
                  .typeTextPasswordField("")
                  .clickLoginButton();
@@ -69,7 +69,7 @@ public class LoginTest extends BaseTest {
         User user = input.getUser(0);
         getDriver().get(user.getSiteURL());
 
-        LoginPage loginPage = new LoginPage(getDriver(), getWait());
+        LoginPage loginPage = webApp.loginPage();
         loginPage.typeTextUsernameField("")
                  .typeTextPasswordField("")
                  .clickLoginButton();
@@ -97,7 +97,6 @@ public class LoginTest extends BaseTest {
             description = "Confirms that injecting a session cookie into a new tab does not grant access, preventing session hijacking."
     )
     public void negativeCookiesInjectionTest(){
-        closeDriver = false; // Keep browser open for manual inspection if needed
         DashboardPage dashboardPage = login();
 
         Cookie sessionCookie = getCookieByName(printCookies(), "OCSESSID");

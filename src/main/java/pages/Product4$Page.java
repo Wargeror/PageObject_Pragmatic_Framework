@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import data.Input; // Added import
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -34,8 +35,8 @@ public class Product4$Page extends BasePage {
     @SuppressWarnings("SpellCheckingInspection")
     public final static String succAddNotf = "[class='alert alert-success alert-dismissible']";
 
-    public Product4$Page(WebDriver driver, WebDriverWait wait){
-        super(driver, wait);
+    public Product4$Page(WebDriver driver, WebDriverWait wait, WebApp webApp){
+        super(driver, wait, webApp);
         this.input = new Input();
         macBookUrl = input.getUrl("macbook.url");
         customDesktop = input.getUrl("customdesktop.url");
@@ -57,12 +58,12 @@ public class Product4$Page extends BasePage {
 
     public CartPage clickViewCart(){
         clickWebElement(viewCart);
-        return new CartPage(driver,wait);
+        return webApp.cartPage();
     }
 
     public CheckoutPage clickCheckout(){
         clickWebElement(checkout);
-        return new CheckoutPage(driver,wait);
+        return webApp.checkoutPage();
     }
 
     public Product4$Page clickAddToCart(){

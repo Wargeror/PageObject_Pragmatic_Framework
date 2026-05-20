@@ -1,6 +1,7 @@
 package pages;
 
 import base.BasePage;
+import base.WebApp;
 import components.*;
 import data.Input; // Added import
 import org.openqa.selenium.WebDriver;
@@ -42,11 +43,11 @@ public class MainPage extends BasePage {
     @FindBy(id = "carousel-banner-1")
     private WebElement secondBanner;
 
-    public MainPage(WebDriver driver, WebDriverWait wait){
-        super(driver, wait);
-        this.topBarM = new TopBarMain(driver, wait);
-        this.highBar = new HighBar(driver, wait);
-        this.cmp = new Components(driver, wait);
+    public MainPage(WebDriver driver, WebDriverWait wait, WebApp webApp){
+        super(driver, wait, webApp);
+        this.topBarM = new TopBarMain(driver, wait, webApp);
+        this.highBar = new HighBar(driver, wait, webApp);
+        this.cmp = new Components(driver, wait, webApp);
         this.input = new Input();
         mainUrl = input.getUrl("main.url");
     }
@@ -94,12 +95,12 @@ public class MainPage extends BasePage {
 
     public SearchPage clickSearchButton(){
         clickWebElement(cmp.getSearchButton());
-        return new SearchPage(driver,wait);
+        return webApp.searchPage();
     }
 
     public Product4$Page clickMacBookImg(){
         clickWebElement(macBookImg);
-        return new Product4$Page(driver,wait);
+        return webApp.product4$Page();
     }
 
     public CheckoutPage orderAndGoCheckout(){

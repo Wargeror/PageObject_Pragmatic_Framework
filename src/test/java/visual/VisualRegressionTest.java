@@ -25,7 +25,7 @@ public class VisualRegressionTest extends BaseTest {
             description = "Performs a full-page visual comparison of the main page against a baseline image."
     )
     public void MainPageVisual() {
-        MainPage mainPage = new MainPage(getDriver(), getWait());
+        MainPage mainPage = webApp.mainPage();
         getDriver().get(mainPage.mainUrl());
 
         // Freeze animations to ensure consistent screenshots
@@ -72,7 +72,7 @@ public class VisualRegressionTest extends BaseTest {
             description = "Verifies the dimensions and visual appearance of the site logo against a baseline."
     )
     public void correctLogoTest(){
-        MainPage mainPage = new MainPage(getDriver(), getWait());
+        MainPage mainPage = webApp.mainPage();
         getDriver().get(mainPage.mainUrl());
 
         // 1. Assert Size of the element

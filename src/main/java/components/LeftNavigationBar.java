@@ -1,6 +1,7 @@
 package components;
 
 import base.BasePage;
+import base.WebApp;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -99,8 +100,8 @@ public class LeftNavigationBar extends BasePage {
     @FindBy(xpath = "//*[@id=\"menu-report\"]/a")
     private WebElement menuReports;
 
-    public LeftNavigationBar(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public LeftNavigationBar(WebDriver driver, WebDriverWait wait, WebApp webApp) {
+        super(driver, wait, webApp);
     }
 
     public void w8NavBarToBeDisplayed(){
@@ -118,7 +119,7 @@ public class LeftNavigationBar extends BasePage {
 
     public ProductsPage clickProducts(){
         clickWebElement(products);
-        return new ProductsPage(driver,wait);
+        return webApp.productsPage();
     }
 
     public void clickMenuExtensions(){
@@ -132,7 +133,7 @@ public class LeftNavigationBar extends BasePage {
 
     public CustomersPage clickCustomers(){
         clickWebElement(customers);
-        return new CustomersPage(driver,wait);
+        return webApp.customersPage();
     }
 
     public LeftNavigationBar clickMenuSales(){
@@ -142,7 +143,7 @@ public class LeftNavigationBar extends BasePage {
 
     public OrdersPage clickOrders(){
         clickWebElement(orders);
-        return new OrdersPage(driver,wait);
+        return webApp.ordersPage();
     }
 
     public void clickMenuSystem(){

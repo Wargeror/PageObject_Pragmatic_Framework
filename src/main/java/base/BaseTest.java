@@ -31,6 +31,7 @@ public class BaseTest {
     protected static ThreadLocal<WebDriverWait> wait = new ThreadLocal<>();
     protected Input input;
     protected boolean closeDriver;
+    protected WebApp webApp;
 
     @BeforeMethod
     public void setUp() {
@@ -50,6 +51,7 @@ public class BaseTest {
         
         wait.set(new WebDriverWait(localDriver, Duration.ofSeconds(10)));
         input = new Input();
+        webApp = new WebApp(getDriver(), getWait());
     }
 
     public WebDriver getDriver() {
@@ -101,7 +103,7 @@ public class BaseTest {
 
     public DashboardPage loginAs(User user) {
         getDriver().get(user.getSiteURL());
-        LoginPage loginPage = new LoginPage(getDriver(), getWait());
+        LoginPage loginPage = webApp.loginPage();
         DashboardPage dashboardPage = loginPage
                 .typeTextUsernameField(user.getUsername())
                 .typeTextPasswordField(user.getPassword())

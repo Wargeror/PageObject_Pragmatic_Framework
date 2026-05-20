@@ -1,6 +1,7 @@
 package components;
 
 import base.BasePage;
+import base.WebApp;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,8 +18,8 @@ public class TopBar extends BasePage {
     @FindBy(css = "ol.breadcrumb > li.breadcrumb-item:nth-child(2) > a")
     public WebElement secondPageLinkPath;
 
-    public TopBar(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+    public TopBar(WebDriver driver, WebDriverWait wait, WebApp webApp) {
+        super(driver, wait, webApp);
     }
 
     public TopBar scrollToTop(){
