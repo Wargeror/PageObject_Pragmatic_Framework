@@ -93,7 +93,7 @@ public class BaseTest {
     @AfterMethod(dependsOnMethods = "takeScreenshot2", alwaysRun = true)
     public void tearDown(ITestResult result) {
         log.info("----- Finished test: " + result.getMethod().getMethodName() + " -----");
-        LoginManager.clearSessionCookieForCurrentThread();
+        //LoginManager.clearSessionCookiesForCurrentThread();
         WebDriver currentDriver = getDriver();
         if (currentDriver != null && closeDriver) {
             currentDriver.quit();

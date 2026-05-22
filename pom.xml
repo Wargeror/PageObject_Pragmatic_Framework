@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <suiteXmlFile>testng.xml</suiteXmlFile>
         <allure.version>2.27.0</allure.version>
-        <aspectj.version>1.9.23</aspectj.version> <!-- Updated AspectJ version -->
+        <aspectj.version>1.9.25.1</aspectj.version>
     </properties>
 
 

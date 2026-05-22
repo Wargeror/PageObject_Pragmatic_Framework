@@ -123,7 +123,7 @@ To generate and view interactive Allure reports:
     ```
 2.  **Generate and Serve Report**: Use the Allure CLI to generate the report and open it in your default browser.
     ```bash
-    allure serve target/allure-results
+    allure serve allure-results
     ```
     (Ensure you have the Allure CLI installed and configured in your system's PATH.)
 
