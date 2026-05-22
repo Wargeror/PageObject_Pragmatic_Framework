@@ -76,7 +76,7 @@ Contains `VisualRegressionTest.java` for image-based testing of the UI component
 
 ### Setup
 1.  **Clone the project.**
-2.  **Configuration**: Create `config.properties` in the root and populate it with the necessary key-value pairs. You can use `config.properties,example` as an example.
+2.  **Configuration**: Create `config.properties` in the root and populate it with the necessary key-value pairs. You can use `config.properties.example` as an example.
 
 ### Running Tests from Console
 If you are using **PowerShell** (default in VS Code/IntelliJ), use double quotes for arguments:
