@@ -76,29 +76,7 @@ Contains `VisualRegressionTest.java` for image-based testing of the UI component
 
 ### Setup
 1.  **Clone the project.**
-2.  **Configuration**: Create `config.properties` in the root and populate it with the necessary key-value pairs. An example of the required properties is shown below:
-    ```properties
-    test.username=your_username
-    test.password=your_password
-    site.url=https://auto.pragmatic.bg/manage/
-    expected.dashboard.username=\   John Doe
-    main.url=https://auto.pragmatic.bg/index.php?route=common/home&language=en-gb
-    cart.url=https://auto.pragmatic.bg/index.php?route=checkout/cart&language=en-gb
-    order.url=https://auto.pragmatic.bg/manage/index.php?route=sale/order.info
-    orders.url=https://auto.pragmatic.bg/manage/index.php?route=sale/order
-    checkout.url=https://auto.pragmatic.bg/index.php?route=checkout/checkout
-    products.url=https://auto.pragmatic.bg/manage/index.php?route=catalog/product
-    customer.url=https://auto.pragmatic.bg/manage/index.php?route=customer/customer
-    dashboard.url=https://auto.pragmatic.bg/manage/index.php?route=common/dashboard
-    macbook.url=https://auto.pragmatic.bg/index.php?route=product/product&language=en-gb&product_id=43
-    customdesktop.url=https://auto.pragmatic.bg/index.php?route=product/product&language=en-gb&product_id=53&path=20_26
-    online.report.url=https://auto.pragmatic.bg/manage/index.php?route=report/online
-    products.form.url=https://auto.pragmatic.bg/manage/index.php?route=catalog/product.form
-    product.description.path=product
-    product.tags.excel.path=product/tags.xlsx
-    product.image.file.path=product/Imag.png
-    customer.form.url=https://auto.pragmatic.bg/manage/index.php?route=customer/customer.form
-    ```
+2.  **Configuration**: Create `config.properties` in the root and populate it with the necessary key-value pairs. You can use `config.properties,example` as an example.
 
 ### Running Tests from Console
 If you are using **PowerShell** (default in VS Code/IntelliJ), use double quotes for arguments:
