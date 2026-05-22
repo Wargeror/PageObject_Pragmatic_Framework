@@ -2,17 +2,13 @@ package components;
 
 import base.BasePage;
 import base.WebApp;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.CustomersPage;
 import pages.OrdersPage;
 import pages.ProductsPage;
-
-import java.beans.Visibility;
 
 public class LeftNavigationBar extends BasePage {
 
@@ -104,8 +100,8 @@ public class LeftNavigationBar extends BasePage {
         super(driver, wait, webApp);
     }
 
-    public void w8NavBarToBeDisplayed(){
-        w8ForVisibility(dashboardLNavBar);
+    public void waitNavBarToBeDisplayed(){
+        waitForVisibility(dashboardLNavBar);
     }
 
     public WebElement getDashboardLNavBar(){

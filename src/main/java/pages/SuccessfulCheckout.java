@@ -40,8 +40,8 @@ public class SuccessfulCheckout extends BasePage {
         return urlContains(SucCheckUrl);
     }
 
-    public SuccessfulCheckout w8ForH1(){
-        w8ForVisibility(h1);
+    public SuccessfulCheckout waitForH1(){
+        waitForVisibility(h1);
         return this;
     }
 

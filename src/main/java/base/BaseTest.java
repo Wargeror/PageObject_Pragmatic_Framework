@@ -1,8 +1,9 @@
 package base;
 
 import data.Input;
-import data.Slavov;
 import data.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -15,6 +16,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.DashboardPage;
 import pages.LoginPage;
+import utils.LoginManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,10 +34,11 @@ public class BaseTest {
     protected Input input;
     protected boolean closeDriver;
     protected WebApp webApp;
+    protected static final Logger log = LogManager.getLogger(BaseTest.class);
 
     @BeforeMethod
-    public void setUp() {
-        System.out.println(Slavov.MS());
+    public void setUp(ITestResult result) {
+        log.info("----- Starting test: " + result.getMethod().getMethodName() + " -----");
         closeDriver = true;
 
         ChromeOptions options = new ChromeOptions();
@@ -67,27 +70,30 @@ public class BaseTest {
         WebDriver currentDriver = getDriver();
         if (currentDriver != null) {
             if (result.getStatus() == ITestResult.FAILURE){
-            var camera = (TakesScreenshot) currentDriver;
-            File screenshot = camera.getScreenshotAs(OutputType.FILE);
-            
-            Path destinationDir = Paths.get("resources/screenshots");
-            Path destinationFile = destinationDir.resolve(result.getName() + ".png");
+                log.error("!!! Test failed: " + result.getMethod().getMethodName() + " !!!");
+                var camera = (TakesScreenshot) currentDriver;
+                File screenshot = camera.getScreenshotAs(OutputType.FILE);
+                
+                Path destinationDir = Paths.get("resources/screenshots");
+                Path destinationFile = destinationDir.resolve(result.getName() + ".png");
 
-            try {
-                if (!Files.exists(destinationDir)) {
-                    Files.createDirectories(destinationDir);
+                try {
+                    if (!Files.exists(destinationDir)) {
+                        Files.createDirectories(destinationDir);
+                    }
+                    Files.move(screenshot.toPath(), destinationFile);
+                    log.info("Screenshot saved to: " + destinationFile.toAbsolutePath());
+                } catch (IOException e){
+                    log.error("Failed to save screenshot.", e);
                 }
-                Files.move(screenshot.toPath(), destinationFile);
-                System.out.println("The taken screenshot was saved to: " + destinationFile.toAbsolutePath());
-            } catch (IOException e){
-                e.printStackTrace();
-            }
             }
         }
     }
 
     @AfterMethod(dependsOnMethods = "takeScreenshot2", alwaysRun = true)
-    public void tearDown() {
+    public void tearDown(ITestResult result) {
+        log.info("----- Finished test: " + result.getMethod().getMethodName() + " -----");
+        LoginManager.clearSessionCookieForCurrentThread();
         WebDriver currentDriver = getDriver();
         if (currentDriver != null && closeDriver) {
             currentDriver.quit();
@@ -97,18 +103,24 @@ public class BaseTest {
     }
 
     public DashboardPage login() {
-       DashboardPage dashboardPage = loginAs(input.getUser(0));
-       return dashboardPage;
+        DashboardPage dashboardPage = loginAs(input.getUser(0));
+        return dashboardPage;
+    }
+
+    public DashboardPage cookieLogin(){
+        return LoginManager.loginWithCookieOrCredentials(getDriver(), webApp, input.getUser(0));
     }
 
     public DashboardPage loginAs(User user) {
+        log.info("Logging in as user: " + user.getUsername());
         getDriver().get(user.getSiteURL());
         LoginPage loginPage = webApp.loginPage();
         DashboardPage dashboardPage = loginPage
                 .typeTextUsernameField(user.getUsername())
                 .typeTextPasswordField(user.getPassword())
                 .clickLoginButton()
-                .w8UserNameToBeDisplayed();
+                .waitUserNameToBeDisplayed();
+        log.info("Login successful.");
         return dashboardPage;
     }
 
@@ -118,9 +130,9 @@ public class BaseTest {
 
     public Set<Cookie> printCookies() {
         Set<Cookie> cookies = getDriver().manage().getCookies();
-        System.out.println("Total cookies: " + cookies.size());
+        log.debug("Total cookies: " + cookies.size());
         for (Cookie cookie : cookies) {
-            System.out.println(cookie.toString());
+            log.debug(cookie.toString());
         }
         return cookies;
     }

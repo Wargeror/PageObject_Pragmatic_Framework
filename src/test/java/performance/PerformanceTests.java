@@ -2,18 +2,25 @@ package performance;
 
 import base.BaseTest;
 import data.User;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.DashboardPage;
 import pages.LoginPage;
 
+@Epic("Performance")
+@Feature("Load Time Measurements")
 public class PerformanceTests extends BaseTest {
 
     @Test(
             testName = "Login Page Load Time Performance Test",
             description = "Measures the time it takes for the login page to load and asserts that it is within an acceptable limit."
     )
+    @Severity(SeverityLevel.NORMAL)
     public void measureLoginLoadTime() {
+        log.info("Starting login load time performance test.");
         User user = input.getUser(0);
         getDriver().get(user.getSiteURL());
 
@@ -21,25 +28,21 @@ public class PerformanceTests extends BaseTest {
                  .typeTextUsernameField(user.getUsername())
                  .typeTextPasswordField(user.getPassword());
 
-        //Record the current time - Test start time
+        log.info("Recording start time and clicking login.");
         long startTime = System.currentTimeMillis();
 
-        // Click the login button
-                loginPage
+        loginPage
                 .clickLoginButton()
-                .leftNavigationBar.w8NavBarToBeDisplayed();
+                .leftNavigationBar.waitNavBarToBeDisplayed();
 
-        //Record the current time - Test end time
         long endTime = System.currentTimeMillis();
+        log.info("Recording end time.");
 
-        // Calculate the load time
         long loadTime = endTime - startTime;
+        log.info("Login Page Load Time: " + loadTime + " ms");
 
-        // Print the load time
-        System.out.println("Login Page Load Time: " + loadTime + " ms");
-
-        // Assert that the load time is within an acceptable limit (e.g., 5 seconds)
         long acceptableLoadTime = 5000; // milliseconds
+        log.info("Asserting that load time is less than " + acceptableLoadTime + " ms.");
         Assert.assertTrue(loadTime < acceptableLoadTime, "Failure PerformanceTests/measureLoginLoadTime: Login page took too long to load! Time: " + loadTime + " ms");
     }
 }

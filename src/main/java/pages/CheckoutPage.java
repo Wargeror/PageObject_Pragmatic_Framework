@@ -266,6 +266,6 @@ public class CheckoutPage extends BasePage {
                 .clickCashRadioButton()
                 .clickPaymentEndButton()
                 .clickConfirmButton()
-                .w8ForH1();
+                .waitForH1();
     }
 }

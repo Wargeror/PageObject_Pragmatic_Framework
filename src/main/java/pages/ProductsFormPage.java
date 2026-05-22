@@ -298,8 +298,8 @@ public class ProductsFormPage extends BasePage {
         clickWebElement(uploadImgButton);
     }
 
-    public void w84MomchilPCImgVisibility(){
-        w8ForVisibility(momchilPCImg);
+    public void wait4MomchilPCImgVisibility(){
+        waitForVisibility(momchilPCImg);
     }
 
     public void clickMomchilPCImg(){
@@ -343,7 +343,7 @@ public class ProductsFormPage extends BasePage {
         clickEditImg();
         typeImgSearchField("MomchilPCImg");
         clickImgSearchButton();
-        w84MomchilPCImgVisibility();
+        wait4MomchilPCImgVisibility();
         try {
             Thread.sleep(400);
         } catch (InterruptedException e) {

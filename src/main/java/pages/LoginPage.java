@@ -2,8 +2,6 @@ package pages;
 
 import base.BasePage;
 import base.WebApp;
-import data.Input;
-import data.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -54,7 +52,7 @@ public class LoginPage extends BasePage {
     }
 
     public String alertGetText(){
-       return w8AndGetText(alert);
+       return waitAndGetText(alert);
     }
 
 }

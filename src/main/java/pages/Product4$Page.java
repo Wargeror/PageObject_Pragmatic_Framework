@@ -73,7 +73,7 @@ public class Product4$Page extends BasePage {
 
     @SuppressWarnings("SpellCheckingInspection")
     public void waitSuccAddNotf(){
-        w8UntilElementIsInvisible(By.cssSelector(succAddNotf));
+        waitUntilElementIsInvisible(By.cssSelector(succAddNotf));
     }
 
     public String getCustomDesktop(){

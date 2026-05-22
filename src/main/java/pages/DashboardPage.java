@@ -113,19 +113,19 @@ public class DashboardPage extends BasePage {
         return urlDashboard;
     }
 
-    public DashboardPage w8UserNameToBeDisplayed(){
-        w8ForVisibility(username);
+    public DashboardPage waitUserNameToBeDisplayed(){
+        waitForVisibility(username);
         return this;
     }
 
     public boolean isUserNameDisplayed(){
-        w8ForVisibility(username);
+        waitForVisibility(username);
         return isDisplayed(username);
     }
 
     //Method used to get the username
     public String usernameGetText(){
-        return w8AndGetText(username);
+        return waitAndGetText(username);
     }
 
     // Getter for username
@@ -185,7 +185,7 @@ public class DashboardPage extends BasePage {
     }
 
     public void invisibilityOfAlesAnalyticsTimeFrameList(int index){
-        w8UntilElementIsInvisible(By.cssSelector(SalesAnalyticsTimeFrameListSelector(index)));
+        waitUntilElementIsInvisible(By.cssSelector(SalesAnalyticsTimeFrameListSelector(index)));
     }
 
     public OrderPage clickLatestOrder(){

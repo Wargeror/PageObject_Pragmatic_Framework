@@ -28,7 +28,7 @@ public class BasePage {
         element.sendKeys(text);
     }
 
-    public String w8AndGetText(WebElement element) {
+    public String waitAndGetText(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
         return element.getText();
     }
@@ -48,12 +48,12 @@ public class BasePage {
         }
     }
 
-    public void w8ForVisibility(WebElement element) {
+    public void waitForVisibility(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     // Waits for an element to be either invisible or not present on the DOM.
-    public void w8UntilElementIsInvisible(By locator) {
+    public void waitUntilElementIsInvisible(By locator) {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
@@ -67,11 +67,11 @@ public class BasePage {
         }
     }
 
-    public void w8iFrameAndMoveToIt(WebElement element) {
+    public void waitiFrameAndMoveToIt(WebElement element) {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
     }
 
-    public void w8PopUpAndMoveToIt(WebElement element) {
+    public void waitPopUpAndMoveToIt(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
         driver.switchTo().frame(element);
     }

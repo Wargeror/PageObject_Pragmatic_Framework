@@ -10,6 +10,7 @@ A robust, multi-threaded Selenium automation framework built with Java and TestN
   - [Prerequisites](#prerequisites)
   - [Setup](#setup)
   - [Running Tests from Console](#running-tests-from-console)
+- [Allure Reports](#allure-reports)
 - [Visual Regression Testing](#visual-regression-testing)
 - [Contribution Guide](#contribution-guide)
 
@@ -22,6 +23,8 @@ A robust, multi-threaded Selenium automation framework built with Java and TestN
 *   **TestNG 7.12**: Testing framework for assertions and parallel execution.
 *   **Maven**: Build and dependency management.
 *   **AShot**: For advanced visual regression and full-page screenshots.
+*   **Log4j 2**: For flexible and powerful logging.
+*   **Allure Framework**: For generating rich, interactive test reports.
 
 ---
 
@@ -29,11 +32,12 @@ A robust, multi-threaded Selenium automation framework built with Java and TestN
 
 ### `base`
 *   `BasePage.java`: Generic interaction methods (`click`, `type`, `scroll`).
-*   `BaseTest.java`: Manages the `ThreadLocal` WebDriver lifecycle and automatic failure screenshots.
+*   `BaseTest.java`: Manages the `ThreadLocal` WebDriver lifecycle, automatic failure screenshots, and the `WebApp` instance.
+*   `WebApp.java`: A central hub for accessing all page objects using a lazy initialization pattern. This improves performance and simplifies test setup.
 
 ### `pages`
 Page Objects representing web pages (e.g., `LoginPage`, `DashboardPage`). Methods are designed with **Fluid Syntax** to allow chaining:
-`login().goToOrdersPage().clickFilterButton();`
+`webApp.loginPage().clickLoginButton();`
 
 ### `pagetest` & `functionstest`
 *   `pagetest`: Unit-like tests for individual page elements.
@@ -56,6 +60,9 @@ Contains `VisualRegressionTest.java` for image-based testing of the UI component
 *   **Dynamic Data**: Built-in random string and email generators for unique test data.
 *   **Centralized Configuration**: All URLs and sensitive data are managed in a `config.properties` file, which is excluded from version control via `.gitignore`.
 *   **Descriptive Assertions**: All TestNG assertions include detailed failure messages to aid in debugging from logs.
+*   **Lazy Page Initialization**: The `WebApp` class ensures that page objects are only created when they are first needed, reducing overhead.
+*   **Advanced Logging**: Uses Log4j 2 to provide detailed, multi-level logging to both the console and a rolling log file (`logs/tests.log`).
+*   **Interactive Test Reports**: Integration with Allure Framework for comprehensive and visually appealing test reports.
 
 ---
 
@@ -65,6 +72,7 @@ Contains `VisualRegressionTest.java` for image-based testing of the UI component
 *   JDK 25 or higher.
 *   Maven installed and in System PATH.
 *   Google Chrome browser.
+*   Allure Command Line Interface (CLI) installed (for generating reports locally).
 
 ### Setup
 1.  **Clone the project.**
@@ -88,7 +96,7 @@ Contains `VisualRegressionTest.java` for image-based testing of the UI component
     products.form.url=https://auto.pragmatic.bg/manage/index.php?route=catalog/product.form
     product.description.path=product
     product.tags.excel.path=product/tags.xlsx
-    product.image.file.path=product/MomchilPCImag.png
+    product.image.file.path=product/Imag.png
     customer.form.url=https://auto.pragmatic.bg/manage/index.php?route=customer/customer.form
     ```
 
@@ -103,6 +111,21 @@ If you are using **PowerShell** (default in VS Code/IntelliJ), use double quotes
     `mvn clean test "-DsuiteXmlFile=parallel.xml"`
 *   **Full Regression**:
     `mvn clean test "-DsuiteXmlFile=regression.xml"`
+
+---
+
+## Allure Reports
+To generate and view interactive Allure reports:
+
+1.  **Run Tests**: Execute your tests using Maven. This will generate Allure results in the `target/allure-results` directory.
+    ```bash
+    mvn clean test
+    ```
+2.  **Generate and Serve Report**: Use the Allure CLI to generate the report and open it in your default browser.
+    ```bash
+    allure serve target/allure-results
+    ```
+    (Ensure you have the Allure CLI installed and configured in your system's PATH.)
 
 ---
 
