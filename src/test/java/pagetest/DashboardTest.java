@@ -26,7 +26,7 @@ public class DashboardTest extends BaseTest {
     public void orderViewMoreTest() {
         log.info("Logging in and clicking 'View More' on the Orders widget.");
         OrdersPage ordersPage =
-                cookieLogin()
+                login()
                 .clickViewMoreOrders();
 
         log.info("Asserting redirection to the Orders page.");
@@ -43,7 +43,7 @@ public class DashboardTest extends BaseTest {
     public void SalesViewMoreTest() {
         log.info("Logging in and clicking 'View More' on the Sales widget.");
         OrdersPage ordersPage =
-                cookieLogin()
+                login()
                 .clickViewMoreSales();
 
         log.info("Asserting redirection to the Orders page.");
@@ -60,7 +60,7 @@ public class DashboardTest extends BaseTest {
     public void CustomersViewMoreTest() {
         log.info("Logging in and clicking 'View More' on the Customers widget.");
         CustomersPage customersPage =
-                cookieLogin()
+                login()
                 .clickViewMoreCustomers();
 
         log.info("Asserting redirection to the Customers page.");
@@ -77,7 +77,7 @@ public class DashboardTest extends BaseTest {
     public void PeopleOnlineViewMoreTest() {
         log.info("Logging in and clicking 'View More' on the People Online widget.");
         OnlineReportPage onlineReportPage =
-                cookieLogin()
+                login()
                 .clickViewMorePeopleOnline();
 
         log.info("Asserting redirection to the Online Report page.");
@@ -94,7 +94,7 @@ public class DashboardTest extends BaseTest {
     public void WorldMapRussiaTest(){
         log.info("Logging in and clicking on Russia in the world map.");
         DashboardPage dashboardPage =
-                 cookieLogin()
+                 login()
                 .clickWorldMapRussia();
 
         log.info("Asserting that Russia is highlighted on the map.");
@@ -110,7 +110,7 @@ public class DashboardTest extends BaseTest {
     @Description("Verifies that the time frame filter in the Sales Analytics widget functions correctly.")
     public void SalesAnaliticsFilterTest() {
         log.info("Logging in to test the Sales Analytics filter.");
-        DashboardPage dashboardPage = cookieLogin();
+        DashboardPage dashboardPage = login();
 
         List<String> exp_options = Arrays.asList(new String[]{"Today", "Week", "Month","Year"});
 
@@ -138,7 +138,7 @@ public class DashboardTest extends BaseTest {
     public void LatestOrderRedirectTest(){
         log.info("Logging in and clicking on the latest order.");
         OrderPage orderPage =
-                 cookieLogin()
+                 login()
                 .clickLatestOrder();
 
         log.info("Asserting redirection to the Order page.");
