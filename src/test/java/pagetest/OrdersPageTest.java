@@ -1,6 +1,7 @@
 package pagetest;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
@@ -25,6 +26,7 @@ public class OrdersPageTest extends BaseTest {
     )
     @Story("Order Status Filtering")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies that the order status dropdown on the Orders page contains all expected values.")
     public void orderStatusCheck(){
         log.info("Navigating to the Orders page to check status values.");
         OrdersPage ordersPage =

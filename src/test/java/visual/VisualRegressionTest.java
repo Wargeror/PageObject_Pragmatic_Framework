@@ -29,6 +29,7 @@ public class VisualRegressionTest extends BaseTest {
     )
     @Story("Full Page Screenshot Validation")
     @Severity(SeverityLevel.CRITICAL)
+    @Description("Performs a full-page visual comparison of the main page against a baseline image.")
     public void MainPageVisual() {
         log.info("Navigating to the main page for visual regression test.");
         MainPage mainPage = webApp.mainPage();
@@ -82,6 +83,7 @@ public class VisualRegressionTest extends BaseTest {
     )
     @Story("Component-Level Screenshot Validation")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies the dimensions and visual appearance of the site logo against a baseline.")
     public void correctLogoTest(){
         log.info("Navigating to the main page for logo validation.");
         MainPage mainPage = webApp.mainPage();

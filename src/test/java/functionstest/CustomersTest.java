@@ -1,6 +1,7 @@
 package functionstest;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
@@ -16,11 +17,11 @@ import org.testng.annotations.Test;
 public class CustomersTest extends BaseTest {
 
     @Test(
-            testName = "Add and Delete Customer",
-            description = "Tests the full lifecycle of a customer: adding a new customer, verifying their existence, and then deleting them."
+            testName = "Add and Delete Customer"
     )
     @Story("Customer Creation and Deletion")
     @Severity(SeverityLevel.CRITICAL)
+    @Description("Tests the full lifecycle of a customer: adding a new customer, verifying their existence, and then deleting them.")
     public void addCustomerTest() {
         log.info("Starting add and delete customer test.");
         CustomersFormPage cuFormPage =

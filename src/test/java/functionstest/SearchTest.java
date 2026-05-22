@@ -1,6 +1,7 @@
 package functionstest;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
@@ -19,6 +20,7 @@ public class SearchTest extends BaseTest {
             description = "Searches for 'iMac' and asserts that the corresponding product image is displayed on the search results page."
     )
     @Severity(SeverityLevel.CRITICAL)
+    @Description("Searches for 'iMac' and asserts that the corresponding product image is displayed on the search results page.")
     public void iMacSearch(){
         log.info("Navigating to the main page and searching for 'iMac'.");
         MainPage mainPage = webApp.mainPage();

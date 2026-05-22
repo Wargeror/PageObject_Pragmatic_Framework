@@ -1,6 +1,7 @@
 package pagetest;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
@@ -23,6 +24,7 @@ public class LeftNavigationBarTest extends BaseTest {
     )
     @Story("Visibility of Navigation Elements")
     @Severity(SeverityLevel.CRITICAL)
+    @Description("Asserts that the Left Navigation Bar is displayed after a successful login.")
     public void NavBarIsDisplayed(){
         log.info("Logging in to verify Left Navigation Bar display.");
         login();
@@ -40,6 +42,7 @@ public class LeftNavigationBarTest extends BaseTest {
     )
     @Story("Navigation to Orders Page")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Asserts that the Orders Page loads correctly when accessed from the Left Navigation Bar.")
     public void orderStatusCheck() {
         log.info("Logging in and navigating to the Orders page.");
         OrdersPage ordersPage =
@@ -56,6 +59,7 @@ public class LeftNavigationBarTest extends BaseTest {
     )
     @Story("Navigation to Products Page")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Asserts that the Products Page loads correctly when accessed from the Left Navigation Bar.")
     public void addProductTest() throws InterruptedException {
         log.info("Logging in and navigating to the Products page.");
         ProductsPage productsPage =

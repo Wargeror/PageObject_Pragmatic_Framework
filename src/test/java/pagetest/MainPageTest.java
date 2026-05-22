@@ -1,6 +1,7 @@
 package pagetest;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
@@ -18,6 +19,7 @@ public class MainPageTest extends BaseTest {
             description = "Verifies that all critical elements on the main page are displayed correctly upon loading."
     )
     @Severity(SeverityLevel.CRITICAL)
+    @Description("Verifies that all critical elements on the main page are displayed correctly upon loading.")
     public void displayTest(){
         log.info("Navigating to the main page to verify element display.");
         MainPage mainPage = webApp.mainPage();

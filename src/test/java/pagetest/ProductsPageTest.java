@@ -1,6 +1,7 @@
 package pagetest;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
@@ -20,6 +21,7 @@ public class ProductsPageTest extends BaseTest {
     )
     @Story("Element Visibility")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Asserts that the main elements on the products page, such as the product form and filter form, are displayed.")
     public void productsPageTest(){
         log.info("Navigating to the Products page to verify element display.");
         ProductsPage prodPage = goTo();
@@ -34,6 +36,7 @@ public class ProductsPageTest extends BaseTest {
     )
     @Story("Product Filtering")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies that the product filter works correctly when filtering by product name.")
     public void productNameFilterTest(){
         log.info("Navigating to the Products page and filtering by name.");
         ProductsPage prodPage =
@@ -51,6 +54,7 @@ public class ProductsPageTest extends BaseTest {
     )
     @Story("Product Filtering")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies that the product filter works correctly when filtering by product model.")
     public void productModelFilterTest(){
         log.info("Navigating to the Products page and filtering by model.");
         ProductsPage prodPage =
@@ -68,6 +72,7 @@ public class ProductsPageTest extends BaseTest {
     )
     @Story("Product Filtering")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies that the product filter works correctly when filtering by product price.")
     public void productPriceFilterTest(){
         log.info("Navigating to the Products page and filtering by price.");
         ProductsPage prodPage =

@@ -2,6 +2,7 @@ package performance;
 
 import base.BaseTest;
 import data.User;
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
@@ -19,6 +20,7 @@ public class PerformanceTests extends BaseTest {
             description = "Measures the time it takes for the login page to load and asserts that it is within an acceptable limit."
     )
     @Severity(SeverityLevel.NORMAL)
+    @Description("Measures the time it takes for the login page to load and asserts that it is within an acceptable limit.")
     public void measureLoginLoadTime() {
         log.info("Starting login load time performance test.");
         User user = input.getUser(0);

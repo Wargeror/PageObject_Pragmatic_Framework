@@ -1,6 +1,7 @@
 package functionstest;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
@@ -22,6 +23,7 @@ public class ProductsTest extends BaseTest {
     )
     @Story("Product Checkout Flow")
     @Severity(SeverityLevel.CRITICAL)
+    @Description("Tests the end-to-end flow of adding a product to the cart and navigating to the checkout page.")
     public void checkoutTest(){
         log.info("Starting checkout navigation test.");
         MainPage mainPage = webApp.mainPage();
@@ -40,6 +42,7 @@ public class ProductsTest extends BaseTest {
     )
     @Story("Product Purchase")
     @Severity(SeverityLevel.BLOCKER)
+    @Description("Tests the complete process of buying a product, from adding it to the cart to successful checkout.")
     public void buyProductTest() throws InterruptedException {
         log.info("Starting buy product end-to-end test.");
         Product4$Page product4$Page = webApp.product4$Page();
@@ -68,6 +71,7 @@ public class ProductsTest extends BaseTest {
     )
     @Story("Cart Management")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies that the quantity of a product in the cart can be successfully increased.")
     public void increaseQuantityTest() {
         log.info("Starting increase product quantity in cart test.");
         Product4$Page product4$Page = webApp.product4$Page();
@@ -91,6 +95,7 @@ public class ProductsTest extends BaseTest {
     )
     @Story("Product Lifecycle")
     @Severity(SeverityLevel.CRITICAL)
+    @Description("Tests the full lifecycle of a product: adding a new product, verifying its existence, and then deleting it.")
     public void addProductTest() throws InterruptedException {
         log.info("Starting add and delete product test.");
         ProductsFormPage productsFormPage =
@@ -121,6 +126,7 @@ public class ProductsTest extends BaseTest {
     )
     @Story("Product Lifecycle")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies that a warning alert is displayed when attempting to add a product with invalid or incomplete data.")
     public void addProductAlertTest() throws InterruptedException {
         log.info("Starting negative test for adding a product with invalid data.");
         ProductsFormPage productsFormPage =

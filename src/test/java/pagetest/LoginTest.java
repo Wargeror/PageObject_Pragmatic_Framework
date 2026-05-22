@@ -25,6 +25,7 @@ public class LoginTest extends BaseTest {
     )
     @Story("Positive Case: Valid Credentials")
     @Severity(SeverityLevel.BLOCKER)
+    @Description("Verifies that a user can log in with valid credentials and is redirected to the dashboard.")
     public void loginTest(){
         log.info("Executing successful login test.");
         DashboardPage dashboardPage = login();
@@ -41,6 +42,7 @@ public class LoginTest extends BaseTest {
     )
     @Story("Negative Case: Invalid Credentials")
     @Severity(SeverityLevel.CRITICAL)
+    @Description("Verifies that an appropriate error message is displayed when a user attempts to log in with invalid credentials.")
     public void unsuccessfulLoginTest() {
         log.info("Executing unsuccessful login test.");
         User user = input.getUser(0);
@@ -62,6 +64,7 @@ public class LoginTest extends BaseTest {
     )
     @Story("Debugging and Diagnostics")
     @Severity(SeverityLevel.MINOR)
+    @Description("Captures and prints console logs during an unsuccessful login attempt for debugging purposes.")
     public void consoleLogsOnUnsuccessfulLoginTest(){
         log.info("Setting up DevTools to capture console logs.");
         ChromeDriver chromeDriver = (ChromeDriver) getDriver();
@@ -91,6 +94,7 @@ public class LoginTest extends BaseTest {
     )
     @Story("Session Management")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies that the 'OCSESSID' session cookie is present after a successful login.")
     public void cookiesOnSuccessfulLoginTest() {
         log.info("Logging in to verify cookie presence.");
         login();
@@ -109,6 +113,7 @@ public class LoginTest extends BaseTest {
     )
     @Story("Security: Session Hijacking")
     @Severity(SeverityLevel.CRITICAL)
+    @Description("Confirms that injecting a session cookie into a new tab does not grant access, preventing session hijacking.")
     public void negativeCookiesInjectionTest(){
         log.info("Logging in and obtaining session cookie.");
         DashboardPage dashboardPage = login();

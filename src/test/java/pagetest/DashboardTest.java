@@ -22,6 +22,7 @@ public class DashboardTest extends BaseTest {
     )
     @Story("Orders Widget Interaction")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies that clicking the 'View More' link on the Total Orders widget redirects to the Orders page.")
     public void orderViewMoreTest() {
         log.info("Logging in and clicking 'View More' on the Orders widget.");
         OrdersPage ordersPage =
@@ -38,6 +39,7 @@ public class DashboardTest extends BaseTest {
     )
     @Story("Sales Widget Interaction")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies that clicking the 'View More' link on the Total Sales widget redirects to the Orders page.")
     public void SalesViewMoreTest() {
         log.info("Logging in and clicking 'View More' on the Sales widget.");
         OrdersPage ordersPage =
@@ -54,6 +56,7 @@ public class DashboardTest extends BaseTest {
     )
     @Story("Customers Widget Interaction")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies that clicking the 'View More' link on the Total Customers widget redirects to the Customers page.")
     public void CustomersViewMoreTest() {
         log.info("Logging in and clicking 'View More' on the Customers widget.");
         CustomersPage customersPage =
@@ -70,6 +73,7 @@ public class DashboardTest extends BaseTest {
     )
     @Story("People Online Widget Interaction")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies that clicking the 'View More' link on the People Online widget redirects to the Online Report page.")
     public void PeopleOnlineViewMoreTest() {
         log.info("Logging in and clicking 'View More' on the People Online widget.");
         OnlineReportPage onlineReportPage =
@@ -86,6 +90,7 @@ public class DashboardTest extends BaseTest {
     )
     @Story("World Map Interaction")
     @Severity(SeverityLevel.MINOR)
+    @Description("Verifies that clicking on Russia in the world map widget correctly highlights it.")
     public void WorldMapRussiaTest(){
         log.info("Logging in and clicking on Russia in the world map.");
         DashboardPage dashboardPage =
@@ -102,6 +107,7 @@ public class DashboardTest extends BaseTest {
     )
     @Story("Sales Analytics Widget Interaction")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies that the time frame filter in the Sales Analytics widget functions correctly.")
     public void SalesAnaliticsFilterTest() {
         log.info("Logging in to test the Sales Analytics filter.");
         DashboardPage dashboardPage = cookieLogin();
@@ -128,6 +134,7 @@ public class DashboardTest extends BaseTest {
     )
     @Story("Latest Orders Widget Interaction")
     @Severity(SeverityLevel.NORMAL)
+    @Description("Verifies that clicking on the latest order in the Latest Orders widget redirects to the correct order page.")
     public void LatestOrderRedirectTest(){
         log.info("Logging in and clicking on the latest order.");
         OrderPage orderPage =
