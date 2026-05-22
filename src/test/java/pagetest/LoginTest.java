@@ -1,7 +1,7 @@
 package pagetest;
 
-import base.BaseTest;
-import data.User;
+import framework.base.BaseTest;
+import framework.data.User;
 import io.qameta.allure.*;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WindowType;
@@ -10,8 +10,8 @@ import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v144.log.Log;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.DashboardPage;
-import pages.LoginPage;
+import framework.pages.DashboardPage;
+import framework.pages.LoginPage;
 
 import java.util.Set;
 

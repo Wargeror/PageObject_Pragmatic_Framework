@@ -1,17 +1,15 @@
 package functionstest;
 
-import base.BaseTest;
+import framework.base.BaseTest;
+import framework.pages.*;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-import components.LeftNavigationBar;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.*;
 
 @Epic("E-commerce")
 @Feature("Product Management and Purchasing")
@@ -45,11 +43,11 @@ public class ProductsTest extends BaseTest {
     @Description("Tests the complete process of buying a product, from adding it to the cart to successful checkout.")
     public void buyProductTest() throws InterruptedException {
         log.info("Starting buy product end-to-end test.");
-        Product4$Page product4$Page = webApp.product4$Page();
-        getDriver().get(product4$Page.getCustomDesktop());
+        Product4SalePage product4SalePage = webApp.product4$Page();
+        getDriver().get(product4SalePage.getCustomDesktop());
 
         CheckoutPage checkoutPage =
-                product4$Page
+                product4SalePage
                 .addAndGoCheckout();
 
         log.info("Asserting that the checkout page URL is correct after adding product.");
@@ -74,11 +72,11 @@ public class ProductsTest extends BaseTest {
     @Description("Verifies that the quantity of a product in the cart can be successfully increased.")
     public void increaseQuantityTest() {
         log.info("Starting increase product quantity in cart test.");
-        Product4$Page product4$Page = webApp.product4$Page();
-        getDriver().get(product4$Page.getCustomDesktop());
+        Product4SalePage product4SalePage = webApp.product4$Page();
+        getDriver().get(product4SalePage.getCustomDesktop());
 
         CartPage cartPage =
-                product4$Page
+                product4SalePage
                 .addAndGoCart();
 
         cartPage

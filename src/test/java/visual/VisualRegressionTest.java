@@ -1,18 +1,17 @@
 package visual;
 
-import base.BaseTest;
+import framework.base.BaseTest;
 import io.qameta.allure.*;
 import org.openqa.selenium.Rectangle;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.MainPage;
+import framework.pages.MainPage;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
-import utils.Utils;
+import framework.utils.Utils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -30,7 +29,7 @@ public class VisualRegressionTest extends BaseTest {
     @Story("Full Page Screenshot Validation")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Performs a full-page visual comparison of the main page against a baseline image.")
-    public void MainPageVisual() {
+    public void mainPageVisual() {
         log.info("Navigating to the main page for visual regression test.");
         MainPage mainPage = webApp.mainPage();
         getDriver().get(mainPage.mainUrl());

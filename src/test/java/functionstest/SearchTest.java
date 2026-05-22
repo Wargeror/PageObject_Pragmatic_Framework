@@ -1,6 +1,6 @@
 package functionstest;
 
-import base.BaseTest;
+import framework.base.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -8,8 +8,8 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.MainPage;
-import pages.SearchPage;
+import framework.pages.MainPage;
+import framework.pages.SearchPage;
 
 @Epic("Search")
 @Feature("Product Search")

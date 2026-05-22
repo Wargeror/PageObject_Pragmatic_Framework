@@ -1,6 +1,6 @@
 package pagetest;
 
-import base.BaseTest;
+import framework.base.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -8,7 +8,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.MainPage;
+import framework.pages.MainPage;
 
 @Epic("Main Page")
 @Feature("Element Visibility")

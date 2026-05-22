@@ -1,13 +1,13 @@
 package pagetest;
 
-import base.BaseTest;
+import framework.base.BaseTest;
+import framework.pages.*;
 import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +40,7 @@ public class DashboardTest extends BaseTest {
     @Story("Sales Widget Interaction")
     @Severity(SeverityLevel.NORMAL)
     @Description("Verifies that clicking the 'View More' link on the Total Sales widget redirects to the Orders page.")
-    public void SalesViewMoreTest() {
+    public void salesViewMoreTest() {
         log.info("Logging in and clicking 'View More' on the Sales widget.");
         OrdersPage ordersPage =
                 login()
@@ -57,7 +57,7 @@ public class DashboardTest extends BaseTest {
     @Story("Customers Widget Interaction")
     @Severity(SeverityLevel.NORMAL)
     @Description("Verifies that clicking the 'View More' link on the Total Customers widget redirects to the Customers page.")
-    public void CustomersViewMoreTest() {
+    public void customersViewMoreTest() {
         log.info("Logging in and clicking 'View More' on the Customers widget.");
         CustomersPage customersPage =
                 login()
@@ -74,7 +74,7 @@ public class DashboardTest extends BaseTest {
     @Story("People Online Widget Interaction")
     @Severity(SeverityLevel.NORMAL)
     @Description("Verifies that clicking the 'View More' link on the People Online widget redirects to the Online Report page.")
-    public void PeopleOnlineViewMoreTest() {
+    public void peopleOnlineViewMoreTest() {
         log.info("Logging in and clicking 'View More' on the People Online widget.");
         OnlineReportPage onlineReportPage =
                 login()
@@ -91,7 +91,7 @@ public class DashboardTest extends BaseTest {
     @Story("World Map Interaction")
     @Severity(SeverityLevel.MINOR)
     @Description("Verifies that clicking on Russia in the world map widget correctly highlights it.")
-    public void WorldMapRussiaTest(){
+    public void worldMapRussiaTest(){
         log.info("Logging in and clicking on Russia in the world map.");
         DashboardPage dashboardPage =
                  login()
@@ -108,7 +108,7 @@ public class DashboardTest extends BaseTest {
     @Story("Sales Analytics Widget Interaction")
     @Severity(SeverityLevel.NORMAL)
     @Description("Verifies that the time frame filter in the Sales Analytics widget functions correctly.")
-    public void SalesAnaliticsFilterTest() {
+    public void salesAnaliticsFilterTest() {
         log.info("Logging in to test the Sales Analytics filter.");
         DashboardPage dashboardPage = login();
 

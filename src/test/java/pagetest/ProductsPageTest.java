@@ -1,6 +1,6 @@
 package pagetest;
 
-import base.BaseTest;
+import framework.base.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -9,7 +9,7 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.ProductsPage;
+import framework.pages.ProductsPage;
 
 @Epic("Catalog Management")
 @Feature("Products Page Functionality")

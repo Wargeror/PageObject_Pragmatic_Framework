@@ -1,5 +1,5 @@
-test.username=your_username
-test.password=your_password
+test.username=your_username - NEEDS TO BE CHANGE
+test.password=your_password - NEEDS TO BE CHANGE
 site.url=https://auto.pragmatic.bg/manage/
 expected.dashboard.username=\   John Doe
 main.url=https://auto.pragmatic.bg/index.php?route=common/home&language=en-gb

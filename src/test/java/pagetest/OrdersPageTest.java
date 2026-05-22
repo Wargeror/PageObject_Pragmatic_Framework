@@ -1,6 +1,6 @@
 package pagetest;
 
-import base.BaseTest;
+import framework.base.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.OrdersPage;
+import framework.pages.OrdersPage;
 
 import java.util.ArrayList;
 import java.util.List;

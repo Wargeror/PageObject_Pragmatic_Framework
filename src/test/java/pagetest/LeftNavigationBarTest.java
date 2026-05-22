@@ -1,18 +1,18 @@
 package pagetest;
 
-import base.BaseTest;
+import framework.base.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-import components.LeftNavigationBar;
+import framework.components.LeftNavigationBar;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.OrdersPage;
-import pages.ProductsPage;
+import framework.pages.OrdersPage;
+import framework.pages.ProductsPage;
 
 @Epic("Navigation")
 @Feature("Left Navigation Bar")
@@ -25,7 +25,7 @@ public class LeftNavigationBarTest extends BaseTest {
     @Story("Visibility of Navigation Elements")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Asserts that the Left Navigation Bar is displayed after a successful login.")
-    public void NavBarIsDisplayed(){
+    public void navBarIsDisplayed(){
         log.info("Logging in to verify Left Navigation Bar display.");
         login();
 

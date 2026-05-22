@@ -1,6 +1,6 @@
 package functionstest;
 
-import base.BaseTest;
+import framework.base.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -8,8 +8,8 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.testng.Assert;
-import pages.CustomersFormPage;
-import pages.CustomersPage;
+import framework.pages.CustomersFormPage;
+import framework.pages.CustomersPage;
 import org.testng.annotations.Test;
 
 @Epic("Customer Management")
