@@ -23,6 +23,9 @@ public class WebApp {
     private ProductsPage productsPage;
     private SearchPage searchPage;
     private SuccessfulCheckout successfulCheckout;
+    private RegistrationPage registerPage;
+    private RegisteredPage registeredPage;
+
 
     public WebApp(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
@@ -132,5 +135,19 @@ public class WebApp {
             successfulCheckout = new SuccessfulCheckout(driver, wait, this);
         }
         return successfulCheckout;
+    }
+
+    public RegistrationPage registerPage() {
+        if (registerPage == null) {
+            registerPage = new RegistrationPage(driver, wait, this);
+        }
+        return registerPage;
+    }
+
+    public RegisteredPage registeredPage() {
+        if (registeredPage == null) {
+            registeredPage = new RegisteredPage(driver, wait, this);
+        }
+        return registeredPage;
     }
 }

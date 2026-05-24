@@ -27,6 +27,9 @@ public class CustomersFormPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"alert\"]/div")
     private WebElement alert;
 
+    @FindBy(xpath = "//div[@id='alert']//*[contains(@class, 'alert-danger') and contains(., 'Warning: Please check the form carefully for errors!')]")
+    private WebElement warningAlert;
+
     @FindBy(xpath = "//*[@id=\"alert\"]/div/button")
     private WebElement alertX;
 
@@ -60,7 +63,7 @@ public class CustomersFormPage extends BasePage {
         this.firstName = Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
         this.lastName = Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7));
         this.password = Utils.passwordGenerator(ThreadLocalRandom.current().nextInt(5, 19));
-        this.randomEmailAddress = Utils.generateEmail();
+        this.randomEmailAddress = Utils.emailGenerator();
         this.input = new Input();
         customerFormUrl = input.getUrl("customer.form.url");
     }
@@ -70,8 +73,10 @@ public class CustomersFormPage extends BasePage {
         return isDisplayed(alert);
     }
 
-    public CustomersFormPage clickAlertX(){
+    public CustomersFormPage clickAlertX(boolean click){
+        if(click){
         clickWebElement(alertX);
+        }
         return this;
     }
 
@@ -170,26 +175,35 @@ public class CustomersFormPage extends BasePage {
         this.randomEmailAddress = randomEmailAddress;
     }
 
-    public CustomersFormPage fillForm(){
+    public boolean isWarningDisplayed(){
+        return isDisplayed(warningAlert);
+    }
+
+    public String getWarningText() {
+        return waitAndGetText(warningAlert);
+    }
+
+    public CustomersFormPage fillForm(String firstName, String lastName, String password, String randomEmailAddress, boolean subscribe, boolean safeAntiFraud, boolean clickAlert) {
         this.typeFirstName(firstName)
                 .typeLastName(lastName)
                 .typeEmail(randomEmailAddress)
                 .typePassword(password)
                 .typeConfirmPassword(password)
                 .scrollToNewsletterCheckbox()
-                .setNewsletter(true)
+                .setNewsletter(subscribe)
                 .scrollSafeAntiFraud()
-                .setSafeAntiFraud(true)
+                .setSafeAntiFraud(safeAntiFraud)
                 .scrollToSaveButton()
-                .clickSave();
+                .clickSave()
+                .clickAlertX(clickAlert);
         return this;
     }
 
-   public CustomersPage filterForNewCu(){
+   public CustomersPage filterForNewCu(String email){
        return
-               clickAlertX()
+               webApp.customersPage()
                .leftNavigationBar.clickCustomers()
-               .typeEmailInputField(getRandomEmailAddress())
+               .typeEmailInputField(email)
                .clickFilterButton();
 
    }

@@ -242,7 +242,7 @@ public class CheckoutPage extends BasePage {
                 clickGuessRadioButton()
                 .typeFirstNameField(Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
                 .typeLastNameField(Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
-                .typeEmailField(Utils.generateEmail())
+                .typeEmailField(Utils.emailGenerator())
                 .typeAddressField(Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
                 .typeCityField(Utils.nameGenerator(ThreadLocalRandom.current().nextInt(3, 7)))
                 .typeZipCodeField(Utils.randomNumeric(4))

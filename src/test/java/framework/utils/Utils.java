@@ -85,7 +85,7 @@ public class Utils {
         return sb.toString();
     }
 
-    public static String generateEmail(){
+    public static String emailGenerator(){
         String prefix = Utils.randomAlphaNumeric(9);
         String domain = Utils.randomAlphabetic(6);
         return prefix + "@" + domain + ".com";

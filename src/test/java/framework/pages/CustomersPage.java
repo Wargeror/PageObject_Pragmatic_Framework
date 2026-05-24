@@ -92,4 +92,10 @@ public class CustomersPage extends BasePage { public String orderUrl;
                 .clickAlert(true);
         return this;
     }
+
+    public CustomersPage filterForNewCu(String email){
+        return
+                typeEmailInputField(email)
+                .clickFilterButton();
+    }
 }

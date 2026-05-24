@@ -12,6 +12,7 @@ A robust, multi-threaded Selenium automation framework built with Java and TestN
   - [Running Tests from Console](#running-tests-from-console)
 - [Allure Reports](#allure-reports)
 - [Visual Regression Testing](#visual-regression-testing)
+- [CI/CD Integration](#cicd-integration)
 - [Contribution Guide](#contribution-guide)
 
 ---
@@ -48,12 +49,14 @@ Contains `VisualRegressionTest.java` for image-based testing of the UI component
 
 ### `utils`
 *   `Utils.java`: Random data generation, screenshot capture, and browser animation freezing.
+*   `LoginManager.java`: Handles session state and authentication optimizations.
 
 ---
 
 ## Key Features
 
 *   **Parallel Execution**: Run tests in multiple threads using `ThreadLocal` for 4x faster execution.
+*   **Session Caching (Cookie Management)**: Drastically speeds up test execution by caching authentication cookies per thread. This avoids full UI logins on every test and supports both in-memory caching and file-based persistence for cross-run efficiency. [This is still being worked on]
 *   **Auto-Screenshots**: Screenshots are automatically saved to `resources/screenshots/` upon assertion failure.
 *   **Visual Regression**: Compare current UI state against baseline images with automatic diff generation.
 *   **Animation Control**: Custom JS injection to freeze CSS/JS animations for stable testing.
@@ -134,6 +137,14 @@ This framework uses **AShot**.
 1.  **First Run**: If no baseline exists in `src/test/resources/visual/baseline/`, the test saves the current screen and fails.
 2.  **Comparison**: Subsequent runs compare the screen to the baseline.
 3.  **Failures**: Differences are saved as highlighted images in `target/visual-diffs/`.
+
+---
+
+## CI/CD Integration
+The project is configured for Continuous Integration using **GitHub Actions**.
+
+*   A workflow (`.github/workflows/ci.yml`) automatically triggers on pushes and pull requests to the `main` branch.
+*   The workflow runs the test suite in parallel (`mvn test -DsuiteXmlFile=parallel.xml`) on a fresh Ubuntu environment using Java 21 to ensure code stability before merging.
 
 ---
 *Framework developed by Momchil Slavov*
