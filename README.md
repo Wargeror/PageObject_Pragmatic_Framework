@@ -42,13 +42,13 @@ Page Objects representing web pages (e.g., `LoginPage`, `DashboardPage`). Method
 
 ### `pagetest` & `functionstest`
 *   `pagetest`: Unit-like tests for individual page elements.
-*   `functionstest`: End-to-end functional flows (e.g., creating and deleting customers).
+*   `functionstest`: End-to-end functional flows (e.g., creating and deleting customers). Tests utilize TestNG **DataProviders** for comprehensive, data-driven negative testing.
 
 ### `visual`
 Contains `VisualRegressionTest.java` for image-based testing of the UI components.
 
 ### `utils`
-*   `Utils.java`: Random data generation, screenshot capture, and browser animation freezing.
+*   `Utils.java`: Centralized data generation (random strings, emails, names, passwords), screenshot capture, and browser animation freezing.
 *   `LoginManager.java`: Handles session state and authentication optimizations.
 
 ---
@@ -56,7 +56,10 @@ Contains `VisualRegressionTest.java` for image-based testing of the UI component
 ## Key Features
 
 *   **Parallel Execution**: Run tests in multiple threads using `ThreadLocal` for 4x faster execution.
-*   **Session Caching (Cookie Management)**: Drastically speeds up test execution by caching authentication cookies per thread. This avoids full UI logins on every test and supports both in-memory caching and file-based persistence for cross-run efficiency. [This is still being worked on]
+*   **Configurable Browser Scope**: Optimize test execution by controlling the browser lifecycle. Run one browser instance per test method (default) or one instance per test class to reduce setup/teardown overhead, fully supporting TestNG's parallel execution model.
+*   **Headless Mode**: Run tests in a headless browser environment by passing a system property (`-Dheadless=true`). This is ideal for CI/CD pipelines and faster local runs.
+*   **Data-Driven Negative Testing**: Utilizes TestNG DataProviders to efficiently execute negative test scenarios, injecting specific invalid data fields while maintaining valid data for the rest of the form to precisely isolate validation errors.
+*   **Session Caching (Cookie Management)**: Drastically speeds up test execution by caching authentication cookies and URL tokens per thread. This avoids full UI logins on every test and supports both in-memory caching and file-based persistence for cross-run efficiency.
 *   **Auto-Screenshots**: Screenshots are automatically saved to `resources/screenshots/` upon assertion failure.
 *   **Visual Regression**: Compare current UI state against baseline images with automatic diff generation.
 *   **Animation Control**: Custom JS injection to freeze CSS/JS animations for stable testing.
@@ -79,29 +82,7 @@ Contains `VisualRegressionTest.java` for image-based testing of the UI component
 
 ### Setup
 1.  **Clone the project.**
-2.  **Configuration**: Create `config.properties` in the root and populate it with the necessary key-value pairs. An example of the required properties is shown below:
-    ```properties
-    test.username=your_username
-    test.password=your_password
-    site.url=https://auto.pragmatic.bg/manage/
-    expected.dashboard.username=\   John Doe
-    main.url=https://auto.pragmatic.bg/index.php?route=common/home&language=en-gb
-    cart.url=https://auto.pragmatic.bg/index.php?route=checkout/cart&language=en-gb
-    order.url=https://auto.pragmatic.bg/manage/index.php?route=sale/order.info
-    orders.url=https://auto.pragmatic.bg/manage/index.php?route=sale/order
-    checkout.url=https://auto.pragmatic.bg/index.php?route=checkout/checkout
-    products.url=https://auto.pragmatic.bg/manage/index.php?route=catalog/product
-    customer.url=https://auto.pragmatic.bg/manage/index.php?route=customer/customer
-    dashboard.url=https://auto.pragmatic.bg/manage/index.php?route=common/dashboard
-    macbook.url=https://auto.pragmatic.bg/index.php?route=product/product&language=en-gb&product_id=43
-    customdesktop.url=https://auto.pragmatic.bg/index.php?route=product/product&language=en-gb&product_id=53&path=20_26
-    online.report.url=https://auto.pragmatic.bg/manage/index.php?route=report/online
-    products.form.url=https://auto.pragmatic.bg/manage/index.php?route=catalog/product.form
-    product.description.path=product
-    product.tags.excel.path=product/tags.xlsx
-    product.image.file.path=product/Imag.png
-    customer.form.url=https://auto.pragmatic.bg/manage/index.php?route=customer/customer.form
-    ```
+2.  **Configuration**: Create `config.properties` in the root and populate it with the necessary key-value pairs. An example use config.properties.example.
 
 ### Running Tests from Console
 If you are using **PowerShell** (default in VS Code/IntelliJ), use double quotes for arguments:
@@ -114,6 +95,16 @@ If you are using **PowerShell** (default in VS Code/IntelliJ), use double quotes
     `mvn clean test "-DsuiteXmlFile=parallel.xml"`
 *   **Full Regression**:
     `mvn clean test "-DsuiteXmlFile=regression.xml"`
+*   **Headless Run**: To run any of the above commands in headless mode, simply add the `-Dheadless=true` flag.
+    `mvn clean test "-DsuiteXmlFile=parallel.xml" -Dheadless=true`
+
+### Advanced Configuration Options (TestNG XML)
+You can further customize test execution by adding parameters to your `testng.xml` files:
+
+*   **Browser Scope**: By default, a new browser instance is started for every test method. To speed up execution, you can reuse the same browser instance for all tests within a single class by adding the following parameter inside your `<suite>` tag:
+    ```xml
+    <parameter name="browserScope" value="class"/>
+    ```
 
 ---
 
@@ -144,7 +135,7 @@ This framework uses **AShot**.
 The project is configured for Continuous Integration using **GitHub Actions**.
 
 *   A workflow (`.github/workflows/ci.yml`) automatically triggers on pushes and pull requests to the `main` branch.
-*   The workflow runs the test suite in parallel (`mvn test -DsuiteXmlFile=parallel.xml`) on a fresh Ubuntu environment using Java 21 to ensure code stability before merging.
+*   The workflow runs the test suite in parallel (`mvn clean test -DsuiteXmlFile=parallel.xml`) on a fresh Ubuntu environment using Java 21 to ensure code stability before merging.
 
 ---
 *Framework developed by Momchil Slavov*

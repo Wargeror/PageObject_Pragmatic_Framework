@@ -40,14 +40,26 @@ public class RegistrationPage extends BasePage {
     @FindBy(id = "input-firstname")
     private WebElement firstNameField;
 
+    @FindBy(id = "error-firstname") // Placeholder
+    private WebElement firstNameError;
+
     @FindBy(id = "input-lastname")
     private WebElement lastNameField;
+
+    @FindBy(id = "error-lastname") // Placeholder
+    private WebElement lastNameError;
 
     @FindBy(id = "input-email")
     private WebElement emailField;
 
+    @FindBy(id = "error-email") // Placeholder
+    private WebElement emailError;
+
     @FindBy(id = "input-password")
     private WebElement passwordField;
+
+    @FindBy(id = "error-password") // Placeholder
+    private WebElement passwordError;
 
     @FindBy(xpath = "//*[@id='input-newsletter']")
     private WebElement subscribeRadioButton;
@@ -139,6 +151,22 @@ public class RegistrationPage extends BasePage {
 
     public String getWarningText() {
         return waitAndGetText(warningAlert);
+    }
+
+    public String getFirstNameError() {
+        return waitAndGetText(firstNameError);
+    }
+
+    public String getLastNameError() {
+        return waitAndGetText(lastNameError);
+    }
+
+    public String getEmailError() {
+        return waitAndGetText(emailError);
+    }
+
+    public String getPasswordError() {
+        return waitAndGetText(passwordError);
     }
 
     public RegistrationPage fillRegistrationForm( String firstName, String lastName, String email, String password, boolean subscribe, boolean policy){

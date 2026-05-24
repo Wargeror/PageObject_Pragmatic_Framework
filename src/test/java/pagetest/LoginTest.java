@@ -28,7 +28,7 @@ public class LoginTest extends BaseTest {
     @Description("Verifies that a user can log in with valid credentials and is redirected to the dashboard.")
     public void loginTest(){
         log.info("Executing successful login test.");
-        DashboardPage dashboardPage = login();
+        DashboardPage dashboardPage = adminLogin();
 
         User user = input.getUser(0);
         log.info("Asserting dashboard username and URL.");
@@ -97,7 +97,7 @@ public class LoginTest extends BaseTest {
     @Description("Verifies that the 'OCSESSID' session cookie is present after a successful login.")
     public void cookiesOnSuccessfulLoginTest() {
         log.info("Logging in to verify cookie presence.");
-        login();
+        adminLogin();
 
         Set<Cookie> cookies = printCookies();
         
@@ -116,7 +116,7 @@ public class LoginTest extends BaseTest {
     @Description("Confirms that injecting a session cookie into a new tab does not grant access, preventing session hijacking.")
     public void negativeCookiesInjectionTest(){
         log.info("Logging in and obtaining session cookie.");
-        DashboardPage dashboardPage = login();
+        DashboardPage dashboardPage = adminLogin();
 
         Cookie sessionCookie = getCookieByName(printCookies(), "OCSESSID");
         String sucLoginURL = getDriver().getCurrentUrl();

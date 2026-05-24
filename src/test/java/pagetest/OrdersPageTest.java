@@ -30,7 +30,7 @@ public class OrdersPageTest extends BaseTest {
     public void orderStatusCheck(){
         log.info("Navigating to the Orders page to check status values.");
         OrdersPage ordersPage =
-                login()
+                adminLogin()
                 .goToOrdersPage();
 
         Select orderStatus = new Select(ordersPage.getOrderStatus());

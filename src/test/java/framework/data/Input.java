@@ -8,6 +8,7 @@ import java.util.Properties;
 
 public class Input {
     private List<User> users;
+    private List<User> customers;
 
     private Properties props; // Store properties as a field
 
@@ -26,6 +27,14 @@ public class Input {
                 props.getProperty("site.url"),
                 props.getProperty("expected.dashboard.username")
         ));
+
+        customers = new ArrayList<>();
+        customers.add(new User(
+                props.getProperty("customer.test.username"),
+                props.getProperty("customer.test.password"),
+                props.getProperty("main.url"),
+                null // No expected username for customer login
+        ));
     }
 
     public User getUser(int index) {
@@ -33,6 +42,13 @@ public class Input {
             return users.get(index);
         }
         else throw new IndexOutOfBoundsException("User index out of bounds: " + index);
+    }
+
+    public User getCustomer(int index) {
+        if (index >= 0 && index < customers.size()) {
+            return customers.get(index);
+        }
+        else throw new IndexOutOfBoundsException("Customer index out of bounds: " + index);
     }
 
     // New method to get URL from config.properties

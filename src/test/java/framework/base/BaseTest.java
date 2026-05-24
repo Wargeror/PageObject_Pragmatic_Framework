@@ -16,6 +16,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import framework.pages.DashboardPage;
 import framework.pages.LoginPage;
+import framework.pages.AccountPage;
+import framework.pages.MainPage;
+import framework.pages.CustomerLoginPage;
 import framework.utils.LoginManager;
 
 import java.io.File;
@@ -48,10 +51,22 @@ public class BaseTest {
         prefs.put("autofill.profile_enabled", false);
         options.setExperimentalOption("prefs", prefs);
 
+        // Check for headless property
+        String headless = System.getProperty("headless");
+        if (headless != null && headless.equalsIgnoreCase("true")) {
+            options.addArguments("--headless=new"); // Use the new headless mode
+            options.addArguments("--disable-gpu");
+            options.addArguments("--window-size=1920,1080"); // Important for headless
+            log.info("Running browser in headless mode.");
+        }
+
         WebDriver localDriver = new ChromeDriver(options);
-        localDriver.manage().window().maximize();
+        if (headless == null || !headless.equalsIgnoreCase("true")) {
+            localDriver.manage().window().maximize(); // Maximize if not headless
+        }
+
         driver.set(localDriver);
-        
+
         wait.set(new WebDriverWait(localDriver, Duration.ofSeconds(10)));
         input = new Input();
         webApp = new WebApp(getDriver(), getWait());
@@ -73,7 +88,7 @@ public class BaseTest {
                 log.error("!!! Test failed: " + result.getMethod().getMethodName() + " !!!");
                 var camera = (TakesScreenshot) currentDriver;
                 File screenshot = camera.getScreenshotAs(OutputType.FILE);
-                
+
                 Path destinationDir = Paths.get("test/resources/screenshots");
                 Path destinationFile = destinationDir.resolve(result.getName() + ".png");
 
@@ -102,8 +117,8 @@ public class BaseTest {
         }
     }
 
-    public DashboardPage login() {
-        DashboardPage dashboardPage = loginAs(input.getUser(0));
+    public DashboardPage adminLogin() {
+        DashboardPage dashboardPage = adminLoginAs(input.getUser(0));
         return dashboardPage;
     }
 
@@ -111,8 +126,8 @@ public class BaseTest {
         return LoginManager.loginWithCookieOrCredentials(getDriver(), webApp, input.getUser(0));
     }
 
-    public DashboardPage loginAs(User user) {
-        log.info("Logging in as user: " + user.getUsername());
+    public DashboardPage adminLoginAs(User user) {
+        log.info("Logging in as admin user: " + user.getUsername());
         getDriver().get(user.getSiteURL());
         LoginPage loginPage = webApp.loginPage();
         DashboardPage dashboardPage = loginPage
@@ -120,9 +135,30 @@ public class BaseTest {
                 .typeTextPasswordField(user.getPassword())
                 .clickLoginButton()
                 .waitUserNameToBeDisplayed();
-        log.info("Login successful.");
+        log.info("Admin login successful.");
         return dashboardPage;
     }
+
+    public AccountPage customerLogin() {
+        return customerLoginAs(input.getCustomer(0));
+    }
+
+    public AccountPage customerLoginAs(User customer) {
+        log.info("Logging in as customer: " + customer.getUsername());
+        getDriver().get(customer.getSiteURL()); // This should be the main URL
+
+        MainPage mainPage = webApp.mainPage();
+        CustomerLoginPage loginPage = mainPage.highBar.clickLoginButton();
+
+        AccountPage accountPage = loginPage
+                .typeTextEmailField(customer.getUsername())
+                .typeTextPasswordField(customer.getPassword())
+                .clickLoginButton();
+
+        log.info("Customer login successful.");
+        return accountPage;
+    }
+
 
     public void printDome(){
         System.out.println(getDriver().getPageSource());
@@ -146,7 +182,7 @@ public class BaseTest {
         return false;
     }
 
-    
+
     public Cookie getCookieByName(Set<Cookie> cookies, String cookieName) {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals(cookieName)) {

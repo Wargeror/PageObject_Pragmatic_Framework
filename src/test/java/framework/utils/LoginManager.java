@@ -17,8 +17,20 @@ public class LoginManager {
 
     private static final Logger log = LogManager.getLogger(LoginManager.class);
 
-    // Store a set of cookies per thread ID to ensure thread safety
-    private static final ConcurrentHashMap<Long, Set<Cookie>> sessionCookies = new ConcurrentHashMap<>();
+    // Inner class to hold both cookies and the URL token
+    private static class SessionData implements Serializable {
+        private static final long serialVersionUID = 1L;
+        Set<Cookie> cookies;
+        String userToken;
+
+        SessionData(Set<Cookie> cookies, String userToken) {
+            this.cookies = cookies;
+            this.userToken = userToken;
+        }
+    }
+
+    // Store SessionData per thread ID to ensure thread safety
+    private static final ConcurrentHashMap<Long, SessionData> sessionCache = new ConcurrentHashMap<>();
     private static final String SESSION_COOKIE_NAME = "OCSESSID";
 
     // Toggle file-based cookie storage
@@ -29,45 +41,52 @@ public class LoginManager {
         long currentThreadId = Thread.currentThread().getId();
         
         // Attempt to load from file if not in memory and file storage is enabled
-        if (saveCookieToFile && !sessionCookies.containsKey(currentThreadId)) {
-            Set<Cookie> fileCookies = loadCookiesFromFile(currentThreadId);
-            if (fileCookies != null) {
-                sessionCookies.put(currentThreadId, fileCookies);
+        if (saveCookieToFile && !sessionCache.containsKey(currentThreadId)) {
+            SessionData fileSession = loadSessionFromFile(currentThreadId);
+            if (fileSession != null) {
+                sessionCache.put(currentThreadId, fileSession);
             }
         }
 
-        Set<Cookie> storedCookies = sessionCookies.get(currentThreadId);
+        SessionData storedSession = sessionCache.get(currentThreadId);
 
-        if (storedCookies != null && !storedCookies.isEmpty() && isSessionStillValid(storedCookies)) {
-            log.info("Valid session cookies found for thread " + currentThreadId + ". Attempting login via cookie injection.");
+        if (storedSession != null && storedSession.cookies != null && !storedSession.cookies.isEmpty() && isSessionStillValid(storedSession.cookies)) {
+            log.info("Valid session found for thread " + currentThreadId + ". Attempting login via cookie and token injection.");
 
             // Navigate to a domain page first to set the cookies
             driver.get(user.getSiteURL());
-            storedCookies.forEach(driver.manage()::addCookie);
+            storedSession.cookies.forEach(driver.manage()::addCookie);
 
-            // Navigate to dashboard to verify session
+            // Construct the dashboard URL with the token
             DashboardPage dashboardPage = webApp.dashboardPage();
-            driver.get(dashboardPage.getUrlDashboard());
+            String targetUrl = dashboardPage.getUrlDashboard();
+            if (storedSession.userToken != null && !storedSession.userToken.isEmpty()) {
+                targetUrl += (targetUrl.contains("?") ? "&" : "?") + storedSession.userToken;
+            }
+            
+            // Navigate to dashboard to verify session
+            driver.get(targetUrl);
 
-            if (driver.getCurrentUrl().contains(dashboardPage.getUrlDashboard())) {
-                log.info("Successfully logged in using session cookies.");
+            // Basic check to see if we landed on the dashboard successfully (ignoring exact token match in check)
+            if (driver.getCurrentUrl().contains("route=common/dashboard")) {
+                log.info("Successfully logged in using cached session.");
                 return dashboardPage;
             } else {
-                log.warn("Login with cookies failed (session might be invalidated server-side). Falling back to credentials.");
-                sessionCookies.remove(currentThreadId);
+                log.warn("Login with cached session failed. Falling back to credentials.");
+                sessionCache.remove(currentThreadId);
                 if (saveCookieToFile) {
                     deleteCookieFile(currentThreadId);
                 }
             }
         } else {
-            log.info("No valid session cookies found for thread " + currentThreadId + ".");
+            log.info("No valid cached session found for thread " + currentThreadId + ".");
         }
 
         // Fallback: Login with credentials
-        return performLoginAndStoreCookies(driver, webApp, user, currentThreadId);
+        return performLoginAndStoreSession(driver, webApp, user, currentThreadId);
     }
 
-    private static DashboardPage performLoginAndStoreCookies(WebDriver driver, WebApp webApp, User user, long threadId) {
+    private static DashboardPage performLoginAndStoreSession(WebDriver driver, WebApp webApp, User user, long threadId) {
         log.info("Logging in with credentials for user: " + user.getUsername());
         driver.get(user.getSiteURL());
         
@@ -77,14 +96,31 @@ public class LoginManager {
                 .clickLoginButton()
                 .waitUserNameToBeDisplayed();
 
-        // Retrieve and store all cookies after a successful login
+        // Retrieve and store all cookies
         Set<Cookie> newSessionCookies = driver.manage().getCookies();
+        
+        // Extract the user_token from the URL
+        String currentUrl = driver.getCurrentUrl();
+        String extractedToken = "";
+        try {
+            int tokenIndex = currentUrl.indexOf("user_token=");
+            if (tokenIndex != -1) {
+                extractedToken = currentUrl.substring(tokenIndex);
+                if (extractedToken.contains("&")) {
+                    extractedToken = extractedToken.substring(0, extractedToken.indexOf("&"));
+                }
+            }
+        } catch (Exception e) {
+            log.warn("Could not extract user_token from URL after login: " + currentUrl);
+        }
+
         if (newSessionCookies != null && !newSessionCookies.isEmpty()) {
-            sessionCookies.put(threadId, newSessionCookies);
-            log.info("Stored " + newSessionCookies.size() + " session cookies for thread " + threadId + ".");
+            SessionData newSession = new SessionData(newSessionCookies, extractedToken);
+            sessionCache.put(threadId, newSession);
+            log.info("Stored " + newSessionCookies.size() + " cookies and token '" + extractedToken + "' for thread " + threadId + ".");
             
             if (saveCookieToFile) {
-                saveCookiesToFile(threadId, newSessionCookies);
+                saveSessionToFile(threadId, newSession);
             }
         } else {
             log.warn("Could not find any cookies after login.");
@@ -93,39 +129,38 @@ public class LoginManager {
         return dashboardPage;
     }
 
-    private static void saveCookiesToFile(long threadId, Set<Cookie> cookies) {
+    private static void saveSessionToFile(long threadId, SessionData sessionData) {
         File dir = new File(COOKIE_DIR);
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        File file = new File(COOKIE_DIR + "cookies-thread-" + threadId + ".ser");
+        File file = new File(COOKIE_DIR + "session-thread-" + threadId + ".ser");
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
-            oos.writeObject(cookies);
-            log.info("Saved cookies to file: " + file.getPath());
+            oos.writeObject(sessionData);
+            log.info("Saved session data to file: " + file.getPath());
         } catch (IOException e) {
-            log.error("Failed to save cookies to file for thread " + threadId, e);
+            log.error("Failed to save session to file for thread " + threadId, e);
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private static Set<Cookie> loadCookiesFromFile(long threadId) {
-        File file = new File(COOKIE_DIR + "cookies-thread-" + threadId + ".ser");
+    private static SessionData loadSessionFromFile(long threadId) {
+        File file = new File(COOKIE_DIR + "session-thread-" + threadId + ".ser");
         if (file.exists()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-                Set<Cookie> cookies = (Set<Cookie>) ois.readObject();
-                log.info("Loaded cookies from file: " + file.getPath());
-                return cookies;
+                SessionData sessionData = (SessionData) ois.readObject();
+                log.info("Loaded session data from file: " + file.getPath());
+                return sessionData;
             } catch (IOException | ClassNotFoundException e) {
-                log.error("Failed to load cookies from file for thread " + threadId, e);
+                log.error("Failed to load session from file for thread " + threadId, e);
             }
         }
         return null;
     }
 
     private static void deleteCookieFile(long threadId) {
-        File file = new File(COOKIE_DIR + "cookies-thread-" + threadId + ".ser");
+        File file = new File(COOKIE_DIR + "session-thread-" + threadId + ".ser");
         if (file.exists() && file.delete()) {
-            log.info("Deleted invalid cookie file for thread " + threadId);
+            log.info("Deleted invalid session file for thread " + threadId);
         }
     }
 
@@ -148,13 +183,13 @@ public class LoginManager {
         return isValid;
     }
 
-    // Utility method to clear cookies for a thread
+    // Utility method to clear session for a thread
     public static void clearSessionCookiesForCurrentThread() {
         long currentThreadId = Thread.currentThread().getId();
-        sessionCookies.remove(currentThreadId);
+        sessionCache.remove(currentThreadId);
         if (saveCookieToFile) {
             deleteCookieFile(currentThreadId);
         }
-        log.info("Cleared stored session cookies for thread " + currentThreadId + ".");
+        log.info("Cleared stored session data for thread " + currentThreadId + ".");
     }
 }

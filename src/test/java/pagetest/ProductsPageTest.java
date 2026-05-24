@@ -85,7 +85,7 @@ public class ProductsPageTest extends BaseTest {
     }
 
     public ProductsPage goTo(){
-        login();
+        adminLogin();
 
         ProductsPage productsPage = webApp.productsPage();
         getDriver().get(productsPage.newUrl());

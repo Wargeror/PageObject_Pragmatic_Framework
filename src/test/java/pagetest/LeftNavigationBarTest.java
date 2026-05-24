@@ -27,7 +27,7 @@ public class LeftNavigationBarTest extends BaseTest {
     @Description("Asserts that the Left Navigation Bar is displayed after a successful login.")
     public void navBarIsDisplayed(){
         log.info("Logging in to verify Left Navigation Bar display.");
-        login();
+        adminLogin();
 
         LeftNavigationBar navBar = new LeftNavigationBar(getDriver(), getWait(), webApp);
         getWait().until(ExpectedConditions.visibilityOf(navBar.getDashboardLNavBar()));
@@ -46,7 +46,7 @@ public class LeftNavigationBarTest extends BaseTest {
     public void orderStatusCheck() {
         log.info("Logging in and navigating to the Orders page.");
         OrdersPage ordersPage =
-                 login()
+                 adminLogin()
                 .goToOrdersPage();
 
         log.info("Asserting that the Orders page URL is correct.");
@@ -63,7 +63,7 @@ public class LeftNavigationBarTest extends BaseTest {
     public void addProductTest() throws InterruptedException {
         log.info("Logging in and navigating to the Products page.");
         ProductsPage productsPage =
-                 login()
+                 adminLogin()
                 .goToProdPage();
 
         log.info("Asserting that the Products page URL is correct.");

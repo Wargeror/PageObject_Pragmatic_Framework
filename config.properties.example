@@ -1,8 +1,13 @@
 test.username=your_username - NEEDS TO BE CHANGE
 test.password=your_password - NEEDS TO BE CHANGE
+customer.test.first.name=first_name - NEEDS TO BE CHANGE
+customer.test.last.name=last_name - NEEDS TO BE CHANGE
+customer.test.username=test_email - NEEDS TO BE CHANGE
+customer.test.password=test_password - NEEDS TO BE CHANGE
 site.url=https://auto.pragmatic.bg/manage/
 expected.dashboard.username=\   John Doe
 main.url=https://auto.pragmatic.bg/index.php?route=common/home&language=en-gb
+account.url=https://auto.pragmatic.bg/index.php?route=account/account&language=en-gb
 cart.url=https://auto.pragmatic.bg/index.php?route=checkout/cart&language=en-gb
 order.url=https://auto.pragmatic.bg/manage/index.php?route=sale/order.info
 orders.url=https://auto.pragmatic.bg/manage/index.php?route=sale/order
@@ -16,3 +21,6 @@ online.report.url=https://auto.pragmatic.bg/manage/index.php?route=report/online
 products.form.url=https://auto.pragmatic.bg/manage/index.php?route=catalog/product.form
 customer.form.url=https://auto.pragmatic.bg/manage/index.php?route=customer/customer.form
 successfull.checkout.url=https://auto.pragmatic.bg/index.php?route=checkout/success
+registration.url=https://auto.pragmatic.bg/index.php?route=account/register&language=en-gb
+registered.url=https://auto.pragmatic.bg/index.php?route=account/success&language=en-gb
+customer.login.url=https://auto.pragmatic.bg/index.php?route=account/login&language=en-gb

@@ -27,12 +27,6 @@ public class MainPage extends BasePage {
     @FindBy(id = "carousel-banner-0")
     private WebElement banner;
 
-    @FindBy(xpath = "//span[text()='My Account']")
-    private WebElement myAccount;
-
-    @FindBy(xpath = "//*[@id=\"top\"]/div/div[2]/ul/li[2]/div/ul/li[1]/a")
-    private WebElement registerButton;
-
     @FindBy(css = ".image > a > img[alt*='MacBook']")
     private WebElement macBookImg;
 
@@ -119,8 +113,6 @@ public class MainPage extends BasePage {
     }
 
     public RegistrationPage clickRegisterButton(){
-        clickWebElement(myAccount);
-        clickWebElement(registerButton);
-        return webApp.registerPage();
+        return highBar.clickRegisterButton();
     }
 }

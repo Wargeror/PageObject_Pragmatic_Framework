@@ -97,7 +97,7 @@ public class ProductsTest extends BaseTest {
     public void addProductTest() throws InterruptedException {
         log.info("Starting add and delete product test.");
         ProductsFormPage productsFormPage =
-                login()
+                adminLogin()
                 .goToProdPage()
                 .clickAddNewButton()
                 .fillProductForm();
@@ -128,7 +128,7 @@ public class ProductsTest extends BaseTest {
     public void addProductAlertTest() throws InterruptedException {
         log.info("Starting negative test for adding a product with invalid data.");
         ProductsFormPage productsFormPage =
-                login()
+                adminLogin()
                 .goToProdPage()
                 .clickAddNewButton()
                 .clickNotfCancelButton()
